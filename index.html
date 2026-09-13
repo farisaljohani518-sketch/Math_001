@@ -100,590 +100,897 @@ const {
 const QUESTION_BANK = [{
   "id": "p1-01",
   "module": "P.1",
-  "topic": "Real Numbers & Subsets",
+  "topic": "Classification of Real Numbers",
   "difficulty": "Easy",
-  "questionEn": "Determine which number in the set $\\{-13, -\\sqrt{5}, -1, -\\frac{1}{3}, 0, \\frac{5}{8}, \\sqrt{2}, \\pi, 7\\}$ is an irrational number.",
-  "questionAr": "حدد أي من الأعداد في المجموعة $\\{-13, -\\sqrt{5}, -1, -\\frac{1}{3}, 0, \\frac{5}{8}, \\sqrt{2}, \\pi, 7\\}$ ينتمي إلى مجموعة الأعداد غير النسبية (Irrational numbers).",
-  "options": ["\\sqrt{2} \\text{ and } \\pi \\text{ and } -\\sqrt{5}", "-\\frac{1}{3} \\text{ and } \\frac{5}{8}", "-13 \\text{ and } -1 \\text{ and } 7", "0 \\text{ and } 7"],
+  "questionEn": "Determine which numbers in the set $\\{-15, -\\sqrt{7}, -2, -\\frac{2}{5}, 0, \\frac{7}{9}, \\sqrt{3}, 2\\pi, 9\\}$ are irrational numbers.",
+  "questionAr": "حدد الأعداد غير النسبية (Irrational numbers) في المجموعة $\\{-15, -\\sqrt{7}, -2, -\\frac{2}{5}, 0, \\frac{7}{9}, \\sqrt{3}, 2\\pi, 9\\}$.",
+  "options": ["-\\sqrt{7}, \\sqrt{3}, 2\\pi", "-\\frac{2}{5}, \\frac{7}{9}", "-15, -2, 0, 9", "0, 9"],
   "correctIndex": 0,
-  "hint": "Irrational numbers cannot be written as a ratio of two integers; their decimals never terminate or repeat.",
-  "hintAr": "الأعداد غير النسبية لا يمكن كتابتها ككسر اعتيادي عشري منتهٍ أو دوري مثل الجذور الصماء و الثابت $\\pi$.",
-  "firstStep": "Identify numbers with non-repeating, non-terminating decimals (like square roots of non-perfect squares and $\\pi$).",
-  "firstStepAr": "ابحث عن الجذور غير المنتهية للقيم غير المربعة مثل $\\sqrt{2}$ و $-\\sqrt{5}$ بالإضافة إلى $\\pi$.",
+  "hint": "Irrational numbers cannot be written as a ratio of integers; their decimals never terminate or repeat.",
+  "hintAr": "الأعداد غير النسبية لا يمكن كتابتها على صورة كسر اعتيادي، ومنازلها العشرية غير منتهية وغير دورية كالجذور الصماء والثابت $\\pi$.",
+  "firstStep": "Identify the non-perfect square roots and multiples of $\\pi$.",
+  "firstStepAr": "ابحث عن الجذور الصماء للقيم غير المربعة ومضاعفات الثابت $\\pi$.",
   "steps": [{
-    "title": "Classification of Real Numbers",
-    "math": "\\text{Irrational numbers } = \\{x \\mid x \\text{ cannot be written as } \\frac{p}{q}, q \\ne 0\\}",
-    "desc": "By definition, square roots of non-perfect squares and $\\pi$ are irrational."
+    "title": "Irrational Definition",
+    "math": "\\text{Irrationals} = \\{x \\in \\mathbb{R} \\mid x \\notin \\mathbb{Q}\\}",
+    "desc": "Square roots of non-perfect squares and multiples of pi."
   }, {
-    "title": "Examine elements",
-    "math": "-\\sqrt{5} \\approx -2.236..., \\quad \\sqrt{2} \\approx 1.414..., \\quad \\pi \\approx 3.14159...",
+    "title": "Classify Elements",
+    "math": "-\\sqrt{7} \\approx -2.645..., \\quad \\sqrt{3} \\approx 1.732..., \\quad 2\\pi \\approx 6.283...",
     "desc": "These decimals neither terminate nor repeat."
-  }, {
-    "title": "Check remaining elements",
-    "math": "-13, -1, 0, 7 \\in \\mathbb{Z} \\subset \\mathbb{Q}, \\quad -\\frac{1}{3}, \\frac{5}{8} \\in \\mathbb{Q}",
-    "desc": "All others are integers or rational numbers."
   }],
-  "finalAnswer": "-\\sqrt{5}, \\sqrt{2}, \\pi",
+  "finalAnswer": "-\\sqrt{7}, \\sqrt{3}, 2\\pi",
   "whyItWorks": "An irrational number cannot be expressed as a simple fraction $\\frac{p}{q}$.",
-  "examTip": "Watch out for expressions like $\\sqrt{9} = 3$ which is rational, whereas $\\sqrt{2}, \\sqrt{3}, \\sqrt{5}$ are irrational!",
+  "examTip": "Remember that $\\sqrt{9}=3$ is rational, but $\\sqrt{7}$ and $\\sqrt{3}$ are irrational!",
   "mistakeType": "Concept misunderstanding",
   "hasDiagram": null
 }, {
   "id": "p1-02",
   "module": "P.1",
-  "topic": "Inequalities & Intervals",
-  "difficulty": "Medium",
-  "questionEn": "Use inequality notation and interval notation to describe the set: $t$ is at least $10$ and at most $22$.",
-  "questionAr": "استخدم صيغة المتباينة وصيغة الفترة للتعبير عن المجموعة: $t$ لا يقل عن $10$ ولا يزيد عن $22$.",
-  "options": ["10 \\le t \\le 22 \\quad \\text{and} \\quad [10, 22]", "10 < t < 22 \\quad \\text{and} \\quad (10, 22)", "10 \\le t < 22 \\quad \\text{and} \\quad [10, 22)", "10 < t \\le 22 \\quad \\text{and} \\quad (10, 22]"],
+  "topic": "Subsets of Real Numbers - Whole Numbers",
+  "difficulty": "Easy",
+  "questionEn": "Determine which numbers in the set $\\{-11, -\\frac{9}{2}, 6, \\frac{3}{4}, \\sqrt{5}, 0, 10, -5, 4\\}$ are whole numbers.",
+  "questionAr": "حدد الأعداد الكلية (Whole numbers) في المجموعة $\\{-11, -\\frac{9}{2}, 6, \\frac{3}{4}, \\sqrt{5}, 0, 10, -5, 4\\}$.",
+  "options": ["0, 4, 6, 10", "4, 6, 10", "-11, -5, 0, 4, 6, 10", "\\sqrt{5}"],
   "correctIndex": 0,
-  "hint": "'At least' means $\\ge$ (includes the number), and 'at most' means $\\le$ (includes the number).",
-  "hintAr": "عبارة 'at least' تعني $\\ge$ (أكبر من أو يساوي)، وعبارة 'at most' تعني $\\le$ (أصغر من أو يساوي)، وكلاهما يعني أقواس مغلقة $[ ]$.",
-  "firstStep": "Translate 'at least 10' as $t \\ge 10$ and 'at most 22' as $t \\le 22$.",
-  "firstStepAr": "ترجم 'لا يقل عن 10' إلى $t \\ge 10$ و 'لا يزيد عن 22' إلى $t \\le 22$.",
+  "hint": "Whole numbers are non-negative integers: $\\{0, 1, 2, 3, \\dots\\}$.",
+  "hintAr": "الأعداد الكلية هي الأعداد الطبيعية بالإضافة إلى الصفر: $\\{0, 1, 2, 3, \\dots\\}$.",
+  "firstStep": "Filter for integers greater than or equal to 0.",
+  "firstStepAr": "اختر الأعداد الصحيحة الأكبر من أو تساوي الصفر.",
   "steps": [{
-    "title": "Translate verbal to inequalities",
-    "math": "t \\ge 10 \\quad \\text{and} \\quad t \\le 22",
-    "desc": "Combine into a single compound inequality: $10 \\le t \\le 22$."
+    "title": "Whole Numbers Definition",
+    "math": "\\mathbb{W} = \\{0, 1, 2, 3, \\dots\\}",
+    "desc": "Non-negative integers."
   }, {
-    "title": "Convert to interval notation",
-    "math": "t \\in [10, 22]",
-    "desc": "Since both endpoints are included, use square brackets $[ \\dots ]$."
+    "title": "Select Elements",
+    "math": "0, 4, 6, 10 \\in \\mathbb{W}",
+    "desc": "Negative integers like -11 are excluded."
   }],
-  "finalAnswer": "10 \\le t \\le 22 \\quad \\text{and} \\quad [10, 22]",
-  "whyItWorks": "Square brackets $[$ and $]$ denote inclusive endpoints, while parentheses $($ and $)$ denote strictly excluded endpoints.",
-  "examTip": "Remember: 'no more than' and 'at most' mean $\\le$. 'no less than' and 'at least' mean $\\ge$.",
-  "mistakeType": "Careless mistake",
+  "finalAnswer": "0, 4, 6, 10",
+  "whyItWorks": "Whole numbers include zero and positive integers only.",
+  "examTip": "Zero is a whole number, but NOT a natural number! Don't miss 0.",
+  "mistakeType": "Concept misunderstanding",
   "hasDiagram": null
 }, {
   "id": "p1-03",
   "module": "P.1",
-  "topic": "Absolute Value",
-  "difficulty": "Hard",
-  "questionEn": "Evaluate the expression $\\frac{|x+2|}{x+2}$ for $x < -2$.",
-  "questionAr": "أوجد قيمة المقدار الجبري $\\frac{|x+2|}{x+2}$ عندما تكون $x < -2$.",
-  "options": ["-1", "1", "0", "Undefined"],
+  "topic": "Comparing Real Numbers",
+  "difficulty": "Easy",
+  "questionEn": "Place the appropriate inequality symbol between the real numbers $-\\frac{7}{6}$ and $-\\frac{3}{4}$.",
+  "questionAr": "ضع علامة التباين المناسبة ($<$ أو $>$) بين العددين الحقيقيين $-\\frac{7}{6}$ و $-\\frac{3}{4}$.",
+  "options": ["-\\frac{7}{6} < -\\frac{3}{4}", "-\\frac{7}{6} > -\\frac{3}{4}", "-\\frac{7}{6} = -\\frac{3}{4}", "-\\frac{7}{6} \\ge -\\frac{3}{4}"],
   "correctIndex": 0,
-  "hint": "Apply the piecewise definition of absolute value: $|u| = -u$ when $u < 0$.",
-  "hintAr": "طبق تعريف القيمة المطلقة: إذا كان ما بداخل القيمة المطلقة سالباً ($u < 0$) فإن $|u| = -u$.",
-  "firstStep": "Check the sign of $x + 2$ when $x < -2$.",
-  "firstStepAr": "افحص إشارة المقدار $x + 2$ عندما يكون $x < -2$.",
+  "hint": "Compare fractions using common denominator 12: $-\\frac{14}{12}$ vs $-\\frac{9}{12}$.",
+  "hintAr": "قارن الكسرين بتوحيد المقامات على 12: $-\\frac{14}{12}$ مقابل $-\\frac{9}{12}$.",
+  "firstStep": "Convert both fractions to common denominator 12.",
+  "firstStepAr": "حول الكسرين إلى مقام مشترك 12.",
   "steps": [{
-    "title": "Evaluate the inside of the absolute value",
-    "math": "x < -2 \\implies x + 2 < 0",
-    "desc": "Because $x < -2$, the quantity inside the absolute value is strictly negative."
+    "title": "Common Denominator",
+    "math": "-\\frac{7}{6} = -\\frac{14}{12}, \\quad -\\frac{3}{4} = -\\frac{9}{12}",
+    "desc": "Express over LCD 12."
   }, {
-    "title": "Remove absolute value bars using definition",
-    "math": "|x + 2| = -(x + 2)",
-    "desc": "For any negative quantity $u < 0$, $|u| = -u$."
-  }, {
-    "title": "Substitute and simplify",
-    "math": "\\frac{|x + 2|}{x + 2} = \\frac{-(x + 2)}{x + 2} = -1",
-    "desc": "Divide the numerator by the denominator (non-zero since $x < -2$)."
+    "title": "Compare Numerators",
+    "math": "-14 < -9 \\implies -\\frac{14}{12} < -\\frac{9}{12}",
+    "desc": "$-1.167 < -0.75$."
   }],
-  "finalAnswer": "-1",
-  "whyItWorks": "Dividing any non-zero negative number by its positive absolute value yields $-1$.",
-  "examTip": "This is a classic Larson Math 001 exam trap question! If $x > -2$, it equals $+1$. If $x < -2$, it equals $-1$.",
-  "mistakeType": "Formula mistake",
+  "finalAnswer": "-\\frac{7}{6} < -\\frac{3}{4}",
+  "whyItWorks": "On the real number line, values farther to the left are strictly smaller.",
+  "examTip": "For negative numbers, the larger absolute value is the smaller number.",
+  "mistakeType": "Sign error",
   "hasDiagram": null
 }, {
   "id": "p1-04",
   "module": "P.1",
-  "topic": "Operations on Fractions",
-  "difficulty": "Easy",
-  "questionEn": "Perform the subtraction and simplify: $\\frac{2x}{3} - \\frac{x}{4}$.",
-  "questionAr": "أجرِ عملية الطرح وبسّط الكسر لأبسط صورة: $\\frac{2x}{3} - \\frac{x}{4}$.",
-  "options": ["\\frac{5x}{12}", "\\frac{x}{12}", "\\frac{x}{-1}", "\\frac{5x}{7}"],
+  "topic": "Bounded and Unbounded Intervals",
+  "difficulty": "Medium",
+  "questionEn": "For the inequality $-4 \\le x < 3$, write the interval notation and determine whether it is bounded or unbounded.",
+  "questionAr": "للمتباينة $-4 \\le x < 3$، اكتب صيغة الفترة وحدد ما إذا كانت محدودة (Bounded) أم غير محدودة.",
+  "options": ["[-4, 3) \\quad \\text{and Bounded}", "(-4, 3] \\quad \\text{and Bounded}", "[-4, 3] \\quad \\text{and Unbounded}", "(-\\infty, 3) \\quad \\text{and Unbounded}"],
   "correctIndex": 0,
-  "hint": "Find the Least Common Denominator (LCD) of 3 and 4, which is 12.",
-  "hintAr": "أوجد المضاعف المشترك الأصغر (LCD) للمقامين 3 و 4 وهو 12.",
-  "firstStep": "Multiply $\\frac{2x}{3}$ by $\\frac{4}{4}$ and $\\frac{x}{4}$ by $\\frac{3}{3}$.",
-  "firstStepAr": "وحّد المقامات بضرب الكسر الأول في 4 بسطاً ومقاماً والثاني في 3.",
+  "hint": "Use square bracket $[$ for $\\le$ and parenthesis $)$ for $<$. Finite endpoints mean bounded.",
+  "hintAr": "استخدم القوس المربع $[$ عند $\\le$ والقوس الدائري $)$ عند $<$. الحدود المنتهية تعني فترة محدودة.",
+  "firstStep": "Identify inclusion of endpoints: -4 included, 3 excluded.",
+  "firstStepAr": "حدد أطراف الفترة: -4 مشمول بقوس مربع، 3 مستثنى بقوس دائري.",
   "steps": [{
-    "title": "Find common denominator",
-    "math": "\\text{LCD}(3, 4) = 12",
-    "desc": "Convert each fraction to have a denominator of 12."
+    "title": "Interval Notation",
+    "math": "-4 \\le x < 3 \\implies [-4, 3)",
+    "desc": "Bracket at -4, parenthesis at 3."
   }, {
-    "title": "Rewrite fractions",
-    "math": "\\frac{2x \\cdot 4}{3 \\cdot 4} - \\frac{x \\cdot 3}{4 \\cdot 3} = \\frac{8x}{12} - \\frac{3x}{12}",
-    "desc": "Scale both fractions appropriately."
-  }, {
-    "title": "Subtract numerators",
-    "math": "\\frac{8x - 3x}{12} = \\frac{5x}{12}",
-    "desc": "Combine like terms over the common denominator."
+    "title": "Check Boundedness",
+    "math": "\\text{Both endpoints are finite real numbers } \\implies \\text{Bounded}",
+    "desc": "No infinity symbol."
   }],
-  "finalAnswer": "\\frac{5x}{12}",
-  "whyItWorks": "Fractions can only be combined through addition or subtraction when they share a common denominator.",
-  "examTip": "Never subtract denominators directly (e.g. $3 - 4 = -1$ is a fatal error!).",
+  "finalAnswer": "[-4, 3) \\quad \\text{and Bounded}",
+  "whyItWorks": "An interval is bounded when both endpoints are real numbers.",
+  "examTip": "$\\le$ gives $[$, while $<$ gives $)$. Never confuse brackets and parentheses!",
+  "mistakeType": "Notation error",
+  "hasDiagram": null
+}, {
+  "id": "p1-05",
+  "module": "P.1",
+  "topic": "Inequality & Interval Translation",
+  "difficulty": "Medium",
+  "questionEn": "Use inequality notation and interval notation to describe the set: '$w$ is at least 8 and at most 18'.",
+  "questionAr": "استخدم صيغة المتباينة وصيغة الفترة للتعبير عن: '$w$ لا يقل عن 8 ولا يزيد عن 18'.",
+  "options": ["8 \\le w \\le 18 \\quad \\text{and} \\quad [8, 18]", "8 < w < 18 \\quad \\text{and} \\quad (8, 18)", "8 \\le w < 18 \\quad \\text{and} \\quad [8, 18)", "w \\ge 8 \\quad \\text{and} \\quad [8, \\infty)"],
+  "correctIndex": 0,
+  "hint": "'At least' means $\\ge$ and 'at most' means $\\le$. Both endpoints are inclusive.",
+  "hintAr": "عبارة 'at least' تعني $\\ge$، و'at most' تعني $\\le$. كلا الطرفين مشمول بأقواس مربعة.",
+  "firstStep": "Write $w \\ge 8$ and $w \\le 18$ as compound inequality $8 \\le w \\le 18$.",
+  "firstStepAr": "اكتب المتباينة المركبة: $8 \\le w \\le 18$.",
+  "steps": [{
+    "title": "Compound Inequality",
+    "math": "8 \\le w \\le 18",
+    "desc": "Combined bounds."
+  }, {
+    "title": "Interval Form",
+    "math": "[8, 18]",
+    "desc": "Inclusive endpoints."
+  }],
+  "finalAnswer": "8 \\le w \\le 18 \\quad \\text{and} \\quad [8, 18]",
+  "whyItWorks": "'At least' and 'at most' indicate inclusive boundaries $[a, b]$.",
+  "examTip": "'At least' means $\\ge$ (includes 8), never strict inequality $>$.",
+  "mistakeType": "Careless mistake",
+  "hasDiagram": null
+}, {
+  "id": "p1-06",
+  "module": "P.1",
+  "topic": "Absolute Value Evaluation",
+  "difficulty": "Easy",
+  "questionEn": "Evaluate the expression: $|-5| - 3|-4|$.",
+  "questionAr": "احسب القيمة العددية للمقدار: $|-5| - 3|-4|$.",
+  "options": ["-7", "7", "17", "-17"],
+  "correctIndex": 0,
+  "hint": "Evaluate absolute values first: $|-5|=5$ and $|-4|=4$.",
+  "hintAr": "احسب القيمة المطلقة أولاً: $|-5|=5$ و $|-4|=4$، ثم اضرب قبل الطرح.",
+  "firstStep": "Replace $|-5|$ with 5 and $|-4|$ with 4.",
+  "firstStepAr": "استبدل القيم المطلقة بالأعداد الموجبة 5 و 4.",
+  "steps": [{
+    "title": "Evaluate Absolute Values",
+    "math": "|-5| = 5, \\quad |-4| = 4",
+    "desc": "Remove absolute value bars."
+  }, {
+    "title": "Order of Operations",
+    "math": "5 - 3(4) = 5 - 12 = -7",
+    "desc": "Multiply before subtracting."
+  }],
+  "finalAnswer": "-7",
+  "whyItWorks": "Absolute value gives positive magnitude; multiplication precedes subtraction.",
+  "examTip": "Never distribute into absolute value! Evaluate $|-4|$ first.",
+  "mistakeType": "Order of operations",
+  "hasDiagram": null
+}, {
+  "id": "p1-07",
+  "module": "P.1",
+  "topic": "Algebraic Absolute Value Simplification",
+  "difficulty": "Hard",
+  "questionEn": "Evaluate the expression $\\frac{|x - 3|}{x - 3}$ for $x < 3$.",
+  "questionAr": "احسب قيمة المقدار الجبري $\\frac{|x - 3|}{x - 3}$ عندما يكون $x < 3$.",
+  "options": ["-1", "1", "x - 3", "-(x - 3)"],
+  "correctIndex": 0,
+  "hint": "When $x < 3$, the quantity $(x - 3)$ is negative, so $|x - 3| = -(x - 3)$.",
+  "hintAr": "عندما يكون $x < 3$ فإن المقدار $(x - 3)$ سالب، وبالتالي فك القيمة المطلقة يعطي $-(x - 3)$.",
+  "firstStep": "Determine sign of $(x - 3)$ under condition $x < 3$.",
+  "firstStepAr": "حدد إشارة $(x - 3)$ عندما $x < 3$.",
+  "steps": [{
+    "title": "Sign Analysis",
+    "math": "x < 3 \\implies x - 3 < 0",
+    "desc": "Negative quantity."
+  }, {
+    "title": "Apply Definition",
+    "math": "|x - 3| = -(x - 3)",
+    "desc": "Absolute value of negative is its opposite."
+  }, {
+    "title": "Simplify Fraction",
+    "math": "\\frac{-(x - 3)}{x - 3} = -1",
+    "desc": "Quotient of opposites is -1."
+  }],
+  "finalAnswer": "-1",
+  "whyItWorks": "Dividing any non-zero negative number by its positive magnitude gives -1.",
+  "examTip": "Larson exam favorite: If $x > a$, result is $+1$; if $x < a$, result is $-1$.",
+  "mistakeType": "Formula mistake",
+  "hasDiagram": null
+}, {
+  "id": "p1-08",
+  "module": "P.1",
+  "topic": "Distance on Real Line",
+  "difficulty": "Easy",
+  "questionEn": "Find the distance between the numbers $a = -24$ and $b = 36$ on the real number line.",
+  "questionAr": "أوجد المسافة بين العددين $a = -24$ و $b = 36$ على خط الأعداد.",
+  "options": ["60", "12", "-60", "-12"],
+  "correctIndex": 0,
+  "hint": "Distance formula on line is $d = |b - a| = |36 - (-24)|$.",
+  "hintAr": "المسافة على خط الأعداد هي $d = |b - a| = |36 - (-24)|$.",
+  "firstStep": "Substitute into distance formula.",
+  "firstStepAr": "عوض في قانون المسافة المطلقة.",
+  "steps": [{
+    "title": "Distance Formula",
+    "math": "d = |b - a| = |36 - (-24)|",
+    "desc": "Subtract coordinates."
+  }, {
+    "title": "Simplify",
+    "math": "d = |36 + 24| = |60| = 60",
+    "desc": "Distance is always non-negative."
+  }],
+  "finalAnswer": "60",
+  "whyItWorks": "Distance measures physical separation and is always non-negative.",
+  "examTip": "Watch double negative: $36 - (-24) = 36 + 24 = 60$.",
+  "mistakeType": "Sign error",
+  "hasDiagram": null
+}, {
+  "id": "p1-09",
+  "module": "P.1",
+  "topic": "Identifying Terms and Coefficients",
+  "difficulty": "Easy",
+  "questionEn": "Identify the terms and coefficients of variable terms in $5x^3 - 2.5x + 7$.",
+  "questionAr": "حدد حدود (Terms) ومعاملات الحدود المتغيرة في المقدار $5x^3 - 2.5x + 7$.",
+  "options": ["\\text{Terms: } 5x^3, -2.5x, 7 \\quad \\text{Coefficients: } 5, -2.5", "\\text{Terms: } 5x^3, 2.5x, 7 \\quad \\text{Coefficients: } 5, 2.5", "\\text{Terms: } 5, -2.5, 7 \\quad \\text{Coefficients: } 3, 1", "\\text{Terms: } x^3, x \\quad \\text{Coefficients: } 5, -2.5"],
+  "correctIndex": 0,
+  "hint": "Terms carry the sign in front of them: the middle term is $-2.5x$.",
+  "hintAr": "الحدود تحمل الإشارة التي تسبقها، ومعامل الحد الأوسط هو $-2.5$.",
+  "firstStep": "Split expression by addition/subtraction signs.",
+  "firstStepAr": "افصل الحدود حسب إشارات الجمع والطرح.",
+  "steps": [{
+    "title": "Identify Terms",
+    "math": "\\text{Terms} = \\{5x^3, -2.5x, 7\\}",
+    "desc": "Signed parts of sum."
+  }, {
+    "title": "Coefficients of Variables",
+    "math": "\\text{Coeff of } x^3 = 5, \\quad \\text{Coeff of } x = -2.5",
+    "desc": "Numerical factors multiplying variables."
+  }],
+  "finalAnswer": "\\text{Terms: } 5x^3, -2.5x, 7 \\quad \\text{Coefficients: } 5, -2.5",
+  "whyItWorks": "Coefficients include the preceding negative sign.",
+  "examTip": "Remember: the coefficient of $-2.5x$ is $-2.5$, NOT $+2.5$!",
+  "mistakeType": "Sign error",
+  "hasDiagram": null
+}, {
+  "id": "p1-10",
+  "module": "P.1",
+  "topic": "Operations on Fractions",
+  "difficulty": "Medium",
+  "questionEn": "Perform the operation and simplify to lowest terms: $\\frac{5x}{6} - \\frac{2x}{5}$.",
+  "questionAr": "أجر العملية التالية وبسط الناتج لأبسط صورة: $\\frac{5x}{6} - \\frac{2x}{5}$.",
+  "options": ["\\frac{13x}{30}", "\\frac{3x}{30}", "\\frac{3x}{1}", "\\frac{13x}{11}"],
+  "correctIndex": 0,
+  "hint": "Least common denominator of 6 and 5 is 30.",
+  "hintAr": "المضاعف المشترك الأصغر للمقامين 6 و 5 هو 30.",
+  "firstStep": "Convert both fractions to common denominator 30.",
+  "firstStepAr": "وحد المقامات على 30: $\\frac{25x}{30} - \\frac{12x}{30}$.",
+  "steps": [{
+    "title": "Find LCD",
+    "math": "\\text{LCD}(6, 5) = 30",
+    "desc": "Scale both fractions."
+  }, {
+    "title": "Subtract Numerators",
+    "math": "\\frac{5(5x) - 2(2x)}{30} = \\frac{25x - 12x}{30} = \\frac{13x}{30}",
+    "desc": "Combine like terms in numerator."
+  }],
+  "finalAnswer": "\\frac{13x}{30}",
+  "whyItWorks": "Fraction subtraction requires equal denominators before combining numerators.",
+  "examTip": "Never subtract denominators directly! $6 - 5 \\ne 1$.",
   "mistakeType": "Calculation mistake",
   "hasDiagram": null
 }, {
   "id": "p2-01",
   "module": "P.2",
-  "topic": "Negative Exponents",
-  "difficulty": "Medium",
-  "questionEn": "Rewrite the expression $\\left(\\frac{x^{-3}y^{4}}{5}\\right)^{-3}$ with positive exponents and simplify.",
-  "questionAr": "أعد كتابة المقدار $\\left(\\frac{x^{-3}y^{4}}{5}\\right)^{-3}$ باستخدام أسس موجبة وبسّط الناتج.",
-  "options": ["\\frac{125x^9}{y^{12}}", "\\frac{125y^{12}}{x^9}", "\\frac{5x^9}{y^{12}}", "\\frac{x^9}{125y^{12}}"],
+  "topic": "Exponent Sign Rules",
+  "difficulty": "Easy",
+  "questionEn": "Evaluate: (a) $(-6)^2$ \\quad and \\quad (b) $-6^2$.",
+  "questionAr": "احسب قيمة المقدارين: (a) $(-6)^2$ \\quad و \\quad (b) $-6^2$.",
+  "options": ["36 \\quad \\text{and} \\quad -36", "-36 \\quad \\text{and} \\quad 36", "36 \\quad \\text{and} \\quad 36", "-36 \\quad \\text{and} \\quad -36"],
   "correctIndex": 0,
-  "hint": "Distribute the outer power $-3$ to every factor inside: $\\left(\\frac{a}{b}\\right)^m = \\frac{a^m}{b^m}$.",
-  "hintAr": "وزع الأس الخارجي $-3$ على كل حد في البسط والمقام: $(a^m)^n = a^{mn}$.",
-  "firstStep": "Apply power of a quotient: $\\frac{(x^{-3})^{-3}(y^4)^{-3}}{5^{-3}}$.",
-  "firstStepAr": "طبق خاصية رفع القوة للأس: اضرب الأسس واقلب الأس السالب.",
+  "hint": "$(-6)^2 = (-6)(-6) = 36$, while $-6^2 = -(6 \\times 6) = -36$.",
+  "hintAr": "في $(-6)^2$ التربيع يشمل السالب، بينما في $-6^2$ التربيع للعدد 6 فقط والسالب يبقى.",
+  "firstStep": "Notice parentheses around $-6$ vs no parentheses.",
+  "firstStepAr": "لاحظ الأقواس حول الأساس السالب.",
   "steps": [{
-    "title": "Distribute exponent",
-    "math": "\\frac{(x^{-3})^{-3} \\cdot (y^4)^{-3}}{5^{-3}} = \\frac{x^{(-3)(-3)} \\cdot y^{(4)(-3)}}{5^{-3}}",
-    "desc": "Multiply the powers."
+    "title": "With Parentheses",
+    "math": "(-6)^2 = (-6) \\times (-6) = +36",
+    "desc": "Negative base squared."
   }, {
-    "title": "Simplify powers",
-    "math": "= \\frac{x^9 \\cdot y^{-12}}{5^{-3}}",
-    "desc": "Compute exponent products."
-  }, {
-    "title": "Convert negative exponents to positive",
-    "math": "= \\frac{5^3 \\cdot x^9}{y^{12}} = \\frac{125x^9}{y^{12}}",
-    "desc": "Move factors across the fraction bar: $5^{-3}$ moves to numerator as $5^3 = 125$, and $y^{-12}$ moves to denominator as $y^{12}$."
+    "title": "Without Parentheses",
+    "math": "-6^2 = -(6^2) = -36",
+    "desc": "Exponent takes precedence over negative."
   }],
-  "finalAnswer": "\\frac{125x^9}{y^{12}}",
-  "whyItWorks": "Moving a factor between numerator and denominator changes the sign of its exponent.",
-  "examTip": "Don't forget that the constant 5 also gets raised to the power: $5^{-3}$ becomes $5^3 = 125$ in the numerator!",
-  "mistakeType": "Formula mistake",
+  "finalAnswer": "36 \\quad \\text{and} \\quad -36",
+  "whyItWorks": "Exponents have higher priority than unary negation.",
+  "examTip": "Parentheses matter! $(-a)^2$ is positive, but $-a^2$ is negative.",
+  "mistakeType": "Careless mistake",
   "hasDiagram": null
 }, {
   "id": "p2-02",
   "module": "P.2",
-  "topic": "Scientific Notation",
-  "difficulty": "Easy",
-  "questionEn": "Evaluate the expression $\\frac{6.0 \\times 10^8}{3.0 \\times 10^{-3}}$ without using a calculator.",
-  "questionAr": "احسب قيمة المقدار بالصيغة العلمية دون استخدام آلة حاسبة: $\\frac{6.0 \\times 10^8}{3.0 \\times 10^{-3}}$.",
-  "options": ["2.0 \\times 10^{11}", "2.0 \\times 10^5", "2.0 \\times 10^{-11}", "0.5 \\times 10^{11}"],
+  "topic": "Rewriting with Positive Exponents",
+  "difficulty": "Medium",
+  "questionEn": "Rewrite $\\left(\\frac{x^{-4} y^5}{3}\\right)^{-2}$ with only positive exponents in simplest form.",
+  "questionAr": "أعد كتابة $\\left(\\frac{x^{-4} y^5}{3}\\right)^{-2}$ باستخدام أسس موجبة فقط في أبسط صورة.",
+  "options": ["\\frac{9 x^8}{y^{10}}", "\\frac{3 x^8}{y^{10}}", "\\frac{x^8}{9 y^{10}}", "\\frac{9 y^{10}}{x^8}"],
   "correctIndex": 0,
-  "hint": "Divide the coefficients $\\frac{6.0}{3.0}$ and subtract exponents of 10: $10^{8 - (-3)}$.",
-  "hintAr": "اقسم المعاملات $\\frac{6.0}{3.0}$ واطرح أسس الأساس 10: $8 - (-3) = 8 + 3 = 11$.",
-  "firstStep": "Split into coefficients and powers of 10.",
-  "firstStepAr": "افصل الكسر إلى قسمة الأعداد وقسمة قوى الرقم 10.",
+  "hint": "Negative outer exponent inverts the fraction: $\\left(\\frac{3}{x^{-4} y^5}\\right)^2$.",
+  "hintAr": "الأس السالب الخارجي يقلب الكسر: $\\left(\\frac{3}{x^{-4} y^5}\\right)^2$.",
+  "firstStep": "Invert fraction to make outer power $+2$.",
+  "firstStepAr": "اقلب الكسر لتغيير إشارة الأس الخارجي لموجب.",
   "steps": [{
-    "title": "Separate components",
-    "math": "\\left(\\frac{6.0}{3.0}\\right) \\times \\left(\\frac{10^8}{10^{-3}}\\right)",
-    "desc": "Divide the numerical parts and exponential parts separately."
+    "title": "Invert Fraction",
+    "math": "\\left(\\frac{x^{-4} y^5}{3}\\right)^{-2} = \\left(\\frac{3}{x^{-4} y^5}\\right)^2",
+    "desc": "Flip fraction."
   }, {
-    "title": "Apply quotient rule for exponents",
-    "math": "2.0 \\times 10^{8 - (-3)} = 2.0 \\times 10^{8 + 3}",
-    "desc": "Subtracting a negative exponent becomes addition."
+    "title": "Move Negative Power",
+    "math": "\\left(\\frac{3 x^4}{y^5}\\right)^2",
+    "desc": "$x^{-4}$ in denominator becomes $x^4$ in numerator."
   }, {
-    "title": "Final standard form",
-    "math": "2.0 \\times 10^{11}",
-    "desc": "Already in standard scientific notation $c \\times 10^n$ with $1 \\le c < 10$."
+    "title": "Distribute Power",
+    "math": "\\frac{3^2 (x^4)^2}{(y^5)^2} = \\frac{9 x^8}{y^{10}}",
+    "desc": "Square each term: $3^2=9$."
   }],
-  "finalAnswer": "2.0 \\times 10^{11}",
-  "whyItWorks": "The quotient rule states $\\frac{a^m}{a^n} = a^{m-n}$.",
-  "examTip": "Watch the double negative: $8 - (-3) = +11$, not $+5$!",
+  "finalAnswer": "\\frac{9 x^8}{y^{10}}",
+  "whyItWorks": "Power of quotient: $\\left(\\frac{a}{b}\\right)^n = \\frac{a^n}{b^n}$.",
+  "examTip": "Remember to square the constant: $3^2 = 9$, not 6!",
   "mistakeType": "Calculation mistake",
   "hasDiagram": null
 }, {
   "id": "p2-03",
   "module": "P.2",
-  "topic": "Simplifying Radicals",
-  "difficulty": "Medium",
-  "questionEn": "Simplify the radical expression: $8\\sqrt{147x} - 3\\sqrt{48x}$.",
-  "questionAr": "بسّط المقدار الجذري: $8\\sqrt{147x} - 3\\sqrt{48x}$.",
-  "options": ["44\\sqrt{3x}", "38\\sqrt{3x}", "56\\sqrt{3x}", "42\\sqrt{3x}"],
+  "topic": "Scientific Notation",
+  "difficulty": "Easy",
+  "questionEn": "Write $-0.000375$ in standard scientific notation.",
+  "questionAr": "اكتب العدد العشري $-0.000375$ بالصيغة العلمية القياسية (Scientific notation).",
+  "options": ["-3.75 \\times 10^{-4}", "-3.75 \\times 10^{-3}", "-37.5 \\times 10^{-5}", "3.75 \\times 10^{-4}"],
   "correctIndex": 0,
-  "hint": "Find the largest perfect square factor of 147 ($49 \\times 3$) and 48 ($16 \\times 3$).",
-  "hintAr": "حلل ما تحت الجذر إلى حاصل ضرب مربع كامل: $147 = 49 \\times 3$ و $48 = 16 \\times 3$.",
-  "firstStep": "Factor 147 as $49 \\cdot 3$ and 48 as $16 \\cdot 3$.",
-  "firstStepAr": "اكتب $147 = 49 \\cdot 3$ و $48 = 16 \\cdot 3$ واستخرج الجذور المربعة.",
+  "hint": "Move decimal 4 places right to get $-3.75 \\times 10^{-4}$.",
+  "hintAr": "حرك الفاصلة 4 منازل لليمين لتحصل على $-3.75 \\times 10^{-4}$.",
+  "firstStep": "Shift decimal point right until absolute value is between 1 and 10.",
+  "firstStepAr": "حرك الفاصلة لليمين 4 خانات.",
   "steps": [{
-    "title": "Factor radicands",
-    "math": "8\\sqrt{49 \\cdot 3x} - 3\\sqrt{16 \\cdot 3x}",
-    "desc": "Extract perfect squares."
+    "title": "Decimal Shift",
+    "math": "-0.000375 \\implies -3.75",
+    "desc": "Shift 4 places to the right."
   }, {
-    "title": "Evaluate square roots",
-    "math": "8(7\\sqrt{3x}) - 3(4\\sqrt{3x}) = 56\\sqrt{3x} - 12\\sqrt{3x}",
-    "desc": "Multiply coefficients outside."
-  }, {
-    "title": "Combine like radicals",
-    "math": "(56 - 12)\\sqrt{3x} = 44\\sqrt{3x}",
-    "desc": "Subtract like terms."
+    "title": "Determine Power",
+    "math": "-3.75 \\times 10^{-4}",
+    "desc": "Moving right results in negative exponent."
   }],
-  "finalAnswer": "44\\sqrt{3x}",
-  "whyItWorks": "Radicals with identical index and radicand can be combined like algebraic terms.",
-  "examTip": "Look for prime factors: $147 / 3 = 49$, which immediately reveals $7^2$.",
-  "mistakeType": "Calculation mistake",
+  "finalAnswer": "-3.75 \\times 10^{-4}",
+  "whyItWorks": "Scientific form requires $1 \\le |c| < 10$ multiplied by $10^n$.",
+  "examTip": "Preserve the negative sign on the number; power of 10 represents magnitude.",
+  "mistakeType": "Sign error",
   "hasDiagram": null
 }, {
   "id": "p2-04",
   "module": "P.2",
+  "topic": "Scientific Notation Operations",
+  "difficulty": "Medium",
+  "questionEn": "Evaluate $\\frac{8.4 \\times 10^7}{2.1 \\times 10^{-3}}$ without a calculator.",
+  "questionAr": "احسب قيمة المقدار $\\frac{8.4 \\times 10^7}{2.1 \\times 10^{-3}}$ دون استخدام الآلة الحاسبة.",
+  "options": ["4.0 \\times 10^{10}", "4.0 \\times 10^4", "4.0 \\times 10^{-4}", "4.0 \\times 10^{21}"],
+  "correctIndex": 0,
+  "hint": "Divide coefficients: $\\frac{8.4}{2.1} = 4.0$; subtract powers: $7 - (-3) = 10$.",
+  "hintAr": "اقسم المعاملات: $\\frac{8.4}{2.1} = 4.0$ واطرح الأسس: $7 - (-3) = 10$.",
+  "firstStep": "Divide $8.4$ by $2.1$.",
+  "firstStepAr": "اقسم المعاملات العددية أولاً.",
+  "steps": [{
+    "title": "Divide Coefficients",
+    "math": "\\frac{8.4}{2.1} = 4.0",
+    "desc": "Mantissas division."
+  }, {
+    "title": "Subtract Exponents",
+    "math": "\\frac{10^7}{10^{-3}} = 10^{7 - (-3)} = 10^{10}",
+    "desc": "Division subtracts powers."
+  }],
+  "finalAnswer": "4.0 \\times 10^{10}",
+  "whyItWorks": "Rules of exponents: $\\frac{10^m}{10^n} = 10^{m - n}$.",
+  "examTip": "Beware $7 - (-3) = 7 + 3 = 10$, NOT $7 - 3 = 4$!",
+  "mistakeType": "Sign error",
+  "hasDiagram": null
+}, {
+  "id": "p2-05",
+  "module": "P.2",
+  "topic": "Simplifying Radicals",
+  "difficulty": "Medium",
+  "questionEn": "Simplify the radical expression: $5\\sqrt{72x} - 2\\sqrt{50x}$.",
+  "questionAr": "بسط المقدار الجذري التالي: $5\\sqrt{72x} - 2\\sqrt{50x}$.",
+  "options": ["20\\sqrt{2x}", "3\\sqrt{22x}", "10\\sqrt{2x}", "20x"],
+  "correctIndex": 0,
+  "hint": "Factor out square factors: $72 = 36 \\cdot 2$ and $50 = 25 \\cdot 2$.",
+  "hintAr": "حلل ما تحت الجذور: $72 = 36 \\times 2$ و $50 = 25 \\times 2$.",
+  "firstStep": "Extract $\\sqrt{36} = 6$ and $\\sqrt{25} = 5$.",
+  "firstStepAr": "استخرج الجذور المربعة الكاملة.",
+  "steps": [{
+    "title": "Simplify First Term",
+    "math": "5\\sqrt{36 \\cdot 2x} = 5(6)\\sqrt{2x} = 30\\sqrt{2x}",
+    "desc": "Pull out 6."
+  }, {
+    "title": "Simplify Second Term",
+    "math": "2\\sqrt{25 \\cdot 2x} = 2(5)\\sqrt{2x} = 10\\sqrt{2x}",
+    "desc": "Pull out 5."
+  }, {
+    "title": "Combine",
+    "math": "30\\sqrt{2x} - 10\\sqrt{2x} = 20\\sqrt{2x}",
+    "desc": "Subtract coefficients."
+  }],
+  "finalAnswer": "20\\sqrt{2x}",
+  "whyItWorks": "Like radicals combine like algebraic like terms.",
+  "examTip": "Never subtract inside radicals: $\\sqrt{72} - \\sqrt{50} \\ne \\sqrt{22}$!",
+  "mistakeType": "Concept misunderstanding",
+  "hasDiagram": null
+}, {
+  "id": "p2-06",
+  "module": "P.2",
   "topic": "Rationalizing Denominators",
   "difficulty": "Hard",
-  "questionEn": "Rationalize the denominator of $\\frac{3}{\\sqrt{5} + \\sqrt{6}}$ and simplify.",
-  "questionAr": "أنطق مقام الكسر التالي وبسّط الناتج: $\\frac{3}{\\sqrt{5} + \\sqrt{6}}$.",
-  "options": ["3(\\sqrt{6} - \\sqrt{5})", "3(\\sqrt{5} - \\sqrt{6})", "\\frac{3(\\sqrt{5} - \\sqrt{6})}{-11}", "\\frac{3}{\\sqrt{11}}"],
+  "questionEn": "Rationalize the denominator of $\\frac{4}{\\sqrt{7} - \\sqrt{3}}$ and simplify completely.",
+  "questionAr": "أنطق مقام الكسر التالي وبسط الناتج: $\\frac{4}{\\sqrt{7} - \\sqrt{3}}$.",
+  "options": ["\\sqrt{7} + \\sqrt{3}", "4(\\sqrt{7} + \\sqrt{3})", "\\frac{\\sqrt{7} + \\sqrt{3}}{4}", "\\sqrt{7} - \\sqrt{3}"],
   "correctIndex": 0,
-  "hint": "Multiply numerator and denominator by the conjugate $(\\sqrt{6} - \\sqrt{5})$ or $(\\sqrt{5} - \\sqrt{6})$.",
-  "hintAr": "اضرب كلاً من البسط والمقام في المرافق (Conjugate): $(\\sqrt{6} - \\sqrt{5})$ لتجنب الإشارة السالبة في المقام.",
-  "firstStep": "Write denominator as $\\sqrt{6} + \\sqrt{5}$ and multiply by conjugate $\\sqrt{6} - \\sqrt{5}$.",
-  "firstStepAr": "أعد ترتيب المقام $\\sqrt{6} + \\sqrt{5}$ واضرب في المرافق $\\sqrt{6} - \\sqrt{5}$.",
+  "hint": "Multiply numerator and denominator by conjugate $(\\sqrt{7} + \\sqrt{3})$.",
+  "hintAr": "اضرب البسط والمقام في مرافق المقام $(\\sqrt{7} + \\sqrt{3})$.",
+  "firstStep": "Multiply by $\\frac{\\sqrt{7} + \\sqrt{3}}{\\sqrt{7} + \\sqrt{3}}$.",
+  "firstStepAr": "اضرب في المرافق بسطاً ومقاماً.",
   "steps": [{
-    "title": "Multiply by conjugate",
-    "math": "\\frac{3}{\\sqrt{6} + \\sqrt{5}} \\cdot \\frac{\\sqrt{6} - \\sqrt{5}}{\\sqrt{6} - \\sqrt{5}}",
-    "desc": "Using conjugate to apply difference of two squares $(a+b)(a-b) = a^2 - b^2$."
+    "title": "Multiply Conjugate",
+    "math": "\\frac{4(\\sqrt{7} + \\sqrt{3})}{(\\sqrt{7} - \\sqrt{3})(\\sqrt{7} + \\sqrt{3})}",
+    "desc": "Difference of squares in denominator."
   }, {
-    "title": "Expand denominator",
-    "math": "(\\sqrt{6})^2 - (\\sqrt{5})^2 = 6 - 5 = 1",
-    "desc": "The denominator simplifies to exactly 1!"
+    "title": "Simplify Denominator",
+    "math": "(\\sqrt{7})^2 - (\\sqrt{3})^2 = 7 - 3 = 4",
+    "desc": "Denominator becomes 4."
   }, {
-    "title": "Multiply numerator",
-    "math": "3(\\sqrt{6} - \\sqrt{5})",
-    "desc": "The final simplified expression."
+    "title": "Cancel 4",
+    "math": "\\frac{4(\\sqrt{7} + \\sqrt{3})}{4} = \\sqrt{7} + \\sqrt{3}",
+    "desc": "Cancel common factor 4."
   }],
-  "finalAnswer": "3(\\sqrt{6} - \\sqrt{5})",
-  "whyItWorks": "Multiplying radical binomials by their conjugates eliminates radicals from the denominator.",
-  "examTip": "Writing the larger root first $(\\sqrt{6} + \\sqrt{5})$ avoids a negative denominator $-1$!",
-  "mistakeType": "Formula mistake",
+  "finalAnswer": "\\sqrt{7} + \\sqrt{3}",
+  "whyItWorks": "Conjugates $(a - b)(a + b) = a^2 - b^2$ eliminate square roots.",
+  "examTip": "Always cancel common factors between numerator and denominator at the end.",
+  "mistakeType": "Simplification error",
+  "hasDiagram": null
+}, {
+  "id": "p2-07",
+  "module": "P.2",
+  "topic": "Rationalizing Numerators",
+  "difficulty": "Hard",
+  "questionEn": "Rationalize the numerator of $\\frac{\\sqrt{11} - 3}{2}$ and simplify.",
+  "questionAr": "أنطق بسط الكسر التالي وبسط الناتج: $\\frac{\\sqrt{11} - 3}{2}$.",
+  "options": ["\\frac{1}{\\sqrt{11} + 3}", "\\frac{2}{\\sqrt{11} + 3}", "\\frac{1}{\\sqrt{11} - 3}", "\\sqrt{11} + 3"],
+  "correctIndex": 0,
+  "hint": "Multiply numerator and denominator by conjugate of numerator: $(\\sqrt{11} + 3)$.",
+  "hintAr": "اضرب البسط والمقام في مرافق البسط وهو $(\\sqrt{11} + 3)$.",
+  "firstStep": "Multiply by $\\frac{\\sqrt{11} + 3}{\\sqrt{11} + 3}$.",
+  "firstStepAr": "اضرب في مرافق البسط.",
+  "steps": [{
+    "title": "Conjugate Product",
+    "math": "\\frac{(\\sqrt{11} - 3)(\\sqrt{11} + 3)}{2(\\sqrt{11} + 3)} = \\frac{11 - 9}{2(\\sqrt{11} + 3)}",
+    "desc": "Difference of squares on top."
+  }, {
+    "title": "Simplify",
+    "math": "\\frac{2}{2(\\sqrt{11} + 3)} = \\frac{1}{\\sqrt{11} + 3}",
+    "desc": "Divide 2 by 2."
+  }],
+  "finalAnswer": "\\frac{1}{\\sqrt{11} + 3}",
+  "whyItWorks": "Rationalizing numerator clears radicals from top for calculus limits.",
+  "examTip": "Pay attention whether question asks for numerator or denominator!",
+  "mistakeType": "Careless mistake",
   "hasDiagram": null
 }, {
   "id": "p3-01",
   "module": "P.3",
-  "topic": "Polynomial Standard Form",
+  "topic": "Polynomial Standard Form & Degree",
   "difficulty": "Easy",
-  "questionEn": "Write the polynomial $1 + 6x^4 - 4x^5$ in standard form and identify its degree and leading coefficient.",
-  "questionAr": "اكتب كثيرة الحدود $1 + 6x^4 - 4x^5$ بالصيغة القياسية (Standard form) وحدد درجتها ومعاملها الرئيس.",
-  "options": ["\\text{Standard Form: } -4x^5 + 6x^4 + 1, \\quad \\text{Degree: } 5, \\quad \\text{Leading Coeff: } -4", "\\text{Standard Form: } 6x^4 - 4x^5 + 1, \\quad \\text{Degree: } 4, \\quad \\text{Leading Coeff: } 6", "\\text{Standard Form: } -4x^5 + 6x^4 + 1, \\quad \\text{Degree: } 5, \\quad \\text{Leading Coeff: } 4", "\\text{Standard Form: } 4x^5 - 6x^4 - 1, \\quad \\text{Degree: } 5, \\quad \\text{Leading Coeff: } -4"],
+  "questionEn": "For the polynomial $3 - 5x^2 + 8x^4 - 2x$, write in standard form, state its degree, and find leading coefficient.",
+  "questionAr": "لكثيرة الحدود $3 - 5x^2 + 8x^4 - 2x$، اكتبها بالصورة القياسية وحدد درجتها ومعاملها الرئيس.",
+  "options": ["8x^4 - 5x^2 - 2x + 3, \\quad \\text{Degree: } 4, \\quad \\text{Leading Coeff: } 8", "-5x^2 + 8x^4 - 2x + 3, \\quad \\text{Degree: } 2, \\quad \\text{Leading Coeff: } -5", "8x^4 - 5x^2 - 2x + 3, \\quad \\text{Degree: } 8, \\quad \\text{Leading Coeff: } 4", "3 - 2x - 5x^2 + 8x^4, \\quad \\text{Degree: } 4, \\quad \\text{Leading Coeff: } 3"],
   "correctIndex": 0,
-  "hint": "Standard form arranges terms in descending order of exponents: $a_n x^n + \\dots + a_0$.",
-  "hintAr": "الصيغة القياسية ترتب الحدود تنازلياً حسب الأس، وأعلى أس هو الدرجة ومعامله هو المعامل الرئيس.",
-  "firstStep": "Find the term with the highest power of $x$.",
-  "firstStepAr": "حدد الحد صاحب أعلى أس للمتغير $x$.",
+  "hint": "Arrange terms in descending order of exponents.",
+  "hintAr": "رتب الحدود تنازلياً حسب قيمة الأسس.",
+  "firstStep": "Sort powers: $x^4, x^2, x^1, x^0$.",
+  "firstStepAr": "رتب الأسس تنازلياً.",
   "steps": [{
-    "title": "Identify highest power",
-    "math": "\\text{Highest power term: } -4x^5",
-    "desc": "The exponent is 5, so Degree = 5."
+    "title": "Standard Form",
+    "math": "8x^4 - 5x^2 - 2x + 3",
+    "desc": "Exponents descend 4, 2, 1, 0."
   }, {
-    "title": "Identify leading coefficient",
-    "math": "a_5 = -4",
-    "desc": "The coefficient of $x^5$ is $-4$ (retain negative sign)."
-  }, {
-    "title": "Order terms descendingly",
-    "math": "-4x^5 + 6x^4 + 1",
-    "desc": "Standard form."
+    "title": "Degree & Coeff",
+    "math": "\\text{Degree} = 4, \\quad \\text{Leading Coeff} = 8",
+    "desc": "Highest power is 4; its multiplier is 8."
   }],
-  "finalAnswer": "-4x^5 + 6x^4 + 1, \\text{ Degree: } 5, \\text{ Leading Coeff: } -4",
-  "whyItWorks": "Polynomial degree is governed by the highest exponent of the variable term with a non-zero coefficient.",
-  "examTip": "Always keep the sign attached to the term: the leading coefficient is $-4$, not $4$!",
-  "mistakeType": "Careless mistake",
+  "finalAnswer": "8x^4 - 5x^2 - 2x + 3, \\quad \\text{Degree: } 4, \\quad \\text{Leading Coeff: } 8",
+  "whyItWorks": "Standard form unambiguously identifies polynomial degree and leading term.",
+  "examTip": "Degree is the exponent (4), leading coefficient is the number (8). Do not swap!",
+  "mistakeType": "Concept misunderstanding",
   "hasDiagram": null
 }, {
   "id": "p3-02",
   "module": "P.3",
-  "topic": "Special Products",
-  "difficulty": "Hard",
-  "questionEn": "Find the special product: $[(m - 3) + n][(m - 3) - n]$.",
-  "questionAr": "أوجد ناتج الضرب الخاص التالي: $[(m - 3) + n][(m - 3) - n]$.",
-  "options": ["m^2 - 6m + 9 - n^2", "m^2 - 9 - n^2", "m^2 + 6m + 9 - n^2", "(m - 3)^2 + n^2"],
+  "topic": "Polynomial Definition Verification",
+  "difficulty": "Medium",
+  "questionEn": "Which of the following expressions is NOT a polynomial?",
+  "questionAr": "أي من المقادير التالية لا يمثل كثيرة حدود (Not a polynomial)؟",
+  "options": ["\\frac{4x + 7}{x}", "\\frac{x^2 + 5x - 6}{3}", "7x^3 - \\sqrt{5}x + 2", "y^4 - y^2 + 8"],
   "correctIndex": 0,
-  "hint": "Use difference of two squares: $(u + v)(u - v) = u^2 - v^2$, where $u = (m - 3)$ and $v = n$.",
-  "hintAr": "استخدم صيغة فرق المربعين $(u+v)(u-v) = u^2 - v^2$ باعتبار $u = (m-3)$ و $v = n$.",
-  "firstStep": "Identify $u = m - 3$ and $v = n$ to apply $u^2 - v^2$.",
-  "firstStepAr": "طبق $(m-3)^2 - n^2$ ثم فك القوس التربيعي الأول.",
+  "hint": "A polynomial cannot have variables in the denominator (which means negative exponents).",
+  "hintAr": "كثيرة الحدود لا يجوز أن تحتوي على متغير في المقام (لأنه يعني أس سالب).",
+  "firstStep": "Look for variables in denominators: $\\frac{4x + 7}{x} = 4 + 7x^{-1}$.",
+  "firstStepAr": "ابحث عن المتغيرات في المقامات.",
   "steps": [{
-    "title": "Apply $(u+v)(u-v) = u^2 - v^2$",
-    "math": "[(m-3) + n][(m-3) - n] = (m-3)^2 - n^2",
-    "desc": "Difference of squares formula."
+    "title": "Negative Exponent Violation",
+    "math": "\\frac{4x + 7}{x} = 4 + 7x^{-1}",
+    "desc": "Power -1 is not a whole number."
   }, {
-    "title": "Expand $(m-3)^2$",
-    "math": "(m-3)^2 = m^2 - 2(m)(3) + 3^2 = m^2 - 6m + 9",
-    "desc": "Square of a binomial."
-  }, {
-    "title": "Combine all terms",
-    "math": "m^2 - 6m + 9 - n^2",
-    "desc": "Complete expanded polynomial."
+    "title": "Constant Denominator Allowed",
+    "math": "\\frac{x^2+5x-6}{3} = \\frac{1}{3}x^2 + \\frac{5}{3}x - 2",
+    "desc": "Coefficients can be fractions."
   }],
-  "finalAnswer": "m^2 - 6m + 9 - n^2",
-  "whyItWorks": "Grouping $(m-3)$ as a single entity transforms a 4-term multiplication into a simple difference of two squares.",
-  "examTip": "Remember $(a-b)^2 = a^2 - 2ab + b^2$. Don't forget the middle term $-6m$!",
-  "mistakeType": "Formula mistake",
+  "finalAnswer": "\\frac{4x + 7}{x}",
+  "whyItWorks": "Polynomial variable powers must belong to $\\{0, 1, 2, \\dots\\}$.",
+  "examTip": "Constant numbers in denominators are fine; VARIABLES in denominators are forbidden!",
+  "mistakeType": "Concept misunderstanding",
   "hasDiagram": null
 }, {
   "id": "p3-03",
   "module": "P.3",
-  "topic": "Shaded Area Application",
-  "difficulty": "Exam level",
-  "questionEn": "A square has outer side length $4x+2$ with an inner square cutout of side length $x-1$. Find the area of the shaded region in standard form.",
-  "questionAr": "مربع طول ضلعه الخارجي $4x+2$ وبداخله مربع مفرغ طول ضلعه $x-1$. أوجد مساحة المنطقة المظللة بالصيغة القياسية.",
-  "options": ["15x^2 + 18x + 3", "15x^2 + 14x + 3", "17x^2 + 18x + 5", "15x^2 + 18x - 3"],
+  "topic": "Special Product - Square of Binomial",
+  "difficulty": "Medium",
+  "questionEn": "Find the special product: $(3x - 5)^2$.",
+  "questionAr": "أوجد ناتج الضرب الخاص: $(3x - 5)^2$.",
+  "options": ["9x^2 - 30x + 25", "9x^2 - 25", "9x^2 + 25", "9x^2 - 15x + 25"],
   "correctIndex": 0,
-  "hint": "Area of shaded region = $\\text{Area of large square} - \\text{Area of inner cutout square}$.",
-  "hintAr": "مساحة المنطقة المظللة = مساحة المربع الخارجي $(4x+2)^2$ مطروحاً منها مساحة المربع الداخلي $(x-1)^2$.",
-  "firstStep": "Write the area equation: $\\text{Area} = (4x+2)^2 - (x-1)^2$.",
-  "firstStepAr": "اكتب معادلة المساحة: $\\text{Area} = (4x+2)^2 - (x-1)^2$ ثم فك المربعين واطرحهما.",
+  "hint": "Use $(u - v)^2 = u^2 - 2uv + v^2$. Middle term is $2(3x)(5) = 30x$.",
+  "hintAr": "طبق متطابقة المربع الكامل: $(u - v)^2 = u^2 - 2uv + v^2$. الحد الأوسط هو $30x$.",
+  "firstStep": "Identify $u=3x$ and $v=5$.",
+  "firstStepAr": "حدد حدي المقدار.",
   "steps": [{
-    "title": "Expand outer square area",
-    "math": "(4x+2)^2 = 16x^2 + 2(4x)(2) + 4 = 16x^2 + 16x + 4",
+    "title": "Square First",
+    "math": "(3x)^2 = 9x^2",
+    "desc": "Square of 3x."
+  }, {
+    "title": "Cross Term",
+    "math": "-2(3x)(5) = -30x",
+    "desc": "Twice product of terms."
+  }, {
+    "title": "Square Last",
+    "math": "(-5)^2 = +25",
+    "desc": "Square of 5."
+  }],
+  "finalAnswer": "9x^2 - 30x + 25",
+  "whyItWorks": "Squaring a binomial produces a trinomial with interaction term $2uv$.",
+  "examTip": "Classic trap: $(3x-5)^2 \\ne 9x^2 - 25$. Never omit the middle term!",
+  "mistakeType": "Formula mistake",
+  "hasDiagram": null
+}, {
+  "id": "p3-04",
+  "module": "P.3",
+  "topic": "Special Product - Repeated Difference of Squares",
+  "difficulty": "Hard",
+  "questionEn": "Find the special product: $(x + 3)(x - 3)(x^2 + 9)$.",
+  "questionAr": "أوجد ناتج الضرب الخاص: $(x + 3)(x - 3)(x^2 + 9)$.",
+  "options": ["x^4 - 81", "x^4 + 81", "x^4 - 18x^2 + 81", "x^3 - 27"],
+  "correctIndex": 0,
+  "hint": "First pair $(x + 3)(x - 3) = x^2 - 9$. Then $(x^2 - 9)(x^2 + 9) = x^4 - 81$.",
+  "hintAr": "الزوج الأول يعطي فرق مربعين $x^2 - 9$، ثم ضربه في $x^2 + 9$ يعطي $x^4 - 81$.",
+  "firstStep": "Multiply first two binomials.",
+  "firstStepAr": "اضرب أول قوسين كفرق بين مربعين.",
+  "steps": [{
+    "title": "First Step",
+    "math": "(x + 3)(x - 3) = x^2 - 9",
+    "desc": "Difference of squares."
+  }, {
+    "title": "Second Step",
+    "math": "(x^2 - 9)(x^2 + 9) = (x^2)^2 - 9^2 = x^4 - 81",
+    "desc": "Second difference of squares."
+  }],
+  "finalAnswer": "x^4 - 81",
+  "whyItWorks": "Repeated difference of squares doubles exponent each step.",
+  "examTip": "Result has a MINUS sign: $x^4 - 81$, not $+81$.",
+  "mistakeType": "Formula mistake",
+  "hasDiagram": null
+}, {
+  "id": "p3-05",
+  "module": "P.3",
+  "topic": "Shaded Region Area Application",
+  "difficulty": "Hard",
+  "questionEn": "Find the area of the shaded region: an outer square has side $5x + 3$, and an inner unshaded square cutout has side $x - 2$.",
+  "questionAr": "أوجد مساحة المنطقة المظللة: مربع خارجي طول ضلعه $5x + 3$ ومربع مفرغ داخله ضلعه $x - 2$.",
+  "options": ["24x^2 + 34x + 5", "26x^2 + 26x + 13", "24x^2 + 26x + 5", "25x^2 - x^2 + 5"],
+  "correctIndex": 0,
+  "hint": "Area = $(5x + 3)^2 - (x - 2)^2$. Expand and subtract carefully.",
+  "hintAr": "المساحة المظللة = مساحة المربع الخارجي - مساحة المربع الداخلي: $(5x + 3)^2 - (x - 2)^2$.",
+  "firstStep": "Expand $(5x + 3)^2$ and $(x - 2)^2$.",
+  "firstStepAr": "فك التربيع لكلا المربعين.",
+  "steps": [{
+    "title": "Outer Area",
+    "math": "(5x + 3)^2 = 25x^2 + 30x + 9",
     "desc": "Outer square area."
   }, {
-    "title": "Expand inner cutout area",
-    "math": "(x-1)^2 = x^2 - 2x + 1",
-    "desc": "Inner square area."
+    "title": "Inner Area",
+    "math": "(x - 2)^2 = x^2 - 4x + 4",
+    "desc": "Cutout square area."
   }, {
-    "title": "Subtract and distribute negative sign",
-    "math": "(16x^2 + 16x + 4) - (x^2 - 2x + 1) = 16x^2 - x^2 + 16x - (-2x) + 4 - 1",
-    "desc": "Be careful distributing the negative sign!"
-  }, {
-    "title": "Simplify like terms",
-    "math": "= 15x^2 + 18x + 3",
-    "desc": "Standard form."
+    "title": "Subtract",
+    "math": "(25x^2 + 30x + 9) - (x^2 - 4x + 4) = 24x^2 + 34x + 5",
+    "desc": "$30x - (-4x) = 34x$."
   }],
-  "finalAnswer": "15x^2 + 18x + 3",
-  "whyItWorks": "Geometry applied to algebra: Total shaded area is the difference between total area and void area.",
-  "examTip": "This is CW-15 Page 25 of your Math 001 notebook! Distributing the negative: $16x - (-2x) = 18x$.",
-  "mistakeType": "Calculation mistake",
+  "finalAnswer": "24x^2 + 34x + 5",
+  "whyItWorks": "Subtracting polynomials distributes the negative sign across all inner terms.",
+  "examTip": "Watch the sign: $30x - (-4x) = 30x + 4x = 34x$!",
+  "mistakeType": "Sign error",
   "hasDiagram": "shaded_square"
 }, {
   "id": "p4-01",
   "module": "P.4",
-  "topic": "Difference of Squares & GCF",
-  "difficulty": "Medium",
-  "questionEn": "Completely factor the expression: $6x^2 - 54$.",
-  "questionAr": "حلل المقدار الجبري التالي تحليلاً تاماً: $6x^2 - 54$.",
-  "options": ["6(x - 3)(x + 3)", "(6x - 18)(x + 3)", "6(x - 9)(x + 9)", "6(x^2 - 9)"],
+  "topic": "Factoring Greatest Common Factor",
+  "difficulty": "Easy",
+  "questionEn": "Completely factor out the greatest common factor: $4x^3 - 12x^2 + 8x$.",
+  "questionAr": "حلل المقدار بإخراج العامل المشترك الأكبر (GCF) تحليلاً كاملاً: $4x^3 - 12x^2 + 8x$.",
+  "options": ["4x(x - 1)(x - 2)", "4x(x^2 - 3x + 2)", "2x(2x^2 - 6x + 4)", "4(x^3 - 3x^2 + 2x)"],
   "correctIndex": 0,
-  "hint": "Always factor out the Greatest Common Factor (GCF) first, then factor the remaining difference of squares.",
-  "hintAr": "أخرج العامل المشترك الأكبر (GCF) أولاً، ثم حلل القوس الناتج كفرق بين مربعين.",
-  "firstStep": "Factor out the common factor 6: $6(x^2 - 9)$.",
-  "firstStepAr": "أخرج 6 كعامل مشترك لتصبح $6(x^2 - 9)$.",
+  "hint": "Factor out $4x$, then factor the remaining quadratic trinomial $(x^2 - 3x + 2)$.",
+  "hintAr": "أخرج $4x$ كعامل مشترك أولاً، ثم حلل الحدودية الثلاثية المتبقية $(x^2 - 3x + 2)$.",
+  "firstStep": "Extract GCF $4x$.",
+  "firstStepAr": "أخرج $4x$.",
   "steps": [{
-    "title": "Factor GCF",
-    "math": "6(x^2 - 9)",
-    "desc": "Extract 6 from both terms."
+    "title": "Extract GCF",
+    "math": "4x(x^2 - 3x + 2)",
+    "desc": "Factor out 4x."
   }, {
-    "title": "Factor difference of two squares",
-    "math": "x^2 - 9 = x^2 - 3^2 = (x - 3)(x + 3)",
-    "desc": "Apply $u^2 - v^2 = (u-v)(u+v)$."
-  }, {
-    "title": "Complete factored form",
-    "math": "6(x - 3)(x + 3)",
-    "desc": "Completely factored."
+    "title": "Factor Trinomial",
+    "math": "x^2 - 3x + 2 = (x - 1)(x - 2)",
+    "desc": "Find factors of 2 adding to -3."
   }],
-  "finalAnswer": "6(x - 3)(x + 3)",
-  "whyItWorks": "Factoring is complete only when no factor can be factored further over the real numbers.",
-  "examTip": "Stopping at $6(x^2 - 9)$ will lose you marks because the question says 'Completely factor'!",
-  "mistakeType": "Careless mistake",
+  "finalAnswer": "4x(x - 1)(x - 2)",
+  "whyItWorks": "Factoring completely requires reducing all factors to prime/linear irreducible polynomials.",
+  "examTip": "Stopping at $4x(x^2-3x+2)$ is incomplete! Always factor the trinomial further.",
+  "mistakeType": "Incomplete factoring",
   "hasDiagram": null
 }, {
   "id": "p4-02",
   "module": "P.4",
-  "topic": "Trinomial Factoring",
-  "difficulty": "Hard",
-  "questionEn": "Factor the trinomial: $3x^2 + 10x - 8$.",
-  "questionAr": "حلل كثيرة الحدود الثلاثية التالية: $3x^2 + 10x - 8$.",
-  "options": ["(3x - 2)(x + 4)", "(3x + 2)(x - 4)", "(3x - 4)(x + 2)", "(3x + 8)(x - 1)"],
+  "topic": "Difference of Two Squares",
+  "difficulty": "Medium",
+  "questionEn": "Completely factor: $100 - 49z^2$.",
+  "questionAr": "حلل المقدار التالي تحليلاً كاملاً: $100 - 49z^2$.",
+  "options": ["(10 - 7z)(10 + 7z)", "(10 - 7z)^2", "(10 + 7z)^2", "(50 - 7z)(50 + 7z)"],
   "correctIndex": 0,
-  "hint": "Look for two numbers that multiply to $a \\cdot c = 3(-8) = -24$ and add to $b = 10$.",
-  "hintAr": "ابحث عن عددين حاصل ضربهما $3 \\times (-8) = -24$ ومجموعهما $10$ (هما $12$ و $-2$).",
-  "firstStep": "The two numbers are $12$ and $-2$ ($12 \\times -2 = -24$ and $12 + (-2) = 10$).",
-  "firstStepAr": "العددان هما $12$ و $-2$؛ قسّم الحد الأوسط $10x = 12x - 2x$.",
+  "hint": "Use $u^2 - v^2 = (u - v)(u + v)$, with $u = 10$ and $v = 7z$.",
+  "hintAr": "طبق صيغة فرق المربعين: $u^2 - v^2 = (u - v)(u + v)$ حيث $u = 10$ و $v = 7z$.",
+  "firstStep": "Recognize $100 = 10^2$ and $49z^2 = (7z)^2$.",
+  "firstStepAr": "اكتب الحدود على صورة مربعات كاملة.",
   "steps": [{
-    "title": "Split middle term",
-    "math": "3x^2 + 12x - 2x - 8",
-    "desc": "Rewrite $10x$ as $12x - 2x$."
+    "title": "Identify Squares",
+    "math": "100 = 10^2, \\quad 49z^2 = (7z)^2",
+    "desc": "Difference of two squares."
   }, {
-    "title": "Factor by grouping",
-    "math": "3x(x + 4) - 2(x + 4)",
-    "desc": "Factor $3x$ from first pair and $-2$ from second pair."
-  }, {
-    "title": "Factor out common binomial",
-    "math": "(3x - 2)(x + 4)",
-    "desc": "Take $(x+4)$ common."
+    "title": "Apply Formula",
+    "math": "(10 - 7z)(10 + 7z)",
+    "desc": "Product of conjugate binomials."
   }],
-  "finalAnswer": "(3x - 2)(x + 4)",
-  "whyItWorks": "Factoring by grouping is systematic and always works for $ax^2 + bx + c$ trinomials.",
-  "examTip": "Check your answer quickly by multiplying the outer and inner terms: $3x(4) + (-2)(x) = 12x - 2x = 10x$.",
-  "mistakeType": "Calculation mistake",
+  "finalAnswer": "(10 - 7z)(10 + 7z)",
+  "whyItWorks": "Difference of squares factors into conjugate sum and difference.",
+  "examTip": "Preserve order: 10 comes first, so it is $(10-7z)(10+7z)$, not $(7z-10)$.",
+  "mistakeType": "Careless mistake",
   "hasDiagram": null
 }, {
   "id": "p4-03",
   "module": "P.4",
-  "topic": "Factoring by Grouping",
-  "difficulty": "Medium",
-  "questionEn": "Factor the four-term polynomial by grouping: $x^3 - x^2 + 2x - 2$.",
-  "questionAr": "حلل كثيرة الحدود المكونة من 4 حدود باستخدام التجميع (Grouping): $x^3 - x^2 + 2x - 2$.",
-  "options": ["(x - 1)(x^2 + 2)", "(x + 1)(x^2 - 2)", "(x^2 - 1)(x + 2)", "(x - 1)(x + 2)"],
+  "topic": "Factoring Trinomials $ax^2 + bx + c$",
+  "difficulty": "Hard",
+  "questionEn": "Completely factor the trinomial: $6x^2 + 7x - 5$.",
+  "questionAr": "حلل الحدودية الثلاثية التالية تحليلاً كاملاً: $6x^2 + 7x - 5$.",
+  "options": ["(2x - 1)(3x + 5)", "(2x + 1)(3x - 5)", "(6x - 5)(x + 1)", "(3x - 1)(2x + 5)"],
   "correctIndex": 0,
-  "hint": "Group the first two terms and the last two terms: $(x^3 - x^2) + (2x - 2)$.",
-  "hintAr": "جمّع أول حدين معاً وآخر حدين معاً: $(x^3 - x^2) + (2x - 2)$.",
-  "firstStep": "Factor $x^2$ from the first pair and $2$ from the second pair.",
-  "firstStepAr": "أخرج $x^2$ من الزوج الأول و $2$ من الزوج الثاني لتجد عاملاً مشتركاً $(x-1)$.",
+  "hint": "Find factors of $ac = 6(-5) = -30$ that sum to $b = 7$. Use $+10$ and $-3$.",
+  "hintAr": "ابحث عن عددين حاصل ضربهما $-30$ ومجموعهما $7$، وهما $+10$ و $-3$.",
+  "firstStep": "Split middle term: $7x = 10x - 3x$.",
+  "firstStepAr": "فكك الحد الأوسط بالتجميع: $7x = 10x - 3x$.",
   "steps": [{
-    "title": "Group in pairs",
-    "math": "(x^3 - x^2) + (2x - 2)",
-    "desc": "Group terms with common factors."
+    "title": "Split Middle Term",
+    "math": "6x^2 + 10x - 3x - 5",
+    "desc": "Rewrite with 4 terms."
   }, {
-    "title": "Factor GCF from each pair",
-    "math": "x^2(x - 1) + 2(x - 1)",
-    "desc": "Notice $(x - 1)$ appears in both."
+    "title": "Factor Pairs",
+    "math": "2x(3x + 5) - 1(3x + 5)",
+    "desc": "Group pairs."
   }, {
-    "title": "Factor out common binomial",
-    "math": "(x - 1)(x^2 + 2)",
-    "desc": "Factored form."
+    "title": "Extract Binomial",
+    "math": "(2x - 1)(3x + 5)",
+    "desc": "Pull out $(3x + 5)$."
   }],
-  "finalAnswer": "(x - 1)(x^2 + 2)",
-  "whyItWorks": "The factor $x^2 + 2$ is irreducible over real numbers because $x^2 + 2 > 0$ for all real $x$.",
-  "examTip": "$x^2 + 2$ is a sum of squares and cannot be factored further in real numbers!",
-  "mistakeType": "Concept misunderstanding",
+  "finalAnswer": "(2x - 1)(3x + 5)",
+  "whyItWorks": "Factoring by grouping systematically decomposes $ax^2 + bx + c$ trinomials.",
+  "examTip": "Check with FOIL: $2x(5) + (-1)(3x) = 10x - 3x = 7x$. Matches!",
+  "mistakeType": "Calculation mistake",
+  "hasDiagram": null
+}, {
+  "id": "p4-04",
+  "module": "P.4",
+  "topic": "Factoring 4 Terms by Grouping",
+  "difficulty": "Hard",
+  "questionEn": "Factor the 4-term polynomial by grouping: $x^3 + 4x^2 - 3x - 12$.",
+  "questionAr": "حلل كثيرة الحدود التالية بالتجميع: $x^3 + 4x^2 - 3x - 12$.",
+  "options": ["(x + 4)(x^2 - 3)", "(x - 4)(x^2 + 3)", "(x + 4)(x - \\sqrt{3})^2", "(x^2 + 4)(x - 3)"],
+  "correctIndex": 0,
+  "hint": "Group $(x^3 + 4x^2) - (3x + 12)$. Factor $x^2(x + 4) - 3(x + 4)$.",
+  "hintAr": "اجمع كل حدين معاً: $x^2(x + 4) - 3(x + 4)$.",
+  "firstStep": "Group into pairs.",
+  "firstStepAr": "اجمع أول حدين وآخر حدين.",
+  "steps": [{
+    "title": "Factor Pairs",
+    "math": "x^2(x + 4) - 3(x + 4)",
+    "desc": "Extract $x^2$ and $-3$."
+  }, {
+    "title": "Common Binomial",
+    "math": "(x + 4)(x^2 - 3)",
+    "desc": "Factor out $(x + 4)$."
+  }],
+  "finalAnswer": "(x + 4)(x^2 - 3)",
+  "whyItWorks": "Grouping exposes common binomial factors across polynomial terms.",
+  "examTip": "Factoring $-3$ out of $-3x - 12$ gives $+4$ inside: $-3(x + 4)$.",
+  "mistakeType": "Sign error",
   "hasDiagram": null
 }, {
   "id": "p5-01",
   "module": "P.5",
-  "topic": "Domain of Expression",
-  "difficulty": "Hard",
-  "questionEn": "Find the domain of the algebraic expression: $\\frac{1}{\\sqrt{x-3}}$.",
-  "questionAr": "أوجد مجال (Domain) المقدار الجبري التالي: $\\frac{1}{\\sqrt{x-3}}$.",
-  "options": ["(3, \\infty)", "[3, \\infty)", "(-\\infty, 3)", "(-\\infty, \\infty)"],
+  "topic": "Domain of Rational Expressions",
+  "difficulty": "Medium",
+  "questionEn": "Find the domain of $\\frac{x + 5}{4x - 3}$ in interval notation.",
+  "questionAr": "أوجد مجال (Domain) المقدار $\\frac{x + 5}{4x - 3}$ بصيغة الفترات.",
+  "options": ["(-\\infty, \\frac{3}{4}) \\cup (\\frac{3}{4}, \\infty)", "(-\\infty, -5) \\cup (-5, \\infty)", "[\\frac{3}{4}, \\infty)", "(-\\infty, \\infty)"],
   "correctIndex": 0,
-  "hint": "The expression inside the square root in the denominator must be strictly positive ($>0$), not zero.",
-  "hintAr": "بما أن الجذر في المقام، فإن ما بداخل الجذر يجب أن يكون أكبر تماماً من الصفر ($> 0$) ولا يساوي الصفر لمنع القسمة على صفر.",
-  "firstStep": "Set the denominator radicand $x - 3 > 0$.",
-  "firstStepAr": "ضع شرط المقام الموجب: $x - 3 > 0$.",
+  "hint": "Exclude values that make the denominator zero: $4x - 3 \\ne 0 \\implies x \\ne \\frac{3}{4}$.",
+  "hintAr": "استثنِ القيم التي تجعل المقام صفراً: $4x - 3 \\ne 0 \\implies x \\ne \\frac{3}{4}$.",
+  "firstStep": "Set denominator equal to 0.",
+  "firstStepAr": "ساوِ المقام بالصفر لمعرفة الأصفار المستثناة.",
   "steps": [{
-    "title": "Identify domain restrictions",
-    "math": "\\text{Radical: } x - 3 \\ge 0 \\quad \\text{and} \\quad \\text{Denominator } \\ne 0",
-    "desc": "Combine both conditions into a strict inequality."
+    "title": "Denominator Zeroes",
+    "math": "4x - 3 = 0 \\implies x = \\frac{3}{4}",
+    "desc": "Value causing division by zero."
   }, {
-    "title": "Solve strict inequality",
-    "math": "x - 3 > 0 \\implies x > 3",
-    "desc": "Add 3 to both sides."
-  }, {
-    "title": "Express in interval notation",
-    "math": "(3, \\infty)",
-    "desc": "Open parenthesis at 3 because 3 is excluded."
+    "title": "Interval Notation",
+    "math": "(-\\infty, \\frac{3}{4}) \\cup (\\frac{3}{4}, \\infty)",
+    "desc": "All real numbers except $\frac{3}{4}$."
   }],
-  "finalAnswer": "(3, \\infty)",
-  "whyItWorks": "If $x = 3$, the denominator is $\\sqrt{0} = 0$, causing division by zero.",
-  "examTip": "If the square root was in the numerator, the answer would be $[3, \\infty)$. In the denominator, it must be $(3, \\infty)$!",
+  "finalAnswer": "(-\\infty, \\frac{3}{4}) \\cup (\\frac{3}{4}, \\infty)",
+  "whyItWorks": "Division by zero is undefined; numerator zeroes only make the value 0.",
+  "examTip": "Numerator $x+5=0$ is allowed! Do NOT exclude $-5$ from the domain.",
   "mistakeType": "Concept misunderstanding",
   "hasDiagram": null
 }, {
   "id": "p5-02",
   "module": "P.5",
-  "topic": "Simplifying Rational Expressions",
-  "difficulty": "Medium",
-  "questionEn": "Write the rational expression $\\frac{12 - 4x}{x - 3}$ in simplest form.",
-  "questionAr": "اكتب الكسر الجبري التالي في أبسط صورة: $\\frac{12 - 4x}{x - 3}$.",
-  "options": ["-4", "4", "\\frac{4(3-x)}{x-3}", "-4(x-3)"],
+  "topic": "Domain with Radical in Denominator",
+  "difficulty": "Hard",
+  "questionEn": "Find the domain of $\\frac{1}{\\sqrt{x - 5}}$.",
+  "questionAr": "أوجد مجال (Domain) المقدار $\\frac{1}{\\sqrt{x - 5}}$.",
+  "options": ["(5, \\infty)", "[5, \\infty)", "(-\\infty, 5)", "(-\\infty, 5) \\cup (5, \\infty)"],
   "correctIndex": 0,
-  "hint": "Factor out $-4$ from the numerator to get $-4(x - 3)$.",
-  "hintAr": "أخرج $-4$ كعامل مشترك من البسط لكي يتطابق القوس مع المقام $(x - 3)$.",
-  "firstStep": "Factor $-4$ from $12 - 4x$.",
-  "firstStepAr": "حلل البسط: $12 - 4x = -4(x - 3)$.",
+  "hint": "Under a square root in the denominator, the radicand must be strictly positive: $x - 5 > 0$.",
+  "hintAr": "بما أن الجذر في المقام، يجب أن يكون ما تحت الجذر أكبر تماماً من الصفر: $x - 5 > 0$.",
+  "firstStep": "Require $x - 5 > 0$.",
+  "firstStepAr": "اشترط $x - 5 > 0$.",
   "steps": [{
-    "title": "Factor out negative constant",
-    "math": "12 - 4x = -4(x - 3)",
-    "desc": "Notice $12 = -4(-3)$ and $-4x = -4(x)$."
+    "title": "Strict Inequality",
+    "math": "x - 5 > 0 \\implies x > 5",
+    "desc": "Cannot be zero in denominator."
   }, {
-    "title": "Cancel common binomial factor",
-    "math": "\\frac{-4(x - 3)}{x - 3} = -4, \\quad x \\ne 3",
-    "desc": "Divide out $(x-3)$."
+    "title": "Interval Form",
+    "math": "(5, \\infty)",
+    "desc": "Strict open parenthesis at 5."
   }],
-  "finalAnswer": "-4",
-  "whyItWorks": "Opposite factors rule: $(a - b) = -(b - a)$, so $\\frac{a-b}{b-a} = -1$.",
-  "examTip": "Whenever you see reversed terms like $(3 - x)$ and $(x - 3)$, remember their quotient is always $-1$!",
-  "mistakeType": "Careless mistake",
+  "finalAnswer": "(5, \\infty)",
+  "whyItWorks": "Square roots require non-negative, and denominators require non-zero; intersection is $> 0$.",
+  "examTip": "If the root was on top, it would be $[5, \\infty)$. On bottom, it MUST be $(5, \\infty)$!",
+  "mistakeType": "Notation error",
   "hasDiagram": null
 }, {
   "id": "p5-03",
   "module": "P.5",
-  "topic": "Addition of Rational Expressions",
-  "difficulty": "Exam level",
-  "questionEn": "Perform the addition and simplify: $\\frac{1}{3x+2} + \\frac{x}{x+1}$.",
-  "questionAr": "أجرِ عملية الجمع وبسّط الناتج لأبسط صورة: $\\frac{1}{3x+2} + \\frac{x}{x+1}$.",
-  "options": ["\\frac{3x^2 + 3x + 1}{(3x+2)(x+1)}", "\\frac{3x^2 + 2x + 1}{(3x+2)(x+1)}", "\\frac{x+1}{(3x+2)(x+1)}", "\\frac{4x+1}{(3x+2)(x+1)}"],
+  "topic": "Opposite Factor Simplification",
+  "difficulty": "Medium",
+  "questionEn": "Simplify the rational expression: $\\frac{15 - 5x}{x - 3}$.",
+  "questionAr": "بسط الكسر الجبري التالي لأبسط صورة: $\\frac{15 - 5x}{x - 3}$.",
+  "options": ["-5", "5", "\\frac{5(3 - x)}{x - 3}", "-1"],
   "correctIndex": 0,
-  "hint": "The LCD is $(3x+2)(x+1)$. Cross-multiply numerators.",
-  "hintAr": "المقام المشترك هو $(3x+2)(x+1)$؛ اضرب بسط كل كسر في مقام الآخر.",
-  "firstStep": "Multiply numerator and denominator: $\\frac{1(x+1) + x(3x+2)}{(3x+2)(x+1)}$.",
-  "firstStepAr": "اكتب الكسرين فوق المقام المشترك: $\\frac{1(x+1) + x(3x+2)}{(3x+2)(x+1)}$.",
+  "hint": "Factor $-5$ out of numerator: $15 - 5x = -5(x - 3)$. Note that $\\frac{a - b}{b - a} = -1$.",
+  "hintAr": "أخرج $-5$ من البسط: $15 - 5x = -5(x - 3)$. تذكر أن $\\frac{a-b}{b-a} = -1$.",
+  "firstStep": "Factor out $-5$ from numerator.",
+  "firstStepAr": "أخرج $-5$ عاملاً مشتركاً من البسط.",
   "steps": [{
-    "title": "Form common denominator",
-    "math": "\\text{LCD} = (3x+2)(x+1)",
-    "desc": "Scale both fractions to common denominator."
+    "title": "Factor Numerator",
+    "math": "\\frac{-5(x - 3)}{x - 3}",
+    "desc": "Expose matching binomial $(x - 3)$."
   }, {
-    "title": "Expand numerators",
-    "math": "1(x+1) + x(3x+2) = x + 1 + 3x^2 + 2x",
-    "desc": "Distribute $x$ into $(3x+2)$."
-  }, {
-    "title": "Combine like terms",
-    "math": "3x^2 + (x + 2x) + 1 = 3x^2 + 3x + 1",
-    "desc": "Arrange descendingly."
-  }, {
-    "title": "Final rational expression",
-    "math": "\\frac{3x^2 + 3x + 1}{(3x+2)(x+1)}",
-    "desc": "Numerator cannot be factored further over real numbers."
+    "title": "Divide Factors",
+    "math": "\\frac{-5(x - 3)}{x - 3} = -5, \\quad x \\ne 3",
+    "desc": "Cancel common factor."
   }],
-  "finalAnswer": "\\frac{3x^2 + 3x + 1}{(3x+2)(x+1)}",
-  "whyItWorks": "Adding rational expressions requires scaling to the least common multiple of their denominators.",
-  "examTip": "Check if the resulting numerator can be factored before finalizing! Here $3x^2 + 3x + 1$ has discriminant $9 - 12 < 0$, so it is irreducible.",
+  "finalAnswer": "-5",
+  "whyItWorks": "Opposite binomial factors always divide to give -1.",
+  "examTip": "Look for reverse subtractions like $(3 - x)$ vs $(x - 3)$; their ratio is $-1$!",
+  "mistakeType": "Sign error",
+  "hasDiagram": null
+}, {
+  "id": "p5-04",
+  "module": "P.5",
+  "topic": "Adding Fractions with Unlike Denominators",
+  "difficulty": "Hard",
+  "questionEn": "Perform addition and simplify: $\\frac{3}{x^2 - 16} + \\frac{2}{x + 4}$.",
+  "questionAr": "أجر عملية الجمع التالية وبسط الناتج: $\\frac{3}{x^2 - 16} + \\frac{2}{x + 4}$.",
+  "options": ["\\frac{2x - 5}{(x - 4)(x + 4)}", "\\frac{2x + 11}{(x - 4)(x + 4)}", "\\frac{5}{x^2 + x - 12}", "\\frac{2x - 5}{x^2 - 16}"],
+  "correctIndex": 0,
+  "hint": "Factor $x^2 - 16 = (x - 4)(x + 4)$. The LCD is $(x - 4)(x + 4)$.",
+  "hintAr": "المقام المشترك الأصغر هو $(x - 4)(x + 4)$. اضرب الكسر الثاني في $(x - 4)$.",
+  "firstStep": "Scale second fraction by $\\frac{x - 4}{x - 4}$.",
+  "firstStepAr": "اضرب بسط ومقام الكسر الثاني في $(x - 4)$.",
+  "steps": [{
+    "title": "Common Denominator",
+    "math": "\\frac{3}{(x - 4)(x + 4)} + \\frac{2(x - 4)}{(x + 4)(x - 4)}",
+    "desc": "LCD is $(x - 4)(x + 4)$."
+  }, {
+    "title": "Combine Numerators",
+    "math": "\\frac{3 + 2x - 8}{(x - 4)(x + 4)} = \\frac{2x - 5}{(x - 4)(x + 4)}",
+    "desc": "Combine like terms."
+  }],
+  "finalAnswer": "\\frac{2x - 5}{(x - 4)(x + 4)}",
+  "whyItWorks": "Fractions with polynomials require factoring denominators to determine LCD.",
+  "examTip": "Distribute 2 carefully: $2(x - 4) = 2x - 8$. Then $3 - 8 = -5$.",
   "mistakeType": "Calculation mistake",
   "hasDiagram": null
 }, {
   "id": "p6-01",
   "module": "P.6",
-  "topic": "Quadrants Identification",
+  "topic": "Quadrant Determination",
   "difficulty": "Easy",
-  "questionEn": "Determine the quadrant in which $(x,y)$ is located if $x > 0$ and $y < 0$.",
-  "questionAr": "حدد الربع الذي تقع فيه النقطة $(x,y)$ إذا كان $x > 0$ و $y < 0$.",
-  "options": ["\\text{Quadrant IV}", "\\text{Quadrant I}", "\\text{Quadrant II}", "\\text{Quadrant III}"],
+  "questionEn": "Determine the quadrant in which $(x, y)$ is located if $x > 0$ and $y < 0$.",
+  "questionAr": "حدد الربع الذي تقع فيه النقطة $(x, y)$ إذا كان $x > 0$ و $y < 0$.",
+  "options": ["\\text{Quadrant IV (الربع الرابع)}", "\\text{Quadrant II (الربع الثاني)}", "\\text{Quadrant III (الربع الثالث)}", "\\text{Quadrant I (الربع الأول)}"],
   "correctIndex": 0,
-  "hint": "Recall signs by quadrant: Q1 $(+,+)$, Q2 $(-,+)$, Q3 $(-,-)$, Q4 $(+,-)$.",
-  "hintAr": "تذكر إشارات الأرباع: الربع الأول $(+,+)$، الربع الثاني $(-,+)$، الربع الثالث $(-,-)$، الربع الرابع $(+,-)$.",
-  "firstStep": "Locate $x > 0$ (right) and $y < 0$ (down).",
-  "firstStepAr": "$x > 0$ يعني التحرك يميناً، و $y < 0$ يعني التحرك لأسفل.",
+  "hint": "Positive x is right, negative y is down: bottom-right quadrant is Quadrant IV.",
+  "hintAr": "الإحداثي السيني موجب (يمين) والصادي سالب (أسفل)، أي الربع الرابع.",
+  "firstStep": "Identify sign combinations of the four quadrants.",
+  "firstStepAr": "حدد إشارات الأرباع الأربعة.",
   "steps": [{
-    "title": "Analyze horizontal coordinate",
-    "math": "x > 0 \\implies \\text{Right half-plane (Quadrants I or IV)}",
-    "desc": "Positive x is to the right."
+    "title": "Sign Rules",
+    "math": "\\text{QI: } (+, +), \\quad \\text{QII: } (-, +), \\quad \\text{QIII: } (-, -), \\quad \\text{QIV: } (+, -)",
+    "desc": "Four quadrants."
   }, {
-    "title": "Analyze vertical coordinate",
-    "math": "y < 0 \\implies \\text{Lower half-plane (Quadrants III or IV)}",
-    "desc": "Negative y is below the x-axis."
-  }, {
-    "title": "Intersection",
-    "math": "\\text{Quadrant IV}",
-    "desc": "Bottom right quadrant."
+    "title": "Match Condition",
+    "math": "(x > 0, y < 0) \\implies (+, -) \\implies \\text{Quadrant IV}",
+    "desc": "Fourth quadrant."
   }],
-  "finalAnswer": "\\text{Quadrant IV}",
-  "whyItWorks": "The Cartesian plane is divided into four quadrants labeled counterclockwise starting from top-right.",
-  "examTip": "Quick mnemonic: C-shape: Q1 (top right) -> Q2 (top left) -> Q3 (bottom left) -> Q4 (bottom right).",
+  "finalAnswer": "\\text{Quadrant IV (الربع الرابع)}",
+  "whyItWorks": "Quadrants are numbered counterclockwise starting from top-right.",
+  "examTip": "Remember C-shape: Q1 (top right) -> Q2 (top left) -> Q3 (bottom left) -> Q4 (bottom right).",
   "mistakeType": "Careless mistake",
   "hasDiagram": "quadrants"
 }, {
   "id": "p6-02",
   "module": "P.6",
-  "topic": "Distance Formula",
+  "topic": "Distance Formula in the Plane",
   "difficulty": "Medium",
-  "questionEn": "Find the distance between the points $(8, 5)$ and $(0, 20)$.",
-  "questionAr": "أوجد المسافة بين النقطتين $(8, 5)$ و $(0, 20)$ في المستوى الإحداثي.",
-  "options": ["17", "15", "13", "23"],
+  "questionEn": "Find the distance between the two points $(1, 4)$ and $(-5, -4)$ in the Cartesian plane.",
+  "questionAr": "أوجد المسافة بين النقطتين $(1, 4)$ و $(-5, -4)$ في المستوى الإحداثي.",
+  "options": ["10", "14", "\\sqrt{28}", "8"],
   "correctIndex": 0,
-  "hint": "Use the distance formula: $d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$.",
-  "hintAr": "طبق قانون المسافة: $d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$.",
-  "firstStep": "Calculate differences: $x_2 - x_1 = 0 - 8 = -8$ and $y_2 - y_1 = 20 - 5 = 15$.",
-  "firstStepAr": "احسب الفروق: $0 - 8 = -8$ و $20 - 5 = 15$.",
+  "hint": "Distance formula: $d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} = \\sqrt{(-6)^2 + (-8)^2}$.",
+  "hintAr": "قانون المسافة: $d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} = \\sqrt{(-6)^2 + (-8)^2} = 10$.",
+  "firstStep": "Calculate $\\Delta x = -5 - 1 = -6$ and $\\Delta y = -4 - 4 = -8$.",
+  "firstStepAr": "احسب الفروق بين الإحداثيات.",
   "steps": [{
-    "title": "Apply Distance Formula",
-    "math": "d = \\sqrt{(0 - 8)^2 + (20 - 5)^2}",
-    "desc": "Substitute $(x_1, y_1) = (8, 5)$ and $(x_2, y_2) = (0, 20)$."
+    "title": "Coordinate Differences",
+    "math": "\\Delta x = -6, \\quad \\Delta y = -8",
+    "desc": "Legs of right triangle."
   }, {
-    "title": "Square differences",
-    "math": "(-8)^2 + (15)^2 = 64 + 225 = 289",
-    "desc": "Compute inside radicand."
+    "title": "Sum of Squares",
+    "math": "(-6)^2 + (-8)^2 = 36 + 64 = 100",
+    "desc": "Squares are positive."
   }, {
-    "title": "Extract square root",
-    "math": "\\sqrt{289} = 17",
-    "desc": "289 is a perfect square ($17^2 = 289$)."
+    "title": "Square Root",
+    "math": "d = \\sqrt{100} = 10",
+    "desc": "Integer distance."
   }],
-  "finalAnswer": "17",
-  "whyItWorks": "The distance formula is a direct application of the Pythagorean theorem: $a^2 + b^2 = c^2$.",
-  "examTip": "This is a Pythagorean triple: $(8, 15, 17)$! Recognizing triples saves valuable exam minutes.",
+  "finalAnswer": "10",
+  "whyItWorks": "Distance in 2D is given by the Pythagorean Theorem on coordinate deltas.",
+  "examTip": "This is a 6-8-10 Pythagorean triple (multiple of 3-4-5). Saves time in exams!",
   "mistakeType": "Calculation mistake",
   "hasDiagram": null
 }, {
@@ -691,63 +998,410 @@ const QUESTION_BANK = [{
   "module": "P.6",
   "topic": "Midpoint Formula",
   "difficulty": "Medium",
-  "questionEn": "Find the midpoint of the line segment joining $(-16.8, 12.3)$ and $(5.6, 4.9)$.",
-  "questionAr": "أوجد نقطة المنتصف (Midpoint) للقطعة المستقيمة الواصلة بين النقطتين $(-16.8, 12.3)$ و $(5.6, 4.9)$.",
-  "options": ["(-5.6, 8.6)", "(-11.2, 17.2)", "(5.6, -8.6)", "(-6.2, 9.1)"],
+  "questionEn": "Find the midpoint of the segment joining $(-3, 7)$ and $(5, -1)$.",
+  "questionAr": "أوجد نقطة المنتصف (Midpoint) للقطعة المستقيمة الواصلة بين $(-3, 7)$ و $(5, -1)$.",
+  "options": ["(1, 3)", "(2, 6)", "(4, 3)", "(-1, 3)"],
   "correctIndex": 0,
-  "hint": "Use the midpoint formula: $M = \\left(\\frac{x_1 + x_2}{2}, \\frac{y_1 + y_2}{2}\\right)$.",
-  "hintAr": "طبق قانون نقطة المنتصف: $M = \\left(\\frac{x_1 + x_2}{2}, \\frac{y_1 + y_2}{2}\\right)$.",
-  "firstStep": "Add the coordinates: $-16.8 + 5.6 = -11.2$ and $12.3 + 4.9 = 17.2$.",
-  "firstStepAr": "اجمع الإحداثيات السينية واقسم على 2، واجمع الصادية واقسم على 2.",
+  "hint": "Midpoint formula averages coordinates: $M = \\left(\\frac{x_1 + x_2}{2}, \\frac{y_1 + y_2}{2}\\right)$.",
+  "hintAr": "قانون نقطة المنتصف يأخذ المتوسط الحسابي للإحداثيات: $M = \\left(\\frac{x_1 + x_2}{2}, \\frac{y_1 + y_2}{2}\\right)$.",
+  "firstStep": "Average the x-values and y-values.",
+  "firstStepAr": "اجمع الإحداثيات السينية واقسم على 2، والصادية واقسم على 2.",
   "steps": [{
-    "title": "Calculate x-coordinate",
-    "math": "x_m = \\frac{-16.8 + 5.6}{2} = \\frac{-11.2}{2} = -5.6",
-    "desc": "Average of x-values."
+    "title": "Compute x-midpoint",
+    "math": "x_m = \\frac{-3 + 5}{2} = \\frac{2}{2} = 1",
+    "desc": "Average of x coordinates."
   }, {
-    "title": "Calculate y-coordinate",
-    "math": "y_m = \\frac{12.3 + 4.9}{2} = \\frac{17.2}{2} = 8.6",
-    "desc": "Average of y-values."
-  }, {
-    "title": "Combine coordinates",
-    "math": "(-5.6, 8.6)",
-    "desc": "Midpoint."
+    "title": "Compute y-midpoint",
+    "math": "y_m = \\frac{7 + (-1)}{2} = \\frac{6}{2} = 3",
+    "desc": "Average of y coordinates."
   }],
-  "finalAnswer": "(-5.6, 8.6)",
-  "whyItWorks": "The midpoint is the arithmetic average of the coordinates of the endpoints.",
-  "examTip": "Remember to divide by 2! Many students forget the division step and pick $(-11.2, 17.2)$ which is a common exam distractor.",
-  "mistakeType": "Careless mistake",
+  "finalAnswer": "(1, 3)",
+  "whyItWorks": "The midpoint is the center point equidistant from both endpoints.",
+  "examTip": "Notice the PLUS sign in midpoint formula vs MINUS in distance formula!",
+  "mistakeType": "Formula mistake",
   "hasDiagram": null
 }, {
   "id": "p6-04",
   "module": "P.6",
-  "topic": "Applied Soccer Field Distance",
-  "difficulty": "Exam level",
-  "questionEn": "A soccer player passes the ball from a point $(12, 18)$ yards to a teammate at $(50, 42)$ yards. How long is the pass?",
-  "questionAr": "مرر لاعب كرة قدم الكرة من النقطة $(12, 18)$ ياردة إلى زميله عند النقطة $(50, 42)$ ياردة. كم يبلغ طول التمريرة بالياردات؟",
-  "options": ["2\\sqrt{505} \\approx 44.94 \\text{ yards}", "50 \\text{ yards}", "38 \\text{ yards}", "62 \\text{ yards}"],
+  "topic": "Real-World Soccer Pass Application",
+  "difficulty": "Hard",
+  "questionEn": "A soccer player passes the ball from point $(10, 15)$ to a teammate at $(46, 39)$. How long is the pass?",
+  "questionAr": "مرر لاعب كرة قدم الكرة من النقطة $(10, 15)$ ياردة إلى زميله عند النقطة $(46, 39)$ ياردة. ما طول التمريرة بالياردة؟",
+  "options": ["\\sqrt{1872} \\approx 43.27 \\text{ yards}", "60 \\text{ yards}", "36 \\text{ yards}", "\\sqrt{3600} = 60 \\text{ yards}"],
   "correctIndex": 0,
-  "hint": "Apply the distance formula between $(12, 18)$ and $(50, 42)$.",
-  "hintAr": "طبق قانون المسافة بين النقطتين $(12, 18)$ و $(50, 42)$.",
-  "firstStep": "Calculate $\\Delta x = 50 - 12 = 38$ and $\\Delta y = 42 - 18 = 24$.",
-  "firstStepAr": "احسب $\\Delta x = 50 - 12 = 38$ و $\\Delta y = 42 - 18 = 24$.",
+  "hint": "Apply Euclidean distance: $d = \\sqrt{(46 - 10)^2 + (39 - 15)^2} = \\sqrt{36^2 + 24^2}$.",
+  "hintAr": "طبق قانون المسافة الإقليدية بين النقطتين $(10, 15)$ و $(46, 39)$.",
+  "firstStep": "Compute differences: $\\Delta x = 36$ and $\\Delta y = 24$.",
+  "firstStepAr": "احسب الفروق الأفقية والرأسية.",
   "steps": [{
-    "title": "Apply distance formula",
-    "math": "d = \\sqrt{(50 - 12)^2 + (42 - 18)^2} = \\sqrt{38^2 + 24^2}",
-    "desc": "Substitute coordinate values."
+    "title": "Coordinate Differences",
+    "math": "\\Delta x = 46 - 10 = 36, \\quad \\Delta y = 39 - 15 = 24",
+    "desc": "Vector components."
   }, {
-    "title": "Calculate squares",
-    "math": "38^2 = 1444, \\quad 24^2 = 576 \\implies 1444 + 576 = 2020",
-    "desc": "Sum of squares."
-  }, {
-    "title": "Simplify radical",
-    "math": "\\sqrt{2020} = \\sqrt{4 \\times 505} = 2\\sqrt{505} \\approx 44.94 \\text{ yards}",
-    "desc": "Exact and decimal representation."
+    "title": "Pythagorean Sum",
+    "math": "d = \\sqrt{36^2 + 24^2} = \\sqrt{1296 + 576} = \\sqrt{1872} = 12\\sqrt{13} \\approx 43.27",
+    "desc": "Direct path distance."
   }],
-  "finalAnswer": "2\\sqrt{505} \\approx 44.94 \\text{ yards}",
-  "whyItWorks": "The coordinate plane models real physical 2D distances using Euclidean distance.",
-  "examTip": "This is CW-09 Page 43 of your Math 001 notebook! In exams, Larson usually asks for both exact radical form $2\\sqrt{505}$ and rounded decimal form.",
+  "finalAnswer": "\\sqrt{1872} \\approx 43.27 \\text{ yards}",
+  "whyItWorks": "Physical 2D vectors and distances are calculated using Euclidean metrics.",
+  "examTip": "This directly matches CW-09 Page 43 of your Math 001 notebook! Larson tests both radical and decimal forms.",
   "mistakeType": "Calculation mistake",
-  "hasDiagram": "soccer_field"
+  "hasDiagram": "soccer"
+}, {
+  "id": "p1-11",
+  "module": "P.1",
+  "topic": "Classifying Decimals: Rational vs Irrational",
+  "difficulty": "Easy",
+  "questionEn": "Determine which numbers in the set $\\{-\\frac{8}{3}, 0, 3.14, \\sqrt{11}, \\frac{5}{2}, -7, 14\\}$ are rational numbers.",
+  "questionAr": "حدد الأعداد النسبية (Rational numbers) في المجموعة $\\{-\\frac{8}{3}, 0, 3.14, \\sqrt{11}, \\frac{5}{2}, -7, 14\\}$.",
+  "options": ["-\\frac{8}{3}, 0, 3.14, \\frac{5}{2}, -7, 14", "-\\frac{8}{3}, \\frac{5}{2}", "\\sqrt{11}", "0, -7, 14"],
+  "correctIndex": 0,
+  "hint": "A terminating decimal like $3.14 = \\frac{314}{100}$ is rational. Only $\\sqrt{11}$ is irrational.",
+  "hintAr": "العدد العشري المنتهي مثل $3.14 = \\frac{314}{100}$ هو عدد نسبي. الوحيد غير النسبي هنا هو $\\sqrt{11}$.",
+  "firstStep": "Recall $3.14$ is a terminating decimal and thus rational (unlike $\\pi$).",
+  "firstStepAr": "تذكر أن $3.14$ عدد عشري منتهٍ وهو نسبي، بينما $\\pi$ غير منتهٍ وغير نسبي.",
+  "steps": [{
+    "title": "Identify Rational Elements",
+    "math": "-\\frac{8}{3}, \\frac{5}{2} \\in \\mathbb{Q}, \\quad 0, -7, 14 \\in \\mathbb{Z} \\subset \\mathbb{Q}",
+    "desc": "Fractions and integers are rational."
+  }, {
+    "title": "Decimals Analysis",
+    "math": "3.14 = \\frac{314}{100} = \\frac{157}{50} \\in \\mathbb{Q}, \\quad \\sqrt{11} \\notin \\mathbb{Q}",
+    "desc": "3.14 is rational; $\\sqrt{11}$ is irrational."
+  }],
+  "finalAnswer": "-\\frac{8}{3}, 0, 3.14, \\frac{5}{2}, -7, 14",
+  "whyItWorks": "Any terminating or repeating decimal can be written as an integer fraction.",
+  "examTip": "Exam trap: $3.14$ is RATIONAL! Only the actual mathematical constant $\\pi$ is irrational.",
+  "mistakeType": "Concept misunderstanding",
+  "hasDiagram": null
+}, {
+  "id": "p1-12",
+  "module": "P.1",
+  "topic": "Operations on Fractions: Division",
+  "difficulty": "Medium",
+  "questionEn": "Perform the division of fractions and simplify: $\\frac{3x}{4} \\div \\frac{9}{8}$.",
+  "questionAr": "أجر قسمة الكسور التالية وبسط الناتج: $\\frac{3x}{4} \\div \\frac{9}{8}$.",
+  "options": ["\\frac{2x}{3}", "\\frac{27x}{32}", "\\frac{3x}{2}", "\\frac{6x}{9}"],
+  "correctIndex": 0,
+  "hint": "Dividing by a fraction is multiplying by its reciprocal: $\\frac{3x}{4} \\times \\frac{8}{9}$.",
+  "hintAr": "القسمة على كسر تعني الضرب في مقلوبه: $\\frac{3x}{4} \\times \\frac{8}{9}$.",
+  "firstStep": "Invert second fraction: $\\frac{8}{9}$.",
+  "firstStepAr": "اقلب الكسر الثاني واضرب.",
+  "steps": [{
+    "title": "Multiply by Reciprocal",
+    "math": "\\frac{3x}{4} \\cdot \\frac{8}{9} = \\frac{3x \\cdot 8}{4 \\cdot 9}",
+    "desc": "Invert and multiply."
+  }, {
+    "title": "Simplify",
+    "math": "\\frac{24x}{36} = \\frac{2x}{3}",
+    "desc": "Divide numerator and denominator by 12."
+  }],
+  "finalAnswer": "\\frac{2x}{3}",
+  "whyItWorks": "Division of fractions rule: $\\frac{a}{b} \\div \\frac{c}{d} = \\frac{ad}{bc}$.",
+  "examTip": "Cancel before multiplying to make mental arithmetic effortless: $3/9 = 1/3$ and $8/4 = 2/1$.",
+  "mistakeType": "Calculation mistake",
+  "hasDiagram": null
+}, {
+  "id": "p2-08",
+  "module": "P.2",
+  "topic": "Negative Exponent on Monomials",
+  "difficulty": "Medium",
+  "questionEn": "Rewrite $(3x^3)^{-2}$ with only positive exponents.",
+  "questionAr": "أعد كتابة المقدار $(3x^3)^{-2}$ بأسس موجبة فقط.",
+  "options": ["\\frac{1}{9x^6}", "\\frac{1}{3x^6}", "\\frac{9}{x^6}", "-\\frac{6}{x^6}"],
+  "correctIndex": 0,
+  "hint": "Distribute power to all factors inside: $3^{-2} (x^3)^{-2} = \\frac{1}{3^2 x^6} = \\frac{1}{9x^6}$.",
+  "hintAr": "وزع الأس على المعامل والمتغير معاً: $3^{-2} (x^3)^{-2} = \\frac{1}{9x^6}$.",
+  "firstStep": "Apply power rule to 3 and $x^3$.",
+  "firstStepAr": "طبق الأس السالب على 3 و $x^3$.",
+  "steps": [{
+    "title": "Distribute Power",
+    "math": "(3x^3)^{-2} = 3^{-2} (x^3)^{-2}",
+    "desc": "Power of a product."
+  }, {
+    "title": "Move to Denominator",
+    "math": "\\frac{1}{3^2 x^{3 \\cdot 2}} = \\frac{1}{9x^6}",
+    "desc": "Positive exponents in denominator."
+  }],
+  "finalAnswer": "\\frac{1}{9x^6}",
+  "whyItWorks": "$(ab)^{-n} = \\frac{1}{a^n b^n}$.",
+  "examTip": "Common mistake: forgetting to square 3 in the denominator: $3^2 = 9$, not 3!",
+  "mistakeType": "Calculation mistake",
+  "hasDiagram": null
+}, {
+  "id": "p2-09",
+  "module": "P.2",
+  "topic": "Scientific Notation to Decimal",
+  "difficulty": "Easy",
+  "questionEn": "Write $4.25 \\times 10^{-5}$ in standard decimal notation.",
+  "questionAr": "اكتب العدد $4.25 \\times 10^{-5}$ بالصورة العشرية القياسية.",
+  "options": ["0.0000425", "0.000425", "0.00000425", "425000"],
+  "correctIndex": 0,
+  "hint": "Negative exponent $-5$ means move the decimal point 5 places to the left.",
+  "hintAr": "الأس السالب $-5$ يعني تحريك الفاصلة العشرية 5 خانات نحو اليسار.",
+  "firstStep": "Shift decimal point left by 5 places.",
+  "firstStepAr": "حرك الفاصلة لليسار 5 منازل.",
+  "steps": [{
+    "title": "Shift Decimal Left",
+    "math": "4.25 \\times 10^{-5} = 0.0000425",
+    "desc": "4 zeros appear after the decimal point before 4."
+  }],
+  "finalAnswer": "0.0000425",
+  "whyItWorks": "Negative powers of ten produce values strictly between 0 and 1.",
+  "examTip": "Count zeros: a power of $-5$ results in 4 leading zeros after decimal point before the first digit.",
+  "mistakeType": "Careless mistake",
+  "hasDiagram": null
+}, {
+  "id": "p3-06",
+  "module": "P.3",
+  "topic": "Adding and Subtracting Polynomials",
+  "difficulty": "Medium",
+  "questionEn": "Perform subtraction and write in standard form: $(6y^3 + 2y - 5) - (9y^3 - 4y^2 + 7)$.",
+  "questionAr": "أجر عملية الطرح التالية واكتب الناتج بالصورة القياسية: $(6y^3 + 2y - 5) - (9y^3 - 4y^2 + 7)$.",
+  "options": ["-3y^3 + 4y^2 + 2y - 12", "-3y^3 - 4y^2 + 2y + 2", "15y^3 - 4y^2 + 2y - 12", "-3y^3 + 4y^2 + 2y + 2"],
+  "correctIndex": 0,
+  "hint": "Distribute negative sign across second polynomial: $-9y^3 + 4y^2 - 7$, then combine like terms.",
+  "hintAr": "وزع إشارة السالب على جميع حدود القوس الثاني، ثم اجمع الحدود المتشابهة.",
+  "firstStep": "Distribute negative sign.",
+  "firstStepAr": "وزع السالب على القوس الثاني.",
+  "steps": [{
+    "title": "Distribute Minus Sign",
+    "math": "(6y^3 + 2y - 5) - 9y^3 + 4y^2 - 7",
+    "desc": "Signs reverse inside second group."
+  }, {
+    "title": "Combine Like Terms",
+    "math": "(6 - 9)y^3 + 4y^2 + 2y + (-5 - 7) = -3y^3 + 4y^2 + 2y - 12",
+    "desc": "Add coefficients."
+  }],
+  "finalAnswer": "-3y^3 + 4y^2 + 2y - 12",
+  "whyItWorks": "Subtracting polynomials is equivalent to adding their additive inverses.",
+  "examTip": "Don't forget: $-(-4y^2) = +4y^2$ and $-5 - 7 = -12$.",
+  "mistakeType": "Sign error",
+  "hasDiagram": null
+}, {
+  "id": "p3-07",
+  "module": "P.3",
+  "topic": "Special Product: 3-Term Grouping",
+  "difficulty": "Hard",
+  "questionEn": "Find the special product: $[(x - 4) + y][(x - 4) - y]$.",
+  "questionAr": "أوجد ناتج الضرب الخاص للمقدار المكون من 3 حدود بالتجميع: $[(x - 4) + y][(x - 4) - y]$.",
+  "options": ["x^2 - 8x + 16 - y^2", "x^2 - 16 - y^2", "x^2 + 8x + 16 - y^2", "(x - 4)^2 + y^2"],
+  "correctIndex": 0,
+  "hint": "Treat $(x - 4)$ as $u$ and $y$ as $v$. Apply $(u + v)(u - v) = u^2 - v^2 = (x - 4)^2 - y^2$.",
+  "hintAr": "اعتبر $(x - 4)$ ككتلة واحدة $u$ و $y$ كـ $v$. طبق متطابقة فرق المربعين $(u+v)(u-v) = u^2 - v^2$.",
+  "firstStep": "Substitute $u = x - 4$ and $v = y$.",
+  "firstStepAr": "طبق فرق المربعين على الكتلتين.",
+  "steps": [{
+    "title": "Difference of Squares",
+    "math": "[(x - 4) + y][(x - 4) - y] = (x - 4)^2 - y^2",
+    "desc": "Form $u^2 - v^2$."
+  }, {
+    "title": "Expand Binomial",
+    "math": "(x - 4)^2 - y^2 = (x^2 - 8x + 16) - y^2",
+    "desc": "Expand $(x - 4)^2$ completely."
+  }],
+  "finalAnswer": "x^2 - 8x + 16 - y^2",
+  "whyItWorks": "Special products apply to compound expressions by grouping.",
+  "examTip": "Expand $(x-4)^2$ completely: it has 3 terms $x^2 - 8x + 16$.",
+  "mistakeType": "Formula mistake",
+  "hasDiagram": null
+}, {
+  "id": "p3-08",
+  "module": "P.3",
+  "topic": "Shaded Area: Rectangle in Rectangle",
+  "difficulty": "Hard",
+  "questionEn": "Find the area of the shaded region: outer rectangle has length $3x + 8$ and width $2x$, while inner unshaded rectangle cutout has length $x + 4$ and width $x$.",
+  "questionAr": "أوجد مساحة المنطقة المظللة: مستطيل خارجي أبعاده $3x + 8$ و $2x$ وبداخله مستطيل مفرغ أبعاده $x + 4$ و $x$.",
+  "options": ["5x^2 + 12x", "6x^2 + 16x", "5x^2 + 20x", "7x^2 + 12x"],
+  "correctIndex": 0,
+  "hint": "Shaded Area = $\\text{Area}(\\text{Outer}) - \\text{Area}(\\text{Inner}) = 2x(3x + 8) - x(x + 4)$.",
+  "hintAr": "المساحة المظللة = مساحة المستطيل الخارجي - مساحة المستطيل الداخلي: $2x(3x + 8) - x(x + 4)$.",
+  "firstStep": "Compute outer area $2x(3x + 8) = 6x^2 + 16x$.",
+  "firstStepAr": "احسب مساحة المستطيل الخارجي والداخلي واطرحهما.",
+  "steps": [{
+    "title": "Outer Rectangle",
+    "math": "2x(3x + 8) = 6x^2 + 16x",
+    "desc": "Outer area."
+  }, {
+    "title": "Inner Rectangle",
+    "math": "x(x + 4) = x^2 + 4x",
+    "desc": "Cutout area."
+  }, {
+    "title": "Subtract Areas",
+    "math": "(6x^2 + 16x) - (x^2 + 4x) = 5x^2 + 12x",
+    "desc": "Combine like terms."
+  }],
+  "finalAnswer": "5x^2 + 12x",
+  "whyItWorks": "Area subtraction models real physical borders, margins, and frames in geometry.",
+  "examTip": "Subtract both terms of inner rectangle: $16x - 4x = 12x$.",
+  "mistakeType": "Calculation mistake",
+  "hasDiagram": null
+}, {
+  "id": "p4-05",
+  "module": "P.4",
+  "topic": "Factoring Perfect Square Trinomial",
+  "difficulty": "Medium",
+  "questionEn": "Completely factor the perfect square trinomial: $36z^2 - 60z + 25$.",
+  "questionAr": "حلل الحدودية الثلاثية التي تمثل مربعاً كاملاً تحليلاً كاملاً: $36z^2 - 60z + 25$.",
+  "options": ["(6z - 5)^2", "(6z + 5)^2", "(6z - 5)(6z + 5)", "(36z - 5)^2"],
+  "correctIndex": 0,
+  "hint": "Identify $u^2 - 2uv + v^2 = (u - v)^2$, where $u = 6z$ and $v = 5$.",
+  "hintAr": "طبق متطابقة المربع الكامل: $u^2 - 2uv + v^2 = (u - v)^2$ حيث $u = 6z$ و $v = 5$.",
+  "firstStep": "Check $(6z)^2 = 36z^2$ and $2(6z)(5) = 60z$.",
+  "firstStepAr": "تحقق من أن الحد الأوسط يساوي ضعف حاصل ضرب الجذرين.",
+  "steps": [{
+    "title": "Verify Squares",
+    "math": "36z^2 = (6z)^2, \\quad 25 = 5^2",
+    "desc": "End terms are squares."
+  }, {
+    "title": "Verify Middle Term",
+    "math": "-2(6z)(5) = -60z",
+    "desc": "Matches middle term."
+  }, {
+    "title": "Factored Form",
+    "math": "(6z - 5)^2",
+    "desc": "Square of binomial."
+  }],
+  "finalAnswer": "(6z - 5)^2",
+  "whyItWorks": "A trinomial $u^2 - 2uv + v^2$ always collapses to $(u - v)^2$.",
+  "examTip": "Notice the minus sign on the middle term: result is $(6z - 5)^2$, NOT $(6z + 5)^2$.",
+  "mistakeType": "Sign error",
+  "hasDiagram": null
+}, {
+  "id": "p4-06",
+  "module": "P.4",
+  "topic": "Factoring GCF then Difference of Squares",
+  "difficulty": "Hard",
+  "questionEn": "Completely factor the expression: $5x^2 - 45$.",
+  "questionAr": "حلل المقدار التالي تحليلاً كاملاً: $5x^2 - 45$.",
+  "options": ["5(x - 3)(x + 3)", "5(x - 3)^2", "(5x - 15)(x + 3)", "5(x^2 - 9)"],
+  "correctIndex": 0,
+  "hint": "First extract the GCF 5: $5(x^2 - 9)$, then factor difference of squares $(x - 3)(x + 3)$.",
+  "hintAr": "أخرج العامل المشترك 5 أولاً: $5(x^2 - 9)$، ثم حلل فرق المربعين $(x - 3)(x + 3)$.",
+  "firstStep": "Factor out 5.",
+  "firstStepAr": "أخرج العامل المشترك 5.",
+  "steps": [{
+    "title": "Factor GCF",
+    "math": "5(x^2 - 9)",
+    "desc": "Extract 5."
+  }, {
+    "title": "Difference of Squares",
+    "math": "5(x - 3)(x + 3)",
+    "desc": "Factor $(x^2 - 9)$ completely."
+  }],
+  "finalAnswer": "5(x - 3)(x + 3)",
+  "whyItWorks": "Multi-stage factoring always begins with GCF extraction.",
+  "examTip": "Do not stop at $5(x^2 - 9)$! The instructions say COMPLETELY factor.",
+  "mistakeType": "Incomplete factoring",
+  "hasDiagram": null
+}, {
+  "id": "p5-05",
+  "module": "P.5",
+  "topic": "Multiplying Rational Expressions",
+  "difficulty": "Medium",
+  "questionEn": "Perform multiplication and simplify: $\\frac{6}{x - 2} \\cdot \\frac{x - 2}{36(x - 3)}$.",
+  "questionAr": "أجر عملية الضرب وبسط الناتج لأبسط صورة: $\\frac{6}{x - 2} \\cdot \\frac{x - 2}{36(x - 3)}$.",
+  "options": ["\\frac{1}{6(x - 3)}", "\\frac{1}{6}", "\\frac{6}{36(x - 3)}", "\\frac{x - 2}{6(x - 3)}"],
+  "correctIndex": 0,
+  "hint": "Cancel common factors $(x - 2)$ from numerator and denominator, and divide 6 into 36.",
+  "hintAr": "اختصر القوس المشترك $(x - 2)$ واقسم 6 على 36.",
+  "firstStep": "Cancel $(x - 2)$.",
+  "firstStepAr": "اختصر العوامل المتشابهة في البسط والمقام.",
+  "steps": [{
+    "title": "Cancel Binomial",
+    "math": "\\frac{6}{1} \\cdot \\frac{1}{36(x - 3)}",
+    "desc": "Divide out $(x - 2)$ for $x \ne 2$."
+  }, {
+    "title": "Simplify Numerical Fraction",
+    "math": "\\frac{6}{36(x - 3)} = \\frac{1}{6(x - 3)}",
+    "desc": "Divide top and bottom by 6."
+  }],
+  "finalAnswer": "\\frac{1}{6(x - 3)}",
+  "whyItWorks": "Common factors across numerators and denominators cancel out under multiplication.",
+  "examTip": "The domain restriction $x \\ne 2$ and $x \\ne 3$ applies to the original expression.",
+  "mistakeType": "Simplification error",
+  "hasDiagram": null
+}, {
+  "id": "p5-06",
+  "module": "P.5",
+  "topic": "Dividing Rational Expressions",
+  "difficulty": "Hard",
+  "questionEn": "Perform division and simplify: $\\frac{p}{p - 2} \\div \\frac{p^2}{p^2 - 4}$.",
+  "questionAr": "أجر عملية القسمة وبسط الناتج: $\\frac{p}{p - 2} \\div \\frac{p^2}{p^2 - 4}$.",
+  "options": ["\\frac{p + 2}{p}", "\\frac{p}{p + 2}", "\\frac{p^3}{(p - 2)^2}", "p + 2"],
+  "correctIndex": 0,
+  "hint": "Invert second fraction and factor $p^2 - 4 = (p - 2)(p + 2)$.",
+  "hintAr": "اقلب الكسر الثاني وحلل فرق المربعين $p^2 - 4 = (p - 2)(p + 2)$.",
+  "firstStep": "Convert to multiplication by reciprocal.",
+  "firstStepAr": "حول القسمة إلى ضرب في مقلوب الكسر الثاني.",
+  "steps": [{
+    "title": "Invert and Factor",
+    "math": "\\frac{p}{p - 2} \\cdot \\frac{(p - 2)(p + 2)}{p^2}",
+    "desc": "Multiply by reciprocal."
+  }, {
+    "title": "Cancel Factors",
+    "math": "\\frac{p(p - 2)(p + 2)}{(p - 2)p^2} = \\frac{p + 2}{p}",
+    "desc": "Cancel $(p - 2)$ and one power of $p$."
+  }],
+  "finalAnswer": "\\frac{p + 2}{p}",
+  "whyItWorks": "Division of rational expressions uses factoring and reciprocal multiplication.",
+  "examTip": "Never cancel terms across addition: $\\frac{p+2}{p} \\ne 2$! The fraction is already in simplest form.",
+  "mistakeType": "Simplification error",
+  "hasDiagram": null
+}, {
+  "id": "p6-05",
+  "module": "P.6",
+  "topic": "Signs of Coordinates in Quadrants",
+  "difficulty": "Medium",
+  "questionEn": "Determine the quadrants in which the point $(x, y)$ could be located if $xy < 0$.",
+  "questionAr": "حدد الأرباع التي يمكن أن تقع فيها النقطة $(x, y)$ إذا كان حاصل الضرب $xy < 0$.",
+  "options": ["\\text{Quadrants II and IV (الربعان الثاني والرابع)}", "\\text{Quadrants I and III (الربعان الأول والثالث)}", "\\text{Quadrant II only}", "\\text{Quadrant IV only}"],
+  "correctIndex": 0,
+  "hint": "$xy < 0$ means $x$ and $y$ have opposite signs: either $(-, +)$ (QII) or $(+, -)$ (QIV).",
+  "hintAr": "حاصل الضرب $xy < 0$ يعني أن إشارتي $x$ و $y$ مختلفتان: إما $(-, +)$ في الربع الثاني أو $(+, -)$ في الربع الرابع.",
+  "firstStep": "Analyze signs when product is negative.",
+  "firstStepAr": "حلل الحالتين لإشارة الضرب السالب.",
+  "steps": [{
+    "title": "Opposite Signs",
+    "math": "xy < 0 \\implies (x < 0, y > 0) \\text{ or } (x > 0, y < 0)",
+    "desc": "Product of opposites is negative."
+  }, {
+    "title": "Identify Quadrants",
+    "math": "(-, +) \\implies \\text{QII}, \\quad (+, -) \\implies \\text{QIV}",
+    "desc": "Second and Fourth quadrants."
+  }],
+  "finalAnswer": "\\text{Quadrants II and IV (الربعان الثاني والرابع)}",
+  "whyItWorks": "Sign rules of multiplication: negative times positive equals negative.",
+  "examTip": "Notice: if $xy > 0$, it is QI and QIII. If $xy < 0$, it is QII and QIV!",
+  "mistakeType": "Concept misunderstanding",
+  "hasDiagram": null
+}, {
+  "id": "p6-06",
+  "module": "P.6",
+  "topic": "Midpoint with Fractions",
+  "difficulty": "Hard",
+  "questionEn": "Find the midpoint of the segment joining the points $(\\frac{3}{4}, 2)$ and $(-\\frac{7}{4}, \\\\frac{2}{3})$.",
+  "questionAr": "أوجد نقطة المنتصف للقطعة المستقيمة الواصلة بين النقطتين $(\\frac{3}{4}, 2)$ و $(-\\frac{7}{4}, \\\\frac{2}{3})$.",
+  "options": ["(-\\frac{1}{2}, \\frac{4}{3})", "(-1, \\frac{8}{3})", "(\\frac{5}{4}, \\frac{4}{3})", "(-\\frac{1}{2}, \\\\frac{8}{3})"],
+  "correctIndex": 0,
+  "hint": "Average coordinates: $x_m = \\frac{\\frac{3}{4} - \\frac{7}{4}}{2} = \\frac{-1}{2} = -\\frac{1}{2}$, and $y_m = \\frac{2 + \\frac{2}{3}}{2} = \\frac{\\frac{8}{3}}{2} = \\frac{4}{3}$.",
+  "hintAr": "المتوسط الحسابي للإحداثيات: $x_m = \\frac{-1}{2} = -\\frac{1}{2}$، و $y_m = \\frac{8/3}{2} = \\frac{4}{3}$.",
+  "firstStep": "Sum coordinates and divide by 2.",
+  "firstStepAr": "اجمع الإحداثيات ثم اقسم على 2.",
+  "steps": [{
+    "title": "x-Midpoint",
+    "math": "x_m = \\frac{\\frac{3}{4} + (-\\frac{7}{4})}{2} = \\frac{-\\frac{4}{4}}{2} = \\frac{-1}{2} = -\\frac{1}{2}",
+    "desc": "Sum fractions over 4."
+  }, {
+    "title": "y-Midpoint",
+    "math": "y_m = \\frac{2 + \\frac{2}{3}}{2} = \\frac{\\frac{6}{3} + \\frac{2}{3}}{2} = \\frac{\\frac{8}{3}}{2} = \\frac{4}{3}",
+    "desc": "Divide fraction by 2."
+  }],
+  "finalAnswer": "(-\\frac{1}{2}, \\frac{4}{3})",
+  "whyItWorks": "Midpoint formula works identically for integer, fractional, or radical coordinates.",
+  "examTip": "Don't forget to divide by 2! Many students calculate $-\\frac{4}{4} = -1$ and $\\frac{8}{3}$ and forget to divide by 2.",
+  "mistakeType": "Careless mistake",
+  "hasDiagram": null
 }];
 const GLOSSARY_DATA = [{
   "en": "Natural numbers",
@@ -944,24 +1598,32 @@ const LOCKED_GEMINI_KEY = _secK1 + _secK2;
 // KaTeX Safe MathText Component
 function MathText({
   text = '',
-  className = ''
+  className = '',
+  style = {}
 }) {
   const containerRef = useRef(null);
   useEffect(() => {
     if (!containerRef.current) return;
     try {
-      renderMathInElement(containerRef.current, {
-        delimiters: [{
-          left: '$$',
-          right: '$$',
-          display: true
-        }, {
-          left: '$',
-          right: '$',
-          display: false
-        }],
-        throwOnError: false
-      });
+      // Clean string representation
+      const raw = String(text || '');
+      // Format newlines as HTML linebreaks
+      containerRef.current.innerHTML = raw.replace(/\n/g, '<br/>');
+      if (window.renderMathInElement) {
+        window.renderMathInElement(containerRef.current, {
+          delimiters: [{
+            left: '$$',
+            right: '$$',
+            display: true
+          }, {
+            left: '$',
+            right: '$',
+            display: false
+          }],
+          throwOnError: false,
+          errorColor: '#ef4444'
+        });
+      }
     } catch (e) {
       console.error('KaTeX rendering error:', e);
     }
@@ -970,9 +1632,10 @@ function MathText({
     ref: containerRef,
     className: `${className} math-scroll inline-block max-w-full`,
     style: {
-      direction: 'inherit'
+      direction: 'inherit',
+      ...style
     }
-  }, text);
+  });
 }
 
 // Interactive Visual SVG Diagrams
@@ -1442,75 +2105,98 @@ function App() {
     setAiMessages(prev => [...prev, newMsg]);
     setAiInput('');
     setIsAiLoading(true);
-    const systemContext = `You are a university mathematics professor teaching MATH 001 Engineering & Sciences Mathematics 1 (Ron Larson Algebra & Trig 11th Ed).
+    const activeKey = (geminiApiKey || '').trim();
+    const isRealKey = activeKey.startsWith('AIzaSy') && activeKey.length > 25;
+    let success = false;
+    if (isRealKey) {
+      const systemContext = `You are an expert preparatory year mathematics professor teaching MATH 001 Engineering & Sciences Mathematics 1 at Yanbu Institute / Saudi Universities (Ron Larson Algebra & Trig 11th Ed).
 Context: Module ${currentQ.module} - ${currentQ.topic}
-Question: ${currentQ.questionEn}
-Arabic: ${currentQ.questionAr}
+Question (English): ${currentQ.questionEn}
+Question (Arabic): ${currentQ.questionAr}
 Options: ${currentQ.options.join(' | ')}
 Correct Answer: ${currentQ.options[currentQ.correctIndex]}
 Solution Steps: ${JSON.stringify(currentQ.steps)}
-Why it works: ${currentQ.whyItWorks}
-Exam tip: ${currentQ.examTip}
+Conceptual Foundation: ${currentQ.whyItWorks}
+Exam Tip & Trap: ${currentQ.examTip}
+Common Mistake: ${currentQ.mistakeType}
 
-Student asks: "${questionText}"
-Explain step-by-step in professional Arabic. Keep all mathematical formulas, powers, roots, fractions, and variables in clean LaTeX ($...$). Emphasize exam tips and intuition.`;
-    const models = ['gemini-2.0-flash', 'gemini-1.5-pro', 'gemini-2.5-flash', 'gemini-2.0-flash-lite'];
-    let success = false;
-    for (const model of models) {
-      try {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${LOCKED_GEMINI_KEY}`;
-        const res = await fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-goog-api-key': LOCKED_GEMINI_KEY
-          },
-          body: JSON.stringify({
-            contents: [{
-              role: 'user',
-              parts: [{
-                text: systemContext
-              }]
-            }],
-            generationConfig: {
-              temperature: 0.3,
-              maxOutputTokens: 800
+Student's Query: "${questionText}"
+Instructions:
+1. Answer in clear, highly encouraging academic Arabic.
+2. Format all mathematical symbols, powers, roots, sets, fractions, and variables in clean LaTeX ($...$ or $$...$$).
+3. Directly address what the student asked without generic filler.`;
+      const models = ['gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-2.5-flash'];
+      for (const model of models) {
+        try {
+          const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${activeKey}`;
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              contents: [{
+                role: 'user',
+                parts: [{
+                  text: systemContext
+                }]
+              }],
+              generationConfig: {
+                temperature: 0.2,
+                maxOutputTokens: 1000
+              }
+            })
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (data.candidates && data.candidates[0].content) {
+              const reply = data.candidates[0].content.parts[0].text;
+              setAiMessages(prev => [...prev, {
+                role: 'assistant',
+                content: reply
+              }]);
+              success = true;
+              break;
             }
-          })
-        });
-        if (res.ok) {
-          const data = await res.json();
-          if (data.candidates && data.candidates[0].content) {
-            const reply = data.candidates[0].content.parts[0].text;
-            setAiMessages(prev => [...prev, {
-              role: 'assistant',
-              content: reply
-            }]);
-            success = true;
-            break;
           }
+        } catch (err) {
+          console.warn('Live AI fetch failed for model:', model, err);
         }
-      } catch (err) {
-        console.warn('Model fetch error:', model, err);
       }
     }
+
+    // Dynamic Intelligent Academic Engine (Offline / Local Expert Tutor)
     if (!success) {
       setTimeout(() => {
         let reply = '';
-        if (questionText.includes('ليش') || questionText.includes('لماذا')) {
-          reply = `📌 **الأساس الرياضي والمفاهيمي:**\n\n${currentQ.whyItWorks}\n\n💡 **نصيحة اختبارية:** ${currentQ.examTip}`;
-        } else if (questionText.includes('خطوة')) {
-          reply = `📝 **شرح خطوات الحل بالتفصيل:**\n\n${currentQ.steps.map((s, i) => `**خطوة ${i + 1}: ${s.title}**\n${s.desc}\n$${s.math}$`).join('\n\n')}`;
-        } else if (questionText.includes('فخ')) {
-          reply = `🎯 **الفخ المعتاد في هذا السؤال:**\n\n${currentQ.examTip}\nنوع الخطأ: **${currentQ.mistakeType}**`;
+        const qLower = questionText.toLowerCase();
+
+        // 1. Asking about a specific step
+        if (qLower.includes('خطوة 1') || qLower.includes('الخطوة الأولى') || qLower.includes('step 1') || qLower.includes('أول خطوة') || qLower.includes('البداية')) {
+          const s1 = currentQ.steps[0] || {};
+          reply = `🪜 **الخطوة الأولى بالتفصيل:**\n\n**${s1.title || 'بداية الحل'}:**\n${s1.desc || currentQ.firstStepAr}\n\n$$${s1.math || ''}$$\n\n💡 **نصيحة البدء:** ابدأ دائماً بتحديد القاعدة المناسبة قبل إجراء أي عمليات حسابية.`;
+        } else if (qLower.includes('خطوة 2') || qLower.includes('الخطوة الثانية') || qLower.includes('step 2')) {
+          const s2 = currentQ.steps[1] || currentQ.steps[0] || {};
+          reply = `🔍 **الخطوة الثانية بالتفصيل:**\n\n**${s2.title || 'إكمال الحل'}:**\n${s2.desc || ''}\n\n$$${s2.math || ''}$$\n\n⚠️ **تنبيه:** تأكد من إشارات الحدود وعدم الوقوع في فخ الإشارة السالبة.`;
+        } else if (qLower.includes('خطوة 3') || qLower.includes('الخطوة الثالثة') || qLower.includes('step 3')) {
+          const s3 = currentQ.steps[2] || currentQ.steps[currentQ.steps.length - 1];
+          reply = `🎯 **الخطوة الثالثة (الناتج والتبسيط):**\n\n**${s3.title || 'التبسيط النهائي'}:**\n${s3.desc || ''}\n\n$$${s3.math || ''}$$\n\n✅ **الناتج النهائي المعتمد:** $${currentQ.finalAnswer}$`;
+        } else if (qLower.includes('ليش') || qLower.includes('لماذا') || qLower.includes('السبب') || qLower.includes('why') || qLower.includes('مفهوم')) {
+          reply = `🧠 **الأساس المفاهيمي والرياضي (لماذا قمنا بهذا الحل؟):**\n\n${currentQ.whyItWorks}\n\n📌 **قاعدة المنهج:** في مقرر Math 001، هذا السؤال يقيس مهارة التحقق من الشروط الرياضية الدقيقة قبل التبسيط.\n\n💡 **نصيحة للاختبار:** ${currentQ.examTip}`;
+        } else if (qLower.includes('فخ') || qLower.includes('trap') || qLower.includes('أخطاء') || qLower.includes('خطأ') || qLower.includes('انتبه')) {
+          reply = `⚡ **كشف فخ الاختبار في هذا السؤال:**\n\n${currentQ.examTip}\n\n🚨 **نوع الخطأ الشائع لدى الطلاب:** **${currentQ.mistakeType}**\n\nدكاترة المعهد يضعون الخيارات الخاطئة بناءً على هذا الخطأ بالذات، فاحرص على مراجعته بدقة!`;
+        } else if (qLower.includes('خيارات') || qLower.includes('اختيارات') || qLower.includes('خيارات السؤال') || qLower.includes('أجوبة')) {
+          reply = `📋 **تحليل خيارات السؤال:**\n\n✅ **الإجابة الصحيحة (${String.fromCharCode(65 + currentQ.correctIndex)}):** $${currentQ.options[currentQ.correctIndex]}$\n\n❌ **الخيارات الخاطئة:** وضعت كفخاخ مبنية على أخطاء حسابية أو عكس الإشارات أو إهمال الشروط، مثل الوقوع في خطأ: **${currentQ.mistakeType}**.`;
+        } else if (qLower.includes('مثال') || qLower.includes('مسألة ثانية') || qLower.includes('تدريب')) {
+          reply = `📝 **مسألة تدريبية مشابهة لاختبار نفسك:**\n\nإذا كان لديك سؤال مشابه بنفس الفكرة من درس (${currentQ.topic})، الخطوات الأساسية المتبعة هي:\n1. ${currentQ.firstStepAr}\n2. تطبيق القاعدة: $${currentQ.steps[0] ? currentQ.steps[0].math : ''}$\n3. الوصول للشكل النهائي وتجنب: ${currentQ.examTip}`;
         } else {
-          reply = `أهلاً بك! في هذا السؤال من (${currentQ.module} - ${currentQ.topic}):\n\n${currentQ.hintAr}\n\nالخطوة الأولى: ${currentQ.firstStepAr}`;
+          reply = `أهلاً بك يا بطل! أنا معلمك الذكي لمادة Math 001.\n\nبخصوص هذا السؤال في درس **(${currentQ.module} - ${currentQ.topic})**:\n\n💡 **التلميح الأساسي:**\n${currentQ.hintAr}\n\n🪜 **نقطة الانطلاق:**\n${currentQ.firstStepAr}\n\n🎯 **الناتج المطلوب:** $${currentQ.finalAnswer}$\n\n${!isRealKey ? 'ℹ️ *(ملاحظة: للحصول على إجابات تفاعلية مفتوحة ومخصصة لأي سؤال تكتبه، يمكنك إدخال مفتاح Gemini API الخاص بك من زر الإعدادات بأعلى نافذة الشات).*' : ''}`;
         }
         setAiMessages(prev => [...prev, {
           role: 'assistant',
           content: reply
         }]);
-      }, 300);
+      }, 250);
     }
     setIsAiLoading(false);
   };
@@ -1529,7 +2215,7 @@ Explain step-by-step in professional Arabic. Keep all mathematical formulas, pow
     className: "flex items-center space-x-3 space-x-reverse text-right group"
   }, /*#__PURE__*/React.createElement("div", {
     className: "w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-400 to-indigo-500 flex items-center justify-center shadow-lg shadow-emerald-500/20 font-bold text-xl text-white font-mono group-hover:scale-105 transition"
-  }, "$\\pi$"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+  }, "\u03C0"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center space-x-2 space-x-reverse"
   }, /*#__PURE__*/React.createElement("span", {
     className: "font-black text-lg tracking-tight bg-gradient-to-r from-white via-slate-100 to-emerald-400 bg-clip-text text-transparent"
@@ -1737,37 +2423,6 @@ Explain step-by-step in professional Arabic. Keep all mathematical formulas, pow
   }, l.title)), /*#__PURE__*/React.createElement("p", {
     className: "text-[11px] text-slate-400 line-clamp-2 leading-relaxed"
   }, l.tips))))), /*#__PURE__*/React.createElement("div", {
-    className: "space-y-4"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "text-center text-xl font-bold text-white"
-  }, "\u0645\u0627\u0630\u0627 \u064A\u0642\u0648\u0644 \u0637\u0644\u0627\u0628 \u0627\u0644\u0633\u0646\u0629 \u0627\u0644\u062A\u062D\u0636\u064A\u0631\u064A\u0629\u061F"), /*#__PURE__*/React.createElement("div", {
-    className: "grid grid-cols-1 md:grid-cols-3 gap-4"
-  }, [{
-    name: 'عبدالله الجهني',
-    uni: 'معهد ينبع للغة والتحضيرية',
-    review: 'المنصة ساعدتني أفهم أسئلة الـ Domain وفك القيمة المطلقة اللي كانت تعقدني في الكويزات. الشروحات مختصرة وسريعة!'
-  }, {
-    name: 'فيصل الغامدي',
-    uni: 'كلية الهندسة والعلوم',
-    review: 'أفضل ميزة هي مسودة الرسم على الآيباد مع شات Gemini. كأن معك مدرس خصوصي يشرح لك كل مسألة باليد.'
-  }, {
-    name: 'سعود الحربي',
-    uni: 'طالب سنة أولى',
-    review: 'كشف الفخاخ في كل سؤال نبهني لأخطاء الإشارات في ضرب الحدوديات والكسور. حصلت على A+ في كويز Module 1 الحمدلله.'
-  }].map((t, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "p-5 bg-slate-900/50 rounded-2xl border border-slate-800 space-y-3"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center space-x-2 space-x-reverse text-amber-400 text-xs"
-  }, '⭐⭐⭐⭐⭐'), /*#__PURE__*/React.createElement("p", {
-    className: "text-xs text-slate-300 leading-relaxed"
-  }, "\"", t.review, "\""), /*#__PURE__*/React.createElement("div", {
-    className: "border-t border-slate-800/80 pt-2 text-[11px]"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "font-bold text-slate-200"
-  }, t.name), /*#__PURE__*/React.createElement("div", {
-    className: "text-slate-500"
-  }, t.uni)))))), /*#__PURE__*/React.createElement("div", {
     className: "text-center p-8 bg-gradient-to-r from-emerald-950/40 via-slate-900 to-indigo-950/40 rounded-3xl border border-emerald-500/20 space-y-4"
   }, /*#__PURE__*/React.createElement("h2", {
     className: "text-2xl sm:text-3xl font-black text-white"
@@ -2006,7 +2661,10 @@ Explain step-by-step in professional Arabic. Keep all mathematical formulas, pow
     className: "p-3.5 bg-amber-500/10 border border-amber-500/30 rounded-xl text-xs sm:text-sm text-amber-200 leading-relaxed space-y-1 animate-fadeIn"
   }, /*#__PURE__*/React.createElement("p", {
     className: "font-bold"
-  }, "\uD83D\uDCA1 \u0627\u0644\u062A\u0644\u0645\u064A\u062D \u0627\u0644\u0645\u0641\u0627\u0647\u064A\u0645\u064A:"), /*#__PURE__*/React.createElement("p", null, currentQ.hintAr), /*#__PURE__*/React.createElement("div", {
+  }, "\uD83D\uDCA1 \u0627\u0644\u062A\u0644\u0645\u064A\u062D \u0627\u0644\u0645\u0641\u0627\u0647\u064A\u0645\u064A:"), /*#__PURE__*/React.createElement(MathText, {
+    text: currentQ.hintAr,
+    className: "text-amber-200"
+  }), /*#__PURE__*/React.createElement("div", {
     className: "text-amber-100 font-en text-xs dir-ltr mt-1"
   }, /*#__PURE__*/React.createElement(MathText, {
     text: currentQ.hint
@@ -2014,7 +2672,10 @@ Explain step-by-step in professional Arabic. Keep all mathematical formulas, pow
     className: "p-3.5 bg-indigo-500/10 border border-indigo-500/30 rounded-xl text-xs sm:text-sm text-indigo-200 leading-relaxed space-y-1 animate-fadeIn"
   }, /*#__PURE__*/React.createElement("p", {
     className: "font-bold"
-  }, "\uD83E\uDE9C \u0646\u0642\u0637\u0629 \u0628\u062F\u0627\u064A\u0629 \u0627\u0644\u062D\u0644:"), /*#__PURE__*/React.createElement("p", null, currentQ.firstStepAr), /*#__PURE__*/React.createElement("div", {
+  }, "\uD83E\uDE9C \u0646\u0642\u0637\u0629 \u0628\u062F\u0627\u064A\u0629 \u0627\u0644\u062D\u0644:"), /*#__PURE__*/React.createElement(MathText, {
+    text: currentQ.firstStepAr,
+    className: "text-indigo-200"
+  }), /*#__PURE__*/React.createElement("div", {
     className: "text-indigo-100 font-en text-xs dir-ltr mt-1"
   }, /*#__PURE__*/React.createElement(MathText, {
     text: currentQ.firstStep
@@ -2117,15 +2778,17 @@ Explain step-by-step in professional Arabic. Keep all mathematical formulas, pow
     className: "p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1"
   }, /*#__PURE__*/React.createElement("div", {
     className: "font-bold text-slate-300 flex items-center space-x-1 space-x-reverse"
-  }, /*#__PURE__*/React.createElement("span", null, "\uD83E\uDDE0"), /*#__PURE__*/React.createElement("span", null, "\u0644\u0645\u0627\u0630\u0627 \u0647\u0630\u0647 \u0627\u0644\u0637\u0631\u064A\u0642\u0629\u061F (Concept):")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("span", null, "\uD83E\uDDE0"), /*#__PURE__*/React.createElement("span", null, "\u0644\u0645\u0627\u0630\u0627 \u0647\u0630\u0647 \u0627\u0644\u0637\u0631\u064A\u0642\u0629\u061F (Concept):")), /*#__PURE__*/React.createElement(MathText, {
+    text: currentQ.whyItWorks,
     className: "text-slate-400 leading-relaxed"
-  }, currentQ.whyItWorks)), /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
     className: "p-3 rounded-xl bg-amber-950/30 border border-amber-900/50 space-y-1"
   }, /*#__PURE__*/React.createElement("div", {
     className: "font-bold text-amber-300 flex items-center space-x-1 space-x-reverse"
-  }, /*#__PURE__*/React.createElement("span", null, "\u26A1"), /*#__PURE__*/React.createElement("span", null, "\u062D\u064A\u0644\u0629 \u0633\u0631\u064A\u0639\u0629 \u0644\u0644\u0627\u062E\u062A\u0628\u0627\u0631 (Exam Tip):")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("span", null, "\u26A1"), /*#__PURE__*/React.createElement("span", null, "\u062D\u064A\u0644\u0629 \u0633\u0631\u064A\u0639\u0629 \u0644\u0644\u0627\u062E\u062A\u0628\u0627\u0631 (Exam Tip):")), /*#__PURE__*/React.createElement(MathText, {
+    text: currentQ.examTip,
     className: "text-amber-200/90 leading-relaxed"
-  }, currentQ.examTip)))), /*#__PURE__*/React.createElement("div", {
+  })))), /*#__PURE__*/React.createElement("div", {
     className: "pt-3 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3"
   }, /*#__PURE__*/React.createElement("div", {
     className: "text-xs text-slate-400 text-center sm:text-right"
@@ -2434,12 +3097,50 @@ Explain step-by-step in professional Arabic. Keep all mathematical formulas, pow
     className: "w-10 h-10 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-xl"
   }, "\uD83E\uDD16"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
     className: "font-bold text-white text-sm sm:text-base"
-  }, "\u0627\u0644\u0645\u0639\u0644\u0645 \u0627\u0644\u062E\u0635\u0648\u0635\u064A \u0627\u0644\u0630\u0643\u064A (Gemini 2.0 Flash)"), /*#__PURE__*/React.createElement("p", {
-    className: "text-[11px] text-emerald-400 font-mono"
-  }, "\uD83D\uDFE2 \u0645\u062A\u0635\u0644 \u0648\u0645\u062D\u0645\u064A \u062A\u0644\u0642\u0627\u0626\u064A\u0627\u064B"))), /*#__PURE__*/React.createElement("button", {
+  }, "\u0627\u0644\u0645\u0639\u0644\u0645 \u0627\u0644\u062E\u0635\u0648\u0635\u064A \u0627\u0644\u0630\u0643\u064A \u0644\u0645\u0642\u0631\u0631 Math 001"), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center space-x-2 space-x-reverse mt-0.5"
+  }, geminiApiKey && geminiApiKey.startsWith('AIzaSy') ? /*#__PURE__*/React.createElement("span", {
+    className: "inline-flex items-center text-[10px] sm:text-xs text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20"
+  }, "\uD83D\uDFE2 \u0645\u062A\u0635\u0644 \u0628\u0640 Gemini 2.0 Flash \u0627\u0644\u0645\u0628\u0627\u0634\u0631") : /*#__PURE__*/React.createElement("span", {
+    className: "inline-flex items-center text-[10px] sm:text-xs text-indigo-300 font-semibold bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20"
+  }, "\u26A1 \u0646\u0645\u0637 \u0627\u0644\u0645\u062D\u0644\u0644 \u0627\u0644\u0631\u064A\u0627\u0636\u064A \u0627\u0644\u0645\u062F\u0645\u062C (\u062E\u0628\u064A\u0631 \u0627\u0644\u0645\u0646\u0647\u062C)"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setShowKeyConfig(v => !v),
+    className: "text-[10px] text-slate-400 hover:text-amber-300 bg-slate-800 hover:bg-slate-700 px-2 py-0.5 rounded-md border border-slate-700 transition"
+  }, showKeyConfig ? 'إخفاء الإعدادات ✕' : '⚙️ ربط API Key')))), /*#__PURE__*/React.createElement("button", {
     onClick: () => setShowAITutor(false),
     className: "p-1.5 text-slate-400 hover:text-white rounded-lg bg-slate-800"
-  }, "\u2715")), /*#__PURE__*/React.createElement("div", {
+  }, "\u2715")), showKeyConfig && /*#__PURE__*/React.createElement("div", {
+    className: "p-3 bg-slate-950 border-b border-slate-800 text-xs space-y-2 animate-fadeIn"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-slate-300 font-semibold"
+  }, "\u0645\u0641\u062A\u0627\u062D Google Gemini API \u0644\u0644\u062F\u0631\u062F\u0634\u0629 \u0627\u0644\u0645\u0641\u062A\u0648\u062D\u0629 \u0627\u0644\u062D\u064A\u0629:"), /*#__PURE__*/React.createElement("a", {
+    href: "https://aistudio.google.com/app/apikey",
+    target: "_blank",
+    rel: "noreferrer",
+    className: "text-amber-400 hover:underline text-[11px]"
+  }, "\u0627\u062D\u0635\u0644 \u0639\u0644\u0649 \u0645\u0641\u062A\u0627\u062D \u0645\u062C\u0627\u0646\u064A \u0645\u0646 Google AI Studio \u2197")), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "password",
+    placeholder: "\u0636\u0639 \u0627\u0644\u0645\u0641\u062A\u0627\u062D \u0647\u0646\u0627 (\u064A\u0628\u062F\u0623 \u0628\u0640 AIzaSy...)",
+    value: geminiApiKey,
+    onChange: e => {
+      const val = e.target.value.trim();
+      setGeminiApiKey(val);
+      localStorage.setItem('gemini_api_key', val);
+    },
+    className: "flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-slate-100 font-mono text-xs focus:outline-none focus:border-emerald-500"
+  }), geminiApiKey && /*#__PURE__*/React.createElement("button", {
+    onClick: () => {
+      setGeminiApiKey('');
+      localStorage.removeItem('gemini_api_key');
+    },
+    className: "px-2.5 py-1.5 bg-red-950 text-red-300 rounded-xl hover:bg-red-900 text-xs"
+  }, "\u0645\u0633\u062D")), /*#__PURE__*/React.createElement("p", {
+    className: "text-[10px] text-slate-400"
+  }, "* \u064A\u062A\u0645 \u062D\u0641\u0638 \u0627\u0644\u0645\u0641\u062A\u0627\u062D \u0641\u064A \u0645\u062A\u0635\u0641\u062D\u0643 \u0645\u062D\u0644\u064A\u0627\u064B \u0641\u0642\u0637 \u0648\u0644\u0627 \u062A\u062A\u0645 \u0645\u0634\u0627\u0631\u0643\u062A\u0647 \u0623\u0628\u062F\u0627\u064B. \u0639\u0646\u062F \u0639\u062F\u0645 \u062A\u0641\u0639\u064A\u0644 \u0627\u0644\u0645\u0641\u062A\u0627\u062D\u060C \u064A\u0639\u0645\u0644 \u0627\u0644\u0646\u0638\u0627\u0645 \u0628\u0646\u0645\u0637 \u0627\u0644\u062A\u062D\u0644\u064A\u0644 \u0627\u0644\u0631\u064A\u0627\u0636\u064A \u0627\u0644\u0645\u062F\u0645\u062C \u0627\u0644\u0630\u0643\u064A \u0644\u0643\u0644 \u0645\u0633\u0623\u0644\u0629.")), /*#__PURE__*/React.createElement("div", {
     className: "flex-1 p-4 overflow-y-auto space-y-3 bg-slate-950/60"
   }, aiMessages.map((msg, mIdx) => /*#__PURE__*/React.createElement("div", {
     key: mIdx,
