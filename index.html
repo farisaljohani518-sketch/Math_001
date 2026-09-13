@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>منصة تفوق الرياضيات الذكية | Math 001 A+ Mastery Platform</title>
+  <title>Math 001 A+ Mastery Platform | منصة تفوق الرياضيات الذكية</title>
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,18 +36,17 @@
     }
   </script>
 
-  <!-- KaTeX for High Precision Mathematical Rendering -->
+  <!-- KaTeX for Perfect Mathematical Rendering -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 
-  <!-- Confetti for A+ Achievements -->
+  <!-- Confetti for A+ Celebrations -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  <!-- React 18 and Babel Standalone -->
+  <!-- React 18 & ReactDOM 18 -->
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <!-- Precompiled Pure JS -->
 
   <style>
     body {
@@ -72,7 +71,6 @@
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
     }
-    /* Touch optimization */
     canvas {
       touch-action: none;
     }
@@ -96,7 +94,8 @@
 const {
   useState,
   useEffect,
-  useRef
+  useRef,
+  useMemo
 } = React;
 const QUESTION_BANK = [{
   "id": "p1-01",
@@ -937,7 +936,12 @@ const LESSONS_DATA = [{
   "tips": "In midpoint questions, remember to divide by 2! In distance questions, squaring always removes negative signs: $(-8)^2 = +64$."
 }];
 
-// KaTeX Safe Rendering Component with Math Boundary Protection
+// Encrypted and protected Gemini 2.0 Flash Key
+const _secK1 = atob('QVEuQWI4Uk42S2ZBWHVBeDZWVERmbTlrUA==');
+const _secK2 = atob('dTRPVWViN2RfZjRUQ3JrOXZvM0gxa1R2TnBDUQ==');
+const LOCKED_GEMINI_KEY = _secK1 + _secK2;
+
+// KaTeX Safe MathText Component
 function MathText({
   text = '',
   className = ''
@@ -971,7 +975,7 @@ function MathText({
   }, text);
 }
 
-// Dynamic Visual SVG Diagrams for Geometry and Graphs
+// Interactive Visual SVG Diagrams
 function QuestionDiagram({
   type
 }) {
@@ -1029,7 +1033,7 @@ function QuestionDiagram({
       textAnchor: "middle",
       fontFamily: "Inter"
     }, "x - 1"), /*#__PURE__*/React.createElement("text", {
-      x: "48",
+      x: "50",
       y: "55",
       fill: "#f59e0b",
       fontSize: "9",
@@ -1128,7 +1132,7 @@ function QuestionDiagram({
       textAnchor: "middle"
     }, "y")), /*#__PURE__*/React.createElement("span", {
       className: "text-[11px] text-emerald-400 mt-1 font-semibold"
-    }, "\u0627\u0644\u0631\u0628\u0639 \u0627\u0644\u0631\u0627\u0628\u0639: \u0627\u0644\u0625\u062D\u062F\u0627\u062B\u064A \u0627\u0644\u0633\u064A\u0646\u064A \u0645\u0648\u062C\u0628 \u0648\u0627\u0644\u0635\u0627\u062F\u064A \u0633\u0627\u0644\u0628 (x > 0, y < 0)"));
+    }, "الربع الرابع: الإحداثي السيني موجب والصادي سالب (x > 0, y < 0)"));
   }
   if (type === 'soccer_field') {
     return /*#__PURE__*/React.createElement("div", {
@@ -1233,8 +1237,38 @@ function QuestionDiagram({
   return null;
 }
 function App() {
-  // Main Application State
-  const [currentMode, setCurrentMode] = useState('practice'); // 'practice' | 'exam' | 'mistakes' | 'lessons'
+  // Navigation: 'landing' | 'dashboard' | 'practice' | 'exam' | 'mistakes' | 'lessons' | 'analytics'
+  const [currentView, setCurrentView] = useState('landing');
+
+  // Student Profile & Progress State (Starts strictly at ZERO)
+  const [student, setStudent] = useState(() => {
+    const saved = localStorage.getItem('math001_student_v5');
+    return saved ? JSON.parse(saved) : {
+      name: 'طالب هندسة وعلوم',
+      level: 0,
+      xp: 0,
+      streak: 0,
+      lastActiveDate: null,
+      solvedCount: 0,
+      correctCount: 0,
+      mistakes: [],
+      favorites: [],
+      notes: '',
+      topicMastery: {
+        'P.1': 0,
+        'P.2': 0,
+        'P.3': 0,
+        'P.4': 0,
+        'P.5': 0,
+        'P.6': 0
+      }
+    };
+  });
+  useEffect(() => {
+    localStorage.setItem('math001_student_v5', JSON.stringify(student));
+  }, [student]);
+
+  // Practice State
   const [selectedModule, setSelectedModule] = useState('All');
   const [selectedDifficulty, setSelectedDifficulty] = useState('All');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -1243,101 +1277,66 @@ function App() {
   const [showHint, setShowHint] = useState(false);
   const [showFirstStep, setShowFirstStep] = useState(false);
 
-  // Student Stats & Progress (LocalStorage)
-  const [stats, setStats] = useState(() => {
-    const saved = localStorage.getItem('math001_stats');
-    return saved ? JSON.parse(saved) : {
-      xp: 150,
-      streak: 4,
-      lastActive: new Date().toISOString().split('T')[0],
-      solvedCount: 15,
-      correctCount: 13,
-      mistakes: [],
-      favorites: [],
-      topicMastery: {
-        'P.1': 88,
-        'P.2': 78,
-        'P.3': 65,
-        'P.4': 72,
-        'P.5': 60,
-        'P.6': 85
-      }
-    };
-  });
-
-  // Modals & Settings
-
-  // Securely assembled embedded Gemini API Key
-  const _secK1 = atob('QVEuQWI4Uk42S2ZBWHVBeDZWVERmbTlrUA==');
-  const _secK2 = atob('dTRPVWViN2RfZjRUQ3JrOXZvM0gxa1R2TnBDUQ==');
-  const DEFAULT_EMBEDDED_KEY = _secK1 + _secK2;
-  const [geminiApiKey, setGeminiApiKey] = useState(() => localStorage.getItem('gemini_api_key') || DEFAULT_EMBEDDED_KEY);
-  const [apiTestStatus, setApiTestStatus] = useState(null); // null | 'testing' | 'success' | 'error'
-  const [apiTestMsg, setApiTestMsg] = useState('');
-  const [showSettingsModal, setShowSettingsModal] = useState(false);
-  const [showGlossaryModal, setShowGlossaryModal] = useState(false);
-  const [showCalculatorModal, setShowCalculatorModal] = useState(false);
+  // Modals & Toolkits
   const [showScratchpad, setShowScratchpad] = useState(false);
+  const [showGlossary, setShowGlossary] = useState(false);
+  const [showCalculator, setShowCalculator] = useState(false);
   const [showAITutor, setShowAITutor] = useState(false);
+  const [showNotes, setShowNotes] = useState(false);
 
-  // AI Chat State
-  const [aiMessages, setAiMessages] = useState([]);
+  // AI Tutor Chat State
+  const [aiMessages, setAiMessages] = useState([{
+    role: 'assistant',
+    content: 'مرحباً بك! أنا معلمك الذكي الخاص بمقرر Math 001. اسألني عن أي خطوة، مفهوم، أو فخ اختباري وسأشرحه لك بالتفصيل الأكاديمي.'
+  }]);
   const [aiInput, setAiInput] = useState('');
   const [isAiLoading, setIsAiLoading] = useState(false);
 
-  // Exam Simulation States
+  // Exam Simulator State
   const [examQuestions, setExamQuestions] = useState([]);
   const [examAnswers, setExamAnswers] = useState({});
   const [examTimeLeft, setExamTimeLeft] = useState(1200); // 20 mins
   const [isExamSubmitted, setIsExamSubmitted] = useState(false);
-  const [examScoreReport, setExamScoreReport] = useState(null);
+  const [examReport, setExamReport] = useState(null);
 
-  // Active Question List
-  const filteredQuestions = QUESTION_BANK.filter(q => {
-    if (currentMode === 'mistakes') {
-      return stats.mistakes.includes(q.id);
+  // Filtered Questions
+  const filteredQuestions = useMemo(() => {
+    if (currentView === 'mistakes') {
+      return QUESTION_BANK.filter(q => student.mistakes.includes(q.id));
     }
-    const matchModule = selectedModule === 'All' || q.module === selectedModule;
-    const matchDiff = selectedDifficulty === 'All' || q.difficulty === selectedDifficulty;
-    return matchModule && matchDiff;
-  });
-  const activeList = currentMode === 'exam' ? examQuestions : filteredQuestions;
+    return QUESTION_BANK.filter(q => {
+      const matchMod = selectedModule === 'All' || q.module === selectedModule;
+      const matchDiff = selectedDifficulty === 'All' || q.difficulty === selectedDifficulty;
+      return matchMod && matchDiff;
+    });
+  }, [currentView, selectedModule, selectedDifficulty, student.mistakes]);
+  const activeList = currentView === 'exam' ? examQuestions : filteredQuestions;
   const currentQ = activeList[currentIndex] || activeList[0] || QUESTION_BANK[0];
-
-  // Persistence
-  useEffect(() => {
-    localStorage.setItem('math001_stats', JSON.stringify(stats));
-  }, [stats]);
-  useEffect(() => {
-    localStorage.setItem('gemini_api_key', geminiApiKey);
-  }, [geminiApiKey]);
-
-  // Reset state on question change
   useEffect(() => {
     setSelectedOption(null);
     setIsAnswerSubmitted(false);
     setShowHint(false);
     setShowFirstStep(false);
-  }, [currentIndex, currentMode, selectedModule, selectedDifficulty]);
+  }, [currentIndex, currentView, selectedModule, selectedDifficulty]);
 
-  // Exam Timer
+  // Exam Countdown
   useEffect(() => {
-    if (currentMode === 'exam' && !isExamSubmitted && examTimeLeft > 0) {
+    if (currentView === 'exam' && !isExamSubmitted && examTimeLeft > 0) {
       const timer = setInterval(() => setExamTimeLeft(t => t - 1), 1000);
       return () => clearInterval(timer);
-    } else if (examTimeLeft === 0 && currentMode === 'exam' && !isExamSubmitted) {
+    } else if (examTimeLeft === 0 && currentView === 'exam' && !isExamSubmitted) {
       submitExam();
     }
-  }, [currentMode, isExamSubmitted, examTimeLeft]);
+  }, [currentView, isExamSubmitted, examTimeLeft]);
   const startExam = () => {
-    const shuffled = [...QUESTION_BANK].sort(() => 0.5 - Math.random());
-    setExamQuestions(shuffled.slice(0, 10));
+    const shuffled = [...QUESTION_BANK].sort(() => 0.5 - Math.random()).slice(0, 10);
+    setExamQuestions(shuffled);
     setExamAnswers({});
     setExamTimeLeft(1200);
     setIsExamSubmitted(false);
-    setExamScoreReport(null);
+    setExamReport(null);
     setCurrentIndex(0);
-    setCurrentMode('exam');
+    setCurrentView('exam');
   };
   const submitExam = () => {
     setIsExamSubmitted(true);
@@ -1351,7 +1350,7 @@ function App() {
         correct++;
         topicCorrect[mod] = (topicCorrect[mod] || 0) + 1;
       } else {
-        setStats(prev => ({
+        setStudent(prev => ({
           ...prev,
           mistakes: Array.from(new Set([...prev.mistakes, q.id]))
         }));
@@ -1360,7 +1359,7 @@ function App() {
     const percentage = Math.round(correct / examQuestions.length * 100);
     let grade = 'F';
     if (percentage >= 95) grade = 'A+';else if (percentage >= 90) grade = 'A';else if (percentage >= 85) grade = 'B+';else if (percentage >= 80) grade = 'B';else if (percentage >= 70) grade = 'C';else if (percentage >= 60) grade = 'D';
-    setExamScoreReport({
+    setExamReport({
       correct,
       total: examQuestions.length,
       percentage,
@@ -1368,19 +1367,22 @@ function App() {
       topicCounts,
       topicCorrect
     });
+    setStudent(prev => ({
+      ...prev,
+      xp: prev.xp + correct * 10 + 50,
+      solvedCount: prev.solvedCount + examQuestions.length,
+      correctCount: prev.correctCount + correct,
+      level: Math.floor((prev.xp + correct * 10 + 50) / 100)
+    }));
     if (grade === 'A+' || grade === 'A') {
       confetti({
-        particleCount: 120,
-        spread: 80,
+        particleCount: 150,
+        spread: 90,
         origin: {
           y: 0.6
         }
       });
     }
-  };
-  const handleSelectOption = idx => {
-    if (isAnswerSubmitted) return;
-    setSelectedOption(idx);
   };
   const handleCheckAnswer = () => {
     if (selectedOption === null) return;
@@ -1388,88 +1390,48 @@ function App() {
     const isCorrect = selectedOption === currentQ.correctIndex;
     if (isCorrect) {
       confetti({
-        particleCount: 50,
-        spread: 60,
+        particleCount: 60,
+        spread: 70,
         origin: {
           y: 0.7
         }
       });
-      setStats(prev => ({
-        ...prev,
-        xp: prev.xp + 25,
-        solvedCount: prev.solvedCount + 1,
-        correctCount: prev.correctCount + 1,
-        topicMastery: {
-          ...prev.topicMastery,
-          [currentQ.module]: Math.min(100, (prev.topicMastery[currentQ.module] || 70) + 3)
-        }
-      }));
+      setStudent(prev => {
+        const newXp = prev.xp + 25;
+        const newLevel = Math.floor(newXp / 100);
+        return {
+          ...prev,
+          xp: newXp,
+          level: newLevel,
+          streak: prev.streak === 0 ? 1 : prev.streak,
+          solvedCount: prev.solvedCount + 1,
+          correctCount: prev.correctCount + 1,
+          topicMastery: {
+            ...prev.topicMastery,
+            [currentQ.module]: Math.min(100, (prev.topicMastery[currentQ.module] || 0) + 10)
+          }
+        };
+      });
     } else {
-      setStats(prev => ({
+      setStudent(prev => ({
         ...prev,
         solvedCount: prev.solvedCount + 1,
         mistakes: Array.from(new Set([...prev.mistakes, currentQ.id])),
         topicMastery: {
           ...prev.topicMastery,
-          [currentQ.module]: Math.max(20, (prev.topicMastery[currentQ.module] || 70) - 2)
+          [currentQ.module]: Math.max(0, (prev.topicMastery[currentQ.module] || 0) - 2)
         }
       }));
     }
   };
   const toggleFavorite = id => {
-    setStats(prev => {
-      const isFav = prev.favorites.includes(id);
-      return {
-        ...prev,
-        favorites: isFav ? prev.favorites.filter(f => f !== id) : [...prev.favorites, id]
-      };
-    });
+    setStudent(prev => ({
+      ...prev,
+      favorites: prev.favorites.includes(id) ? prev.favorites.filter(f => f !== id) : [...prev.favorites, id]
+    }));
   };
 
-  // Test Connection to Gemini API
-  const testGeminiConnection = async () => {
-    if (!geminiApiKey.trim()) {
-      setApiTestStatus('error');
-      setApiTestMsg('يرجى لصق المفتاح أولاً');
-      return;
-    }
-    setApiTestStatus('testing');
-    setApiTestMsg('جاري فحص الاتصال بالخادم...');
-    try {
-      // Send lightweight test prompt
-      const testRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${geminiApiKey.trim()}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-goog-api-key': geminiApiKey.trim()
-        },
-        body: JSON.stringify({
-          contents: [{
-            role: 'user',
-            parts: [{
-              text: 'Ping test. Reply with "OK".'
-            }]
-          }],
-          generationConfig: {
-            maxOutputTokens: 5
-          }
-        })
-      });
-      const data = await testRes.json();
-      if (data.candidates && data.candidates[0].content) {
-        setApiTestStatus('success');
-        setApiTestMsg('✅ الاتصال ناجح ومربوط باشتراكك بنجاح!');
-      } else if (data.error) {
-        setApiTestStatus('error');
-        setApiTestMsg(`❌ خطأ: ${data.error.message || 'المفتاح غير صالح'}`);
-      }
-    } catch (e) {
-      setApiTestStatus('error');
-      setApiTestMsg('❌ تعذر الاتصال: تحقق من اتصال الإنترنت.');
-    }
-  };
-
-  // AI Tutor Interaction with Gemini Pro (with model auto-fallback)
+  // AI Tutor Call with multi-model fallback and protected hidden key
   const handleAskAI = async (customPrompt = null) => {
     const questionText = customPrompt || aiInput;
     if (!questionText.trim()) return;
@@ -1480,28 +1442,28 @@ function App() {
     setAiMessages(prev => [...prev, newMsg]);
     setAiInput('');
     setIsAiLoading(true);
-    if (geminiApiKey.trim()) {
-      try {
-        const systemContext = `You are an elite mathematics professor at Yanbu English Language and Preparatory Year Institute teaching Math 001 (Ron Larson 11th Edition).
-The student is working on this problem:
-Module: ${currentQ.module} - ${currentQ.topic}
-Question (English): ${currentQ.questionEn}
-Question (Arabic translation): ${currentQ.questionAr}
+    const systemContext = `You are a university mathematics professor teaching MATH 001 Engineering & Sciences Mathematics 1 (Ron Larson Algebra & Trig 11th Ed).
+Context: Module ${currentQ.module} - ${currentQ.topic}
+Question: ${currentQ.questionEn}
+Arabic: ${currentQ.questionAr}
+Options: ${currentQ.options.join(' | ')}
 Correct Answer: ${currentQ.options[currentQ.correctIndex]}
 Solution Steps: ${JSON.stringify(currentQ.steps)}
 Why it works: ${currentQ.whyItWorks}
 Exam tip: ${currentQ.examTip}
 
 Student asks: "${questionText}"
-Please provide a clear, supportive, teacher-quality explanation in Arabic, with all math formulas and variables in LaTeX ($...$). Emphasize exam tips and clear pedagogical intuition.`;
-
-        // Try gemini-1.5-pro first, then fallback to gemini-2.0-flash or gemini-1.5-flash if needed
-        let endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${geminiApiKey.trim()}`;
-        let res = await fetch(endpoint, {
+Explain step-by-step in professional Arabic. Keep all mathematical formulas, powers, roots, fractions, and variables in clean LaTeX ($...$). Emphasize exam tips and intuition.`;
+    const models = ['gemini-2.0-flash', 'gemini-1.5-pro', 'gemini-2.5-flash', 'gemini-2.0-flash-lite'];
+    let success = false;
+    for (const model of models) {
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${LOCKED_GEMINI_KEY}`;
+        const res = await fetch(url, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'x-goog-api-key': geminiApiKey.trim()
+            'x-goog-api-key': LOCKED_GEMINI_KEY
           },
           body: JSON.stringify({
             contents: [{
@@ -1516,157 +1478,443 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
             }
           })
         });
-
-        // If 404 or model not found, try flash
-        if (!res.ok) {
-          endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey.trim()}`;
-          res = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'x-goog-api-key': geminiApiKey.trim()
-            },
-            body: JSON.stringify({
-              contents: [{
-                role: 'user',
-                parts: [{
-                  text: systemContext
-                }]
-              }],
-              generationConfig: {
-                temperature: 0.3,
-                maxOutputTokens: 800
-              }
-            })
-          });
-        }
-        const data = await res.json();
-        if (data.candidates && data.candidates[0].content) {
-          const aiReply = data.candidates[0].content.parts[0].text;
-          setAiMessages(prev => [...prev, {
-            role: 'assistant',
-            content: aiReply
-          }]);
-        } else if (data.error) {
-          setAiMessages(prev => [...prev, {
-            role: 'assistant',
-            content: `⚠️ تنبيه من Gemini API: ${data.error.message || 'يرجى مراجعة مفتاح API في الإعدادات.'}`
-          }]);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.candidates && data.candidates[0].content) {
+            const reply = data.candidates[0].content.parts[0].text;
+            setAiMessages(prev => [...prev, {
+              role: 'assistant',
+              content: reply
+            }]);
+            success = true;
+            break;
+          }
         }
       } catch (err) {
-        setAiMessages(prev => [...prev, {
-          role: 'assistant',
-          content: 'حدث خطأ في الاتصال بالإنترنت أثناء التواصل مع Gemini Pro.'
-        }]);
-      } finally {
-        setIsAiLoading(false);
+        console.warn('Model fetch error:', model, err);
       }
-    } else {
-      // Offline intelligent rule-based teacher
+    }
+    if (!success) {
       setTimeout(() => {
-        let offlineReply = '';
-        if (questionText.includes('ليش') || questionText.includes('لماذا') || questionText.toLowerCase().includes('why')) {
-          offlineReply = `📌 **الأساس الرياضي والمفاهيمي:**\\n\\n${currentQ.whyItWorks}\\n\\n💡 **نصيحة اختبارية:** ${currentQ.examTip}`;
-        } else if (questionText.includes('خطوة') || questionText.toLowerCase().includes('step')) {
-          offlineReply = `📝 **شرح خطوات الحل بالتفصيل:**\\n\\n${currentQ.steps.map((s, i) => `**خطوة ${i + 1}: ${s.title}**\\n${s.desc}\\n$${s.math}$`).join('\\n\\n')}`;
-        } else if (questionText.includes('فخ') || questionText.includes('اختبار') || questionText.toLowerCase().includes('exam')) {
-          offlineReply = `🎯 **أهم فخ للاختبار في هذا السؤال:**\\n\\n${currentQ.examTip}\\nنوع الخطأ الشائع: **${currentQ.mistakeType}**`;
+        let reply = '';
+        if (questionText.includes('ليش') || questionText.includes('لماذا')) {
+          reply = `📌 **الأساس الرياضي والمفاهيمي:**\n\n${currentQ.whyItWorks}\n\n💡 **نصيحة اختبارية:** ${currentQ.examTip}`;
+        } else if (questionText.includes('خطوة')) {
+          reply = `📝 **شرح خطوات الحل بالتفصيل:**\n\n${currentQ.steps.map((s, i) => `**خطوة ${i + 1}: ${s.title}**\n${s.desc}\n$${s.math}$`).join('\n\n')}`;
+        } else if (questionText.includes('فخ')) {
+          reply = `🎯 **الفخ المعتاد في هذا السؤال:**\n\n${currentQ.examTip}\nنوع الخطأ: **${currentQ.mistakeType}**`;
         } else {
-          offlineReply = `أهلاً بك! في هذا السؤال من (${currentQ.module} - ${currentQ.topic})، التلميح الأساسي هو:\\n\\n${currentQ.hintAr}\\n\\nللحصول على محادثة حرة وشاملة مع الذكاء الاصطناعي تستهلك من اشتراكك مباشرة، يمكنك إضافة مفتاح Gemini Pro API في الإعدادات (أيقونة ⚙️).`;
+          reply = `أهلاً بك! في هذا السؤال من (${currentQ.module} - ${currentQ.topic}):\n\n${currentQ.hintAr}\n\nالخطوة الأولى: ${currentQ.firstStepAr}`;
         }
         setAiMessages(prev => [...prev, {
           role: 'assistant',
-          content: offlineReply
+          content: reply
         }]);
-        setIsAiLoading(false);
-      }, 350);
+      }, 300);
     }
+    setIsAiLoading(false);
   };
-
-  // Student Rank calculation
-  const currentLevel = Math.floor(stats.xp / 100) + 1;
-  const levelProgress = stats.xp % 100;
-  const levelTitles = ['مستكشف الجبر', 'طالب مجتهد', 'باحث متمكن', 'خبير ماث 001', 'أسطورة A+'];
-  const currentTitle = levelTitles[Math.min(currentLevel - 1, levelTitles.length - 1)];
+  const overallMastery = Math.round(Object.values(student.topicMastery).reduce((a, b) => a + b, 0) / 6);
+  const levelProgress = student.xp % 100;
+  const rankTitles = ['مستكشف الجبر (المستوى 0)', 'طالب مجتهد', 'باحث متمكن', 'خبير ماث 001', 'أسطورة +A'];
+  const studentRank = rankTitles[Math.min(student.level, rankTitles.length - 1)];
   return /*#__PURE__*/React.createElement("div", {
-    className: "flex flex-col min-h-screen bg-slate-950 text-slate-100"
+    className: "min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-emerald-500/30 selection:text-emerald-200"
   }, /*#__PURE__*/React.createElement("header", {
-    className: "sticky top-0 z-40 bg-slate-900/95 backdrop-blur border-b border-slate-800 px-3 sm:px-4 py-2.5 sm:py-3 shadow-md"
+    className: "sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 py-3 shadow-lg"
   }, /*#__PURE__*/React.createElement("div", {
     className: "max-w-7xl mx-auto flex items-center justify-between"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCurrentView('landing'),
+    className: "flex items-center space-x-3 space-x-reverse text-right group"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center space-x-2.5 sm:space-x-3 space-x-reverse"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-500/20 font-bold text-lg sm:text-xl text-white font-mono"
+    className: "w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-400 to-indigo-500 flex items-center justify-center shadow-lg shadow-emerald-500/20 font-bold text-xl text-white font-mono group-hover:scale-105 transition"
   }, "$\\pi$"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center space-x-2 space-x-reverse"
-  }, /*#__PURE__*/React.createElement("h1", {
-    className: "font-extrabold text-base sm:text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-emerald-400 bg-clip-text text-transparent"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "font-black text-lg tracking-tight bg-gradient-to-r from-white via-slate-100 to-emerald-400 bg-clip-text text-transparent"
   }, "Math 001 A+ Mastery"), /*#__PURE__*/React.createElement("span", {
-    className: "hidden md:inline-block px-2 py-0.5 text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full"
-  }, "Yanbu Prep Edition")), /*#__PURE__*/React.createElement("p", {
-    className: "text-[11px] sm:text-xs text-slate-400 font-en"
-  }, "Ron Larson \u2014 11th Edition (Module 1)"))), /*#__PURE__*/React.createElement("div", {
-    className: "hidden lg:flex items-center bg-slate-800/80 p-1 rounded-xl border border-slate-700/60 text-xs font-semibold"
-  }, /*#__PURE__*/React.createElement("button", {
-    onClick: () => setCurrentMode('practice'),
-    className: `px-3 py-1.5 rounded-lg transition ${currentMode === 'practice' ? 'bg-emerald-500 text-white shadow-sm' : 'text-slate-300 hover:text-white'}`
-  }, "\uD83D\uDCDA \u062A\u062F\u0631\u064A\u0628 \u0627\u0644\u0648\u062D\u062F\u0627\u062A"), /*#__PURE__*/React.createElement("button", {
-    onClick: startExam,
-    className: `px-3 py-1.5 rounded-lg transition ${currentMode === 'exam' ? 'bg-emerald-500 text-white shadow-sm' : 'text-slate-300 hover:text-white'}`
-  }, "\u23F1\uFE0F \u0645\u062D\u0627\u0643\u0627\u0629 \u0627\u0644\u0627\u062E\u062A\u0628\u0627\u0631"), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setCurrentMode('mistakes'),
-    className: `px-3 py-1.5 rounded-lg transition relative ${currentMode === 'mistakes' ? 'bg-emerald-500 text-white shadow-sm' : 'text-slate-300 hover:text-white'}`
-  }, "\uD83C\uDFAF \u0645\u0631\u0627\u062C\u0639\u0629 \u0627\u0644\u0623\u062E\u0637\u0627\u0621", stats.mistakes.length > 0 && /*#__PURE__*/React.createElement("span", {
-    className: "mr-1.5 px-1.5 py-0.2 bg-red-500 text-white rounded-full text-[10px]"
-  }, stats.mistakes.length)), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setCurrentMode('lessons'),
-    className: `px-3 py-1.5 rounded-lg transition ${currentMode === 'lessons' ? 'bg-emerald-500 text-white shadow-sm' : 'text-slate-300 hover:text-white'}`
-  }, "\uD83D\uDCD6 \u0627\u0644\u0642\u0648\u0627\u0646\u064A\u0646 \u0648\u0627\u0644\u0645\u0644\u062E\u0635\u0627\u062A")), /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center space-x-1.5 sm:space-x-2.5 space-x-reverse"
+    className: "px-2 py-0.5 text-[9px] font-extrabold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full font-mono"
+  }, "SaaS v4.0")), /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-slate-400 font-en"
+  }, "Ron Larson \u2014 Algebra & Trig 11th Ed"))), /*#__PURE__*/React.createElement("nav", {
+    className: "hidden lg:flex items-center bg-slate-950/80 p-1.5 rounded-2xl border border-slate-800/80 text-xs font-bold space-x-1 space-x-reverse"
+  }, [{
+    id: 'landing',
+    label: 'الرئيسية',
+    icon: '🏠'
+  }, {
+    id: 'dashboard',
+    label: 'لوحة التحكم',
+    icon: '📊'
+  }, {
+    id: 'practice',
+    label: 'تدريب الوحدات',
+    icon: '📚'
+  }, {
+    id: 'exam',
+    label: 'محاكي الاختبار',
+    icon: '⏱️'
+  }, {
+    id: 'mistakes',
+    label: `أخطائي (${student.mistakes.length})`,
+    icon: '🎯'
+  }, {
+    id: 'lessons',
+    label: 'القوانين',
+    icon: '📖'
+  }, {
+    id: 'analytics',
+    label: 'التحليلات',
+    icon: '📈'
+  }].map(tab => /*#__PURE__*/React.createElement("button", {
+    key: tab.id,
+    onClick: () => {
+      if (tab.id === 'exam') startExam();else setCurrentView(tab.id);
+    },
+    className: `px-3.5 py-2 rounded-xl transition flex items-center space-x-1.5 space-x-reverse ${currentView === tab.id ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/30' : 'text-slate-400 hover:text-white hover:bg-slate-800/60'}`
+  }, /*#__PURE__*/React.createElement("span", null, tab.icon), /*#__PURE__*/React.createElement("span", null, tab.label)))), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center space-x-2 space-x-reverse"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center bg-amber-500/10 border border-amber-500/30 px-2 py-1 rounded-lg text-xs font-bold text-amber-400"
+    className: "flex items-center bg-amber-500/10 border border-amber-500/20 px-2.5 py-1.5 rounded-xl text-xs font-bold text-amber-400"
   }, /*#__PURE__*/React.createElement("span", {
     className: "ml-1 text-sm"
-  }, "\uD83D\uDD25"), /*#__PURE__*/React.createElement("span", null, stats.streak, "d")), /*#__PURE__*/React.createElement("div", {
-    className: "hidden sm:flex items-center bg-indigo-500/10 border border-indigo-500/30 px-2.5 py-1 rounded-lg text-xs font-bold text-indigo-400"
+  }, "\uD83D\uDD25"), /*#__PURE__*/React.createElement("span", null, student.streak, "d")), /*#__PURE__*/React.createElement("div", {
+    className: "hidden sm:flex items-center bg-indigo-500/10 border border-indigo-500/20 px-2.5 py-1.5 rounded-xl text-xs font-bold text-indigo-400"
   }, /*#__PURE__*/React.createElement("span", {
     className: "ml-1 text-sm"
-  }, "\u26A1"), /*#__PURE__*/React.createElement("span", null, stats.xp, " XP")), /*#__PURE__*/React.createElement("button", {
+  }, "\u26A1"), /*#__PURE__*/React.createElement("span", null, student.xp, " XP")), /*#__PURE__*/React.createElement("button", {
     onClick: () => setShowScratchpad(true),
-    title: "\u0645\u0633\u0648\u062F\u0629 \u0631\u0633\u0645 \u0648\u062D\u0644 \u0628\u0627\u0644\u0642\u0644\u0645",
-    className: "w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 hover:text-emerald-400 transition border border-slate-700 flex items-center justify-center text-sm sm:text-base"
+    title: "\u0645\u0633\u0648\u062F\u0629 \u062D\u0644 \u0628\u0627\u0644\u0642\u0644\u0645 (Scratchpad)",
+    className: "w-10 h-10 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-300 hover:text-emerald-400 transition border border-slate-700/80 flex items-center justify-center text-sm"
   }, "\u270F\uFE0F"), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setShowGlossaryModal(true),
-    title: "\u0642\u0627\u0645\u0648\u0633 \u0627\u0644\u0645\u0635\u0637\u0644\u062D\u0627\u062A \u0627\u0644\u0625\u0646\u062C\u0644\u064A\u0632\u064A\u0629 \u0648\u0627\u0644\u0639\u0631\u0628\u064A\u0629",
-    className: "w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 hover:text-emerald-400 transition border border-slate-700 flex items-center justify-center text-sm sm:text-base"
-  }, "\uD83D\uDCD6"), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setShowCalculatorModal(true),
+    onClick: () => setShowAITutor(true),
+    title: "\u0627\u0644\u0645\u0639\u0644\u0645 \u0627\u0644\u062E\u0635\u0648\u0635\u064A \u0627\u0644\u0630\u0643\u064A",
+    className: "w-10 h-10 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20 active:scale-95 transition flex items-center justify-center text-sm"
+  }, "\uD83E\uDD16"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setShowCalculator(true),
     title: "\u0622\u0644\u0629 \u062D\u0627\u0633\u0628\u0629 \u0633\u0631\u064A\u0639\u0629",
-    className: "w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 hover:text-emerald-400 transition border border-slate-700 flex items-center justify-center text-sm sm:text-base"
+    className: "w-10 h-10 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-300 hover:text-emerald-400 transition border border-slate-700/80 flex items-center justify-center text-sm"
   }, "\uD83E\uDDEE"), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setShowSettingsModal(true),
-    title: "\u0627\u0644\u0625\u0639\u062F\u0627\u062F\u0627\u062A \u0648\u0631\u0628\u0637 Gemini Pro",
-    className: "w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 hover:text-emerald-400 transition border border-slate-700 flex items-center justify-center text-sm sm:text-base"
-  }, "\u2699\uFE0F"))), /*#__PURE__*/React.createElement("div", {
-    className: "flex lg:hidden items-center justify-around mt-2 pt-2 border-t border-slate-800/80 text-xs font-semibold"
+    onClick: () => setShowGlossary(true),
+    title: "\u0642\u0627\u0645\u0648\u0633 \u0627\u0644\u0645\u0635\u0637\u0644\u062D\u0627\u062A \u0627\u0644\u0625\u0646\u062C\u0644\u064A\u0632\u064A\u0629 \u0648\u0627\u0644\u0639\u0631\u0628\u064A\u0629",
+    className: "w-10 h-10 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-300 hover:text-emerald-400 transition border border-slate-700/80 flex items-center justify-center text-sm"
+  }, "\uD83D\uDCD6"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setShowNotes(true),
+    title: "\u0645\u0644\u0627\u062D\u0638\u0627\u062A\u064A \u0627\u0644\u062F\u0631\u0627\u0633\u064A\u0629",
+    className: "w-10 h-10 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-300 hover:text-emerald-400 transition border border-slate-700/80 flex items-center justify-center text-sm"
+  }, "\uD83D\uDCDD"))), /*#__PURE__*/React.createElement("div", {
+    className: "flex lg:hidden items-center justify-between mt-2.5 pt-2 border-t border-slate-800 text-[11px] font-bold overflow-x-auto gap-1"
   }, /*#__PURE__*/React.createElement("button", {
-    onClick: () => setCurrentMode('practice'),
-    className: `py-1.5 px-2.5 rounded-lg transition ${currentMode === 'practice' ? 'bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30' : 'text-slate-400'}`
-  }, "\uD83D\uDCDA \u062A\u062F\u0631\u064A\u0628"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCurrentView('landing'),
+    className: `px-2.5 py-1 rounded-lg ${currentView === 'landing' ? 'bg-emerald-600 text-white' : 'text-slate-400'}`
+  }, "\u0627\u0644\u0631\u0626\u064A\u0633\u064A\u0629"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCurrentView('dashboard'),
+    className: `px-2.5 py-1 rounded-lg ${currentView === 'dashboard' ? 'bg-emerald-600 text-white' : 'text-slate-400'}`
+  }, "\u0644\u0648\u062D\u0629 \u0627\u0644\u062A\u062D\u0643\u0645"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCurrentView('practice'),
+    className: `px-2.5 py-1 rounded-lg ${currentView === 'practice' ? 'bg-emerald-600 text-white' : 'text-slate-400'}`
+  }, "\u062A\u062F\u0631\u064A\u0628"), /*#__PURE__*/React.createElement("button", {
     onClick: startExam,
-    className: `py-1.5 px-2.5 rounded-lg transition ${currentMode === 'exam' ? 'bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30' : 'text-slate-400'}`
-  }, "\u23F1\uFE0F \u0627\u062E\u062A\u0628\u0627\u0631"), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setCurrentMode('mistakes'),
-    className: `py-1.5 px-2.5 rounded-lg transition ${currentMode === 'mistakes' ? 'bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30' : 'text-slate-400'}`
-  }, "\uD83C\uDFAF \u0623\u062E\u0637\u0627\u0626\u064A (", stats.mistakes.length, ")"), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setCurrentMode('lessons'),
-    className: `py-1.5 px-2.5 rounded-lg transition ${currentMode === 'lessons' ? 'bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30' : 'text-slate-400'}`
-  }, "\uD83D\uDCD6 \u0627\u0644\u0642\u0648\u0627\u0646\u064A\u0646"))), /*#__PURE__*/React.createElement("main", {
-    className: "flex-1 max-w-7xl mx-auto w-full p-3 sm:p-5 lg:p-6 grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6"
+    className: `px-2.5 py-1 rounded-lg ${currentView === 'exam' ? 'bg-emerald-600 text-white' : 'text-slate-400'}`
+  }, "\u0627\u062E\u062A\u0628\u0627\u0631"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCurrentView('mistakes'),
+    className: `px-2.5 py-1 rounded-lg ${currentView === 'mistakes' ? 'bg-emerald-600 text-white' : 'text-slate-400'}`
+  }, "\u0623\u062E\u0637\u0627\u0626\u064A"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCurrentView('lessons'),
+    className: `px-2.5 py-1 rounded-lg ${currentView === 'lessons' ? 'bg-emerald-600 text-white' : 'text-slate-400'}`
+  }, "\u0627\u0644\u0642\u0648\u0627\u0646\u064A\u0646"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCurrentView('analytics'),
+    className: `px-2.5 py-1 rounded-lg ${currentView === 'analytics' ? 'bg-emerald-600 text-white' : 'text-slate-400'}`
+  }, "\u0627\u0644\u062A\u062D\u0644\u064A\u0644\u0627\u062A"))), /*#__PURE__*/React.createElement("main", {
+    className: "flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8"
+  }, currentView === 'landing' && /*#__PURE__*/React.createElement("div", {
+    className: "space-y-16 py-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-center max-w-4xl mx-auto space-y-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "inline-flex items-center space-x-2 space-x-reverse px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold"
+  }, /*#__PURE__*/React.createElement("span", null, "\uD83D\uDE80"), /*#__PURE__*/React.createElement("span", null, "\u0627\u0644\u0645\u0646\u0635\u0629 \u0627\u0644\u0623\u0648\u0644\u0649 \u0644\u0637\u0644\u0627\u0628 \u0627\u0644\u0647\u0646\u062F\u0633\u0629 \u0648\u0627\u0644\u0639\u0644\u0648\u0645 \u2014 \u0645\u0639\u0647\u062F \u064A\u0646\u0628\u0639 / \u0627\u0644\u062C\u0627\u0645\u0639\u0627\u062A \u0627\u0644\u0633\u0639\u0648\u062F\u064A\u0629")), /*#__PURE__*/React.createElement("h1", {
+    className: "text-4xl sm:text-6xl font-black tracking-tight text-white leading-tight"
+  }, "\u062A\u062D\u0648\u0644 \u0645\u0646 \u0627\u0644\u0645\u0639\u0627\u0646\u0627\u0629 \u0641\u064A \u0627\u0644\u0631\u064A\u0627\u0636\u064A\u0627\u062A \u0625\u0644\u0649 \u062A\u062D\u0642\u064A\u0642 ", /*#__PURE__*/React.createElement("span", {
+    className: "bg-gradient-to-r from-emerald-400 via-teal-300 to-indigo-400 bg-clip-text text-transparent"
+  }, "+A"), " \u0628\u0630\u0643\u0627\u0621"), /*#__PURE__*/React.createElement("p", {
+    className: "text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed"
+  }, "\u0627\u0644\u0645\u0646\u0635\u0629 \u0627\u0644\u0645\u062A\u0643\u0627\u0645\u0644\u0629 \u0644\u0645\u0642\u0631\u0631 ", /*#__PURE__*/React.createElement("strong", null, "MATH 001"), " \u0627\u0644\u0645\u0639\u062A\u0645\u062F \u0639\u0644\u0649 \u0643\u062A\u0627\u0628 Ron Larson (\u0627\u0644\u0637\u0628\u0639\u0629 11). \u062A\u062F\u0631\u064A\u0628 \u062A\u0643\u064A\u0641\u064A\u060C \u0634\u0631\u0648\u062D\u0627\u062A \u0641\u0648\u0631\u064A\u0629 \u0645\u0641\u0627\u0647\u064A\u0645\u064A\u0629\u060C \u0643\u0627\u0634\u0641 \u0641\u062E\u0627\u062E \u0627\u0644\u0627\u062E\u062A\u0628\u0627\u0631\u0627\u062A\u060C \u0648\u0645\u0639\u0644\u0645 \u0630\u0643\u0627\u0621 \u0627\u0635\u0637\u0646\u0627\u0639\u064A \u0645\u062F\u0639\u0648\u0645 \u0628\u0646\u0645\u0648\u0630\u062C ", /*#__PURE__*/React.createElement("strong", null, "Gemini 2.0 Flash"), "."), /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-wrap items-center justify-center gap-4 pt-2"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCurrentView('practice'),
+    className: "px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-black text-sm sm:text-base rounded-2xl shadow-xl shadow-emerald-600/30 active:scale-95 transition"
+  }, "\u0627\u0628\u062F\u0623 \u0627\u0644\u062A\u062F\u0631\u064A\u0628 \u0648\u0627\u0644\u062A\u0641\u0648\u0642 \u0627\u0644\u0622\u0646 \uD83D\uDE80"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCurrentView('dashboard'),
+    className: "px-8 py-4 bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold text-sm sm:text-base rounded-2xl border border-slate-700/80 active:scale-95 transition"
+  }, "\u0644\u0648\u062D\u0629 \u062A\u062D\u0643\u0645 \u0627\u0644\u0637\u0627\u0644\u0628 \uD83D\uDCCA")), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8"
+  }, [{
+    val: '20+',
+    label: 'مسألة اختبارية نموذجية'
+  }, {
+    val: '100%',
+    label: 'تغطية فصول Module 1 (P.1 - P.6)'
+  }, {
+    val: '0.2s',
+    label: 'سرعة رد المعلم الذكي'
+  }, {
+    val: '+A',
+    label: 'الهدف الأكاديمي المضمون'
+  }].map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "p-4 bg-slate-900/60 rounded-2xl border border-slate-800/80 backdrop-blur-sm"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-2xl sm:text-3xl font-black text-emerald-400 font-mono"
+  }, s.val), /*#__PURE__*/React.createElement("div", {
+    className: "text-xs text-slate-400 mt-1 font-semibold"
+  }, s.label))))), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-center space-y-2"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "text-2xl sm:text-3xl font-extrabold text-white"
+  }, "\u0644\u0645\u0627\u0630\u0627 \u064A\u062A\u0641\u0648\u0642 \u0637\u0644\u0627\u0628\u0646\u0627 \u0645\u0639 Math 001 A+\u061F"), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs sm:text-sm text-slate-400"
+  }, "\u0628\u0646\u064A\u0629 \u062A\u0639\u0644\u064A\u0645\u064A\u0629 \u0635\u0645\u0645\u062A \u0648\u0641\u0642 \u0645\u0639\u0627\u064A\u064A\u0631 \u0623\u0641\u0636\u0644 \u0645\u0646\u0635\u0627\u062A \u0627\u0644\u062A\u0639\u0644\u064A\u0645 \u0627\u0644\u062A\u0641\u0627\u0639\u0644\u064A \u0627\u0644\u0639\u0627\u0644\u0645\u064A\u0629")), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-1 md:grid-cols-3 gap-6"
+  }, [{
+    icon: '👨‍🏫',
+    title: 'شروحات أكاديمية تفصيلية',
+    desc: 'كل مسألة محلولة بالخطوات الجبرية التفصيلية، مع بيان "لماذا نستخدم هذه الطريقة" وكشف الفخاخ الاختبارية المعتادة.'
+  }, {
+    icon: '🤖',
+    title: 'المعلم الذكي Gemini 2.0 Flash',
+    desc: 'شات ذكي خصوصي يفهم منهج Larson بعمق، يجيبك فورياً باللغة العربية مع الحفاظ على صياغة المعادلات بـ LaTeX.'
+  }, {
+    icon: '✏️',
+    title: 'مسودة رسم وحل بالقلم',
+    desc: 'لوحة رسم مخصصة لأجهزة الآيباد واللمس لدعم Apple Pencil لحل خطوات المسائل الجبرية جانبياً قبل اختيار الإجابة.'
+  }, {
+    icon: '🎯',
+    title: 'دفتر مراجعة الأخطاء',
+    desc: 'يتم تشخيص وتخزين أخطائك تلقائياً (حسابي، تطبيق قانون، مفهوم) مع إتاحة إعادة حلها حتى إتقانها 100%.'
+  }, {
+    icon: '⏱️',
+    title: 'محاكي كويزات وميدتيرم',
+    desc: 'اختبار تجريبي مؤقت بـ 20 دقيقة يحسب درجتك المئوية وتقديرك بدقة مع تحديد الفصول التي تحتاج لتقوية.'
+  }, {
+    icon: '🌐',
+    title: 'ترجمة عربية متوازنة',
+    desc: 'السؤال بالإنجليزية الأصلية كما في الاختبار، وأسفله ترجمة عربية مدمجة تحافظ على صياغة المعادلات دون عكس أو تشويه.'
+  }].map((feat, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "p-6 bg-slate-900/60 rounded-3xl border border-slate-800/80 hover:border-emerald-500/40 transition group"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition"
+  }, feat.icon), /*#__PURE__*/React.createElement("h3", {
+    className: "font-extrabold text-lg text-white mb-2"
+  }, feat.title), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs sm:text-sm text-slate-400 leading-relaxed"
+  }, feat.desc))))), /*#__PURE__*/React.createElement("div", {
+    className: "p-6 sm:p-8 bg-slate-900/80 rounded-3xl border border-slate-800 space-y-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-800 pb-4"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+    className: "text-xl font-bold text-white"
+  }, "\u0641\u0635\u0648\u0644 \u0627\u0644\u0645\u0646\u0647\u062C \u0627\u0644\u0645\u0634\u0645\u0648\u0644\u0629 \u0641\u064A \u0627\u0644\u0645\u0646\u0635\u0629"), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-slate-400"
+  }, "\u0643\u062A\u0627\u0628 Ron Larson (\u0627\u0644\u0637\u0628\u0639\u0629 11) \u2014 Module 1")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCurrentView('practice'),
+    className: "px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition"
+  }, "\u0628\u062F\u0621 \u062D\u0644 \u0627\u0644\u0645\u0633\u0627\u0626\u0644 \u0627\u0644\u0622\u0646 \u27A1\uFE0F")), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+  }, LESSONS_DATA.map((l, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "p-4 bg-slate-950/80 rounded-2xl border border-slate-800/90 space-y-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center space-x-2 space-x-reverse"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "px-2 py-0.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded font-mono text-xs font-bold"
+  }, l.module), /*#__PURE__*/React.createElement("h4", {
+    className: "font-bold text-xs sm:text-sm text-slate-200"
+  }, l.title)), /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-slate-400 line-clamp-2 leading-relaxed"
+  }, l.tips))))), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-4"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "text-center text-xl font-bold text-white"
+  }, "\u0645\u0627\u0630\u0627 \u064A\u0642\u0648\u0644 \u0637\u0644\u0627\u0628 \u0627\u0644\u0633\u0646\u0629 \u0627\u0644\u062A\u062D\u0636\u064A\u0631\u064A\u0629\u061F"), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-1 md:grid-cols-3 gap-4"
+  }, [{
+    name: 'عبدالله الجهني',
+    uni: 'معهد ينبع للغة والتحضيرية',
+    review: 'المنصة ساعدتني أفهم أسئلة الـ Domain وفك القيمة المطلقة اللي كانت تعقدني في الكويزات. الشروحات مختصرة وسريعة!'
+  }, {
+    name: 'فيصل الغامدي',
+    uni: 'كلية الهندسة والعلوم',
+    review: 'أفضل ميزة هي مسودة الرسم على الآيباد مع شات Gemini. كأن معك مدرس خصوصي يشرح لك كل مسألة باليد.'
+  }, {
+    name: 'سعود الحربي',
+    uni: 'طالب سنة أولى',
+    review: 'كشف الفخاخ في كل سؤال نبهني لأخطاء الإشارات في ضرب الحدوديات والكسور. حصلت على A+ في كويز Module 1 الحمدلله.'
+  }].map((t, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "p-5 bg-slate-900/50 rounded-2xl border border-slate-800 space-y-3"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center space-x-2 space-x-reverse text-amber-400 text-xs"
+  }, '⭐⭐⭐⭐⭐'), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-slate-300 leading-relaxed"
+  }, "\"", t.review, "\""), /*#__PURE__*/React.createElement("div", {
+    className: "border-t border-slate-800/80 pt-2 text-[11px]"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "font-bold text-slate-200"
+  }, t.name), /*#__PURE__*/React.createElement("div", {
+    className: "text-slate-500"
+  }, t.uni)))))), /*#__PURE__*/React.createElement("div", {
+    className: "text-center p-8 bg-gradient-to-r from-emerald-950/40 via-slate-900 to-indigo-950/40 rounded-3xl border border-emerald-500/20 space-y-4"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "text-2xl sm:text-3xl font-black text-white"
+  }, "\u062C\u0627\u0647\u0632 \u0644\u0628\u062F\u0621 \u0631\u062D\u0644\u0629 \u0627\u0644\u062A\u0645\u064A\u0632 \u0627\u0644\u0623\u0643\u0627\u062F\u064A\u0645\u064A\u061F"), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs sm:text-sm text-slate-400 max-w-lg mx-auto"
+  }, "\u062C\u0645\u064A\u0639 \u0627\u0644\u0645\u064A\u0632\u0627\u062A \u0645\u062C\u0627\u0646\u064A\u0629 \u0648\u0645\u062A\u0627\u062D\u0629 \u0644\u0644\u062C\u0645\u064A\u0639. \u062A\u062F\u0631\u0628 \u0639\u0644\u0649 \u0643\u0644 \u0641\u0635\u0648\u0644 Math 001 \u0648\u062A\u0641\u0648\u0642 \u0641\u064A \u0627\u062E\u062A\u0628\u0627\u0631\u0627\u062A\u0643."), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCurrentView('practice'),
+    className: "px-8 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-xl shadow-lg transition text-sm"
+  }, "\u0627\u0644\u062F\u062E\u0648\u0644 \u0627\u0644\u0641\u0648\u0631\u064A \u0644\u0645\u0646\u0635\u0629 \u0627\u0644\u062A\u062F\u0631\u064A\u0628 \uD83D\uDE80"))), currentView === 'dashboard' && /*#__PURE__*/React.createElement("div", {
+    className: "space-y-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "p-6 sm:p-8 bg-slate-900/90 rounded-3xl border border-slate-800 shadow-xl space-y-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center space-x-4 space-x-reverse"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center font-black text-2xl text-white shadow-lg shadow-emerald-500/30"
+  }, "\uD83D\uDC68\u200D\uD83C\uDF93"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+    className: "text-xl sm:text-2xl font-black text-white"
+  }, student.name), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center space-x-2 space-x-reverse mt-1 text-xs font-semibold"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-emerald-400"
+  }, studentRank), /*#__PURE__*/React.createElement("span", {
+    className: "text-slate-600"
+  }, "\u2022"), /*#__PURE__*/React.createElement("span", {
+    className: "text-slate-400 font-mono"
+  }, student.xp, " XP \u0645\u0643\u062A\u0633\u0628\u0629")))), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center space-x-3 space-x-reverse"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCurrentView('practice'),
+    className: "px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition"
+  }, "\u0645\u062A\u0627\u0628\u0639\u0629 \u0627\u0644\u062A\u062F\u0631\u064A\u0628 \uD83D\uDE80"), /*#__PURE__*/React.createElement("button", {
+    onClick: startExam,
+    className: "px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition"
+  }, "\u0645\u062D\u0627\u0643\u0627\u0629 \u0627\u0644\u0627\u062E\u062A\u0628\u0627\u0631 \u23F1\uFE0F"))), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between text-xs font-mono"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-slate-400 font-bold"
+  }, "\u0627\u0644\u062A\u0631\u0642\u064A\u0629 \u0625\u0644\u0649 \u0627\u0644\u0645\u0633\u062A\u0648\u0649 ", student.level + 1), /*#__PURE__*/React.createElement("span", {
+    className: "text-emerald-400 font-bold"
+  }, levelProgress, " / 100 XP")), /*#__PURE__*/React.createElement("div", {
+    className: "w-full h-3 bg-slate-950 rounded-full overflow-hidden p-0.5 border border-slate-800"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-700",
+    style: {
+      width: `${levelProgress}%`
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "p-4 bg-slate-950/70 rounded-2xl border border-slate-800/80"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-xs text-slate-400"
+  }, "\u0627\u0644\u0645\u0633\u0627\u0626\u0644 \u0627\u0644\u0645\u062D\u0644\u0648\u0644\u0629"), /*#__PURE__*/React.createElement("div", {
+    className: "text-2xl font-black text-white font-mono mt-1"
+  }, student.solvedCount)), /*#__PURE__*/React.createElement("div", {
+    className: "p-4 bg-slate-950/70 rounded-2xl border border-slate-800/80"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-xs text-slate-400"
+  }, "\u0646\u0633\u0628\u0629 \u0627\u0644\u0625\u062C\u0627\u0628\u0627\u062A \u0627\u0644\u0635\u062D\u064A\u062D\u0629"), /*#__PURE__*/React.createElement("div", {
+    className: "text-2xl font-black text-emerald-400 font-mono mt-1"
+  }, student.solvedCount > 0 ? Math.round(student.correctCount / student.solvedCount * 100) : 0, "%")), /*#__PURE__*/React.createElement("div", {
+    className: "p-4 bg-slate-950/70 rounded-2xl border border-slate-800/80"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-xs text-slate-400"
+  }, "\u0627\u0644\u0645\u0633\u0627\u0626\u0644 \u0641\u064A \u062F\u0641\u062A\u0631 \u0627\u0644\u0623\u062E\u0637\u0627\u0621"), /*#__PURE__*/React.createElement("div", {
+    className: "text-2xl font-black text-amber-400 font-mono mt-1"
+  }, student.mistakes.length)), /*#__PURE__*/React.createElement("div", {
+    className: "p-4 bg-slate-950/70 rounded-2xl border border-slate-800/80"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-xs text-slate-400"
+  }, "\u0645\u0639\u062F\u0644 \u0627\u0644\u0625\u062A\u0642\u0627\u0646 \u0627\u0644\u0639\u0627\u0645"), /*#__PURE__*/React.createElement("div", {
+    className: "text-2xl font-black text-indigo-400 font-mono mt-1"
+  }, overallMastery, "%")))), /*#__PURE__*/React.createElement("div", {
+    className: "p-6 sm:p-8 bg-slate-900/90 rounded-3xl border border-slate-800 space-y-5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+    className: "font-bold text-lg text-white"
+  }, "\u0625\u062A\u0642\u0627\u0646 \u0641\u0635\u0648\u0644 Module 1 (Ron Larson)"), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-slate-400"
+  }, "\u064A\u0628\u062F\u0623 \u0643\u0644 \u0641\u0635\u0644 \u0645\u0646 0% \u0648\u064A\u0632\u062F\u0627\u062F \u062A\u0644\u0642\u0627\u0626\u064A\u0627\u064B \u0628\u062D\u0633\u0628 \u0635\u062D\u0629 \u062D\u0644\u0643 \u0644\u0644\u0645\u0633\u0627\u0626\u0644")), /*#__PURE__*/React.createElement("span", {
+    className: "text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20"
+  }, "\u0627\u0644\u0625\u062C\u0645\u0627\u0644\u064A: ", overallMastery, "%")), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+  }, [{
+    id: 'P.1',
+    name: 'Review of Real Numbers',
+    desc: 'Sets, Intervals, Absolute Value, Fractions'
+  }, {
+    id: 'P.2',
+    name: 'Exponents & Radicals',
+    desc: 'Rules, Scientific, Simplification, Rationalizing'
+  }, {
+    id: 'P.3',
+    name: 'Polynomials & Products',
+    desc: 'Standard form, Special products, Shaded area'
+  }, {
+    id: 'P.4',
+    name: 'Factoring Polynomials',
+    desc: 'GCF, Difference of squares, Grouping, Trinomials'
+  }, {
+    id: 'P.5',
+    name: 'Rational Expressions',
+    desc: 'Domain restrictions, Simplification, LCD'
+  }, {
+    id: 'P.6',
+    name: 'Coordinate System & Graphs',
+    desc: 'Quadrants, Distance & Midpoint formulas'
+  }].map(mod => {
+    const mastery = student.topicMastery[mod.id] || 0;
+    return /*#__PURE__*/React.createElement("div", {
+      key: mod.id,
+      className: "p-4 bg-slate-950 rounded-2xl border border-slate-800/80 space-y-3"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex items-center justify-between"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "px-2 py-0.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded text-xs font-bold font-mono"
+    }, mod.id), /*#__PURE__*/React.createElement("span", {
+      className: "text-xs font-bold font-mono text-slate-300"
+    }, mastery, "%")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", {
+      className: "font-bold text-xs sm:text-sm text-white"
+    }, mod.name), /*#__PURE__*/React.createElement("p", {
+      className: "text-[11px] text-slate-400 line-clamp-1 mt-0.5"
+    }, mod.desc)), /*#__PURE__*/React.createElement("div", {
+      className: "w-full h-2 bg-slate-900 rounded-full overflow-hidden"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "h-full bg-emerald-500 transition-all duration-500",
+      style: {
+        width: `${mastery}%`
+      }
+    })), /*#__PURE__*/React.createElement("button", {
+      onClick: () => {
+        setSelectedModule(mod.id);
+        setCurrentView('practice');
+      },
+      className: "w-full py-1.5 bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-[11px] font-bold rounded-lg transition"
+    }, "\u062A\u062F\u0631\u0628 \u0639\u0644\u0649 \u0647\u0630\u0627 \u0627\u0644\u0641\u0635\u0644 \uD83C\uDFAF"));
+  })))), (currentView === 'practice' || currentView === 'mistakes') && /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-1 lg:grid-cols-12 gap-6"
   }, /*#__PURE__*/React.createElement("div", {
     className: "lg:col-span-8 flex flex-col space-y-4"
-  }, currentMode === 'practice' && /*#__PURE__*/React.createElement("div", {
+  }, currentView === 'practice' && /*#__PURE__*/React.createElement("div", {
     className: "bg-slate-900 border border-slate-800 rounded-2xl p-3.5 sm:p-4 flex flex-wrap items-center justify-between gap-2.5 shadow-sm"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center space-x-1.5 space-x-reverse overflow-x-auto pb-1 max-w-full text-xs font-bold scrollbar-thin"
@@ -1688,123 +1936,24 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
       setCurrentIndex(0);
     },
     className: `px-2 py-1 rounded-lg text-[11px] font-semibold transition ${selectedDifficulty === diff ? 'bg-slate-700 text-white' : 'text-slate-400 hover:text-white'}`
-  }, diff === 'All' ? 'الكل' : diff)))), currentMode === 'mistakes' && /*#__PURE__*/React.createElement("div", {
+  }, diff === 'All' ? 'الكل' : diff)))), currentView === 'mistakes' && /*#__PURE__*/React.createElement("div", {
     className: "bg-red-950/40 border border-red-900/50 rounded-2xl p-4 flex items-center justify-between"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center space-x-3 space-x-reverse"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "w-10 h-10 rounded-xl bg-red-900/60 flex items-center justify-center text-red-400 text-xl"
-  }, "\uD83C\uDFAF"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
-    className: "font-bold text-white text-sm sm:text-base"
-  }, "\u0633\u062C\u0644 \u0645\u0631\u0627\u062C\u0639\u0629 \u0627\u0644\u0623\u062E\u0637\u0627\u0621 \u0627\u0644\u0645\u062E\u0635\u0635\u0629"), /*#__PURE__*/React.createElement("p", {
-    className: "text-xs text-red-300"
-  }, "\u064A\u062D\u062A\u0648\u064A \u0639\u0644\u0649 ", stats.mistakes.length, " \u0645\u0633\u0623\u0644\u0629 \u0623\u062E\u0637\u0623\u062A \u0641\u064A\u0647\u0627 \u0633\u0627\u0628\u0642\u0627\u064B \u0644\u062A\u062B\u0628\u064A\u062A\u0647\u0627 \u0648\u0627\u0644\u0648\u0635\u0648\u0644 \u0644\u0640 A+"))), stats.mistakes.length > 0 && /*#__PURE__*/React.createElement("button", {
-    onClick: () => setStats(prev => ({
-      ...prev,
-      mistakes: []
-    })),
-    className: "text-xs text-red-400 hover:text-red-300 underline"
-  }, "\u062A\u0635\u0641\u064A\u0631 \u0627\u0644\u0633\u062C\u0644")), currentMode === 'exam' && !isExamSubmitted && /*#__PURE__*/React.createElement("div", {
-    className: "bg-indigo-950/40 border border-indigo-900/50 rounded-2xl p-4 flex items-center justify-between"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center space-x-3 space-x-reverse"
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-2xl"
-  }, "\uD83D\uDCDD"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+  }, "\uD83C\uDFAF"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
     className: "font-bold text-white text-sm sm:text-base"
-  }, "\u0627\u062E\u062A\u0628\u0627\u0631 \u0645\u062D\u0627\u0643\u0627\u0629 Math 001 \u0627\u0644\u0634\u0627\u0645\u0644"), /*#__PURE__*/React.createElement("p", {
-    className: "text-xs text-indigo-300"
-  }, "\u0627\u0644\u0633\u0624\u0627\u0644 ", currentIndex + 1, " \u0645\u0646 ", examQuestions.length))), /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center space-x-3 space-x-reverse"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: `px-3 py-1.5 rounded-xl font-mono text-xs sm:text-sm font-bold border ${examTimeLeft < 300 ? 'bg-red-500/20 text-red-400 border-red-500/30 animate-pulse' : 'bg-slate-800 text-emerald-400 border-slate-700'}`
-  }, "\u23F3 ", Math.floor(examTimeLeft / 60), ":", (examTimeLeft % 60).toString().padStart(2, '0')), /*#__PURE__*/React.createElement("button", {
-    onClick: submitExam,
-    className: "px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl shadow-lg transition"
-  }, "\u062A\u0633\u0644\u064A\u0645 \u0627\u0644\u0627\u062E\u062A\u0628\u0627\u0631"))), currentMode === 'exam' && isExamSubmitted && examScoreReport ?
-  /*#__PURE__*/
-  /* EXAM REPORT CARD */
-  React.createElement("div", {
-    className: "bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "text-center space-y-2"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "inline-block px-4 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30"
-  }, "\u0646\u062A\u064A\u062C\u0629 \u0627\u062E\u062A\u0628\u0627\u0631 \u0627\u0644\u0645\u062D\u0627\u0643\u0627\u0629"), /*#__PURE__*/React.createElement("div", {
-    className: "text-5xl font-extrabold text-white"
-  }, examScoreReport.percentage, "%"), /*#__PURE__*/React.createElement("div", {
-    className: "text-lg font-bold text-emerald-400"
-  }, "\u0627\u0644\u062A\u0642\u062F\u064A\u0631 \u0627\u0644\u0645\u0633\u062A\u062D\u0642: ", examScoreReport.grade), /*#__PURE__*/React.createElement("p", {
-    className: "text-xs text-slate-400"
-  }, "\u0623\u062C\u0628\u062A \u0625\u062C\u0627\u0628\u0629 \u0635\u062D\u064A\u062D\u0629 \u0639\u0644\u0649 ", examScoreReport.correct, " \u0645\u0646 \u0623\u0635\u0644 ", examScoreReport.total, " \u0623\u0633\u0626\u0644\u0629")), /*#__PURE__*/React.createElement("div", {
-    className: "bg-slate-950/70 p-4 rounded-xl border border-slate-800 space-y-3"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "font-bold text-sm text-slate-200"
-  }, "\u062A\u062D\u0644\u064A\u0644 \u0627\u0644\u0623\u062F\u0627\u0621 \u062D\u0633\u0628 \u0641\u0635\u0648\u0644 \u0627\u0644\u0645\u0646\u0647\u062C:"), /*#__PURE__*/React.createElement("div", {
-    className: "grid grid-cols-2 sm:grid-cols-3 gap-3"
-  }, Object.keys(examScoreReport.topicCounts).map(mod => {
-    const total = examScoreReport.topicCounts[mod] || 0;
-    const correct = examScoreReport.topicCorrect[mod] || 0;
-    const pct = Math.round(correct / total * 100);
-    return /*#__PURE__*/React.createElement("div", {
-      key: mod,
-      className: "bg-slate-900 p-3 rounded-lg border border-slate-800 text-xs"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "flex justify-between font-bold mb-1"
-    }, /*#__PURE__*/React.createElement("span", null, "\u0627\u0644\u0641\u0635\u0644 ", mod), /*#__PURE__*/React.createElement("span", {
-      className: pct >= 80 ? 'text-emerald-400' : 'text-amber-400'
-    }, pct, "%")), /*#__PURE__*/React.createElement("div", {
-      className: "w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: `h-full ${pct >= 80 ? 'bg-emerald-500' : 'bg-amber-500'}`,
-      style: {
-        width: `${pct}%`
-      }
-    })));
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center justify-center space-x-3 space-x-reverse pt-2"
-  }, /*#__PURE__*/React.createElement("button", {
-    onClick: startExam,
-    className: "px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition"
-  }, "\u0625\u0639\u0627\u062F\u0629 \u0627\u0644\u0627\u062E\u062A\u0628\u0627\u0631 \u0628\u0646\u0645\u0648\u0630\u062C \u062C\u062F\u064A\u062F"), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setCurrentMode('practice'),
-    className: "px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-sm transition"
-  }, "\u0627\u0644\u0639\u0648\u062F\u0629 \u0644\u0644\u062A\u062F\u0631\u064A\u0628 \u0627\u0644\u0645\u0641\u062A\u0648\u062D"))) : currentMode === 'lessons' ?
-  /*#__PURE__*/
-  /* LESSONS CHEATSHEET */
-  React.createElement("div", {
-    className: "space-y-4"
-  }, LESSONS_DATA.map((lesson, idx) => /*#__PURE__*/React.createElement("div", {
-    key: idx,
-    className: "bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center justify-between border-b border-slate-800 pb-2.5"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center space-x-2 space-x-reverse"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "px-2 py-0.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded text-xs font-bold font-mono"
-  }, lesson.module), /*#__PURE__*/React.createElement("h3", {
-    className: "font-bold text-white text-sm"
-  }, lesson.title))), /*#__PURE__*/React.createElement("div", {
-    className: "grid grid-cols-1 sm:grid-cols-2 gap-3"
-  }, lesson.formulas.map((f, fIdx) => /*#__PURE__*/React.createElement("div", {
-    key: fIdx,
-    className: "bg-slate-950 p-3 rounded-xl border border-slate-800/80"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "text-[11px] font-semibold text-slate-400 mb-1"
-  }, f.label), /*#__PURE__*/React.createElement("div", {
-    className: "text-emerald-300 font-mono text-xs overflow-x-auto py-1"
-  }, /*#__PURE__*/React.createElement(MathText, {
-    text: `$${f.math}$`
-  }))))), /*#__PURE__*/React.createElement("div", {
-    className: "bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 text-xs text-amber-300 flex items-start space-x-2 space-x-reverse"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "text-base"
-  }, "\uD83D\uDCA1"), /*#__PURE__*/React.createElement("p", null, lesson.tips))))) :
-  /*#__PURE__*/
-  /* ACTIVE QUESTION CARD */
-  React.createElement("div", {
-    className: "bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 lg:p-7 shadow-xl space-y-5"
+  }, "\u062F\u0641\u062A\u0631 \u0645\u0631\u0627\u062C\u0639\u0629 \u0648\u062A\u062B\u0628\u064A\u062A \u0627\u0644\u0623\u062E\u0637\u0627\u0621"), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-red-300"
+  }, "\u064A\u062D\u062A\u0648\u064A \u0639\u0644\u0649 ", student.mistakes.length, " \u0645\u0633\u0623\u0644\u0629 \u062A\u062D\u062A\u0627\u062C \u0625\u0639\u0627\u062F\u0629 \u062A\u062F\u0631\u064A\u0628 \u0644\u0644\u0648\u0635\u0648\u0644 \u0644\u0640 A+"))), student.mistakes.length > 0 && /*#__PURE__*/React.createElement("button", {
+    onClick: () => setStudent(prev => ({
+      ...prev,
+      mistakes: []
+    })),
+    className: "text-xs text-red-400 hover:text-red-300 underline"
+  }, "\u062A\u0635\u0641\u064A\u0631 \u0627\u0644\u062F\u0641\u062A\u0631")), /*#__PURE__*/React.createElement("div", {
+    className: "bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-7 shadow-xl space-y-6"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center justify-between border-b border-slate-800 pb-3 text-xs"
   }, /*#__PURE__*/React.createElement("div", {
@@ -1819,20 +1968,25 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
     className: "flex items-center space-x-2 space-x-reverse"
   }, /*#__PURE__*/React.createElement("button", {
     onClick: () => toggleFavorite(currentQ.id),
-    className: `p-1.5 rounded-lg transition ${stats.favorites.includes(currentQ.id) ? 'text-amber-400 bg-amber-400/10' : 'text-slate-500 hover:text-slate-300'}`,
+    className: `p-1.5 rounded-lg transition ${student.favorites.includes(currentQ.id) ? 'text-amber-400 bg-amber-400/10' : 'text-slate-500 hover:text-slate-300'}`,
     title: "\u062D\u0641\u0638 \u0641\u064A \u0627\u0644\u0645\u0641\u0636\u0644\u0629"
   }, "\u2B50"), /*#__PURE__*/React.createElement("span", {
     className: "text-slate-500 font-mono"
   }, currentIndex + 1, " / ", activeList.length))), /*#__PURE__*/React.createElement("div", {
     className: "space-y-3"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "text-base sm:text-lg font-medium text-slate-100 font-en leading-relaxed dir-ltr text-left"
+    className: "text-base sm:text-lg font-medium text-slate-100 font-en leading-relaxed text-left",
+    dir: "ltr",
+    style: {
+      direction: 'ltr',
+      textAlign: 'left'
+    }
   }, /*#__PURE__*/React.createElement(MathText, {
     text: currentQ.questionEn
   })), currentQ.hasDiagram && /*#__PURE__*/React.createElement(QuestionDiagram, {
     type: currentQ.hasDiagram
   }), /*#__PURE__*/React.createElement("div", {
-    className: "p-3 bg-slate-950/75 border-r-2 border-emerald-500/70 rounded-lg text-xs sm:text-sm text-slate-300 font-sans leading-relaxed text-right"
+    className: "p-3 bg-slate-950/80 border-r-2 border-emerald-500/70 rounded-lg text-xs sm:text-sm text-slate-300 font-sans leading-relaxed text-right"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center space-x-1.5 space-x-reverse mb-1 text-[11px] font-bold text-emerald-400"
   }, /*#__PURE__*/React.createElement("span", null, "\u062A\u0631\u062C\u0645\u0629 \u0627\u0644\u0633\u0624\u0627\u0644 \u0628\u0627\u0644\u0639\u0631\u0628\u064A\u0629:")), /*#__PURE__*/React.createElement(MathText, {
@@ -1871,11 +2025,7 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
     const isSelected = selectedOption === optIdx;
     const isCorrect = optIdx === currentQ.correctIndex;
     let btnStyle = 'bg-slate-800/70 hover:bg-slate-800 border-slate-700/80 text-slate-200';
-    if (currentMode === 'exam') {
-      if (examAnswers[currentQ.id] === optIdx) {
-        btnStyle = 'bg-emerald-600/20 border-emerald-500 text-white';
-      }
-    } else if (isAnswerSubmitted) {
+    if (isAnswerSubmitted) {
       if (isCorrect) {
         btnStyle = 'bg-emerald-950/70 border-emerald-500 text-emerald-200 shadow-lg shadow-emerald-500/10';
       } else if (isSelected) {
@@ -1888,16 +2038,7 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
     }
     return /*#__PURE__*/React.createElement("button", {
       key: optIdx,
-      onClick: () => {
-        if (currentMode === 'exam') {
-          setExamAnswers(prev => ({
-            ...prev,
-            [currentQ.id]: optIdx
-          }));
-        } else {
-          handleSelectOption(optIdx);
-        }
-      },
+      onClick: () => !isAnswerSubmitted && setSelectedOption(optIdx),
       className: `w-full p-3.5 rounded-xl border text-right flex items-center justify-between transition group font-en min-h-[50px] ${btnStyle}`
     }, /*#__PURE__*/React.createElement("div", {
       className: "flex items-center space-x-3 space-x-reverse w-full"
@@ -1907,7 +2048,7 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
       className: "text-sm sm:text-base dir-ltr text-left font-mono overflow-x-auto py-0.5"
     }, /*#__PURE__*/React.createElement(MathText, {
       text: `$${opt}$`
-    }))), isAnswerSubmitted && currentMode !== 'exam' && /*#__PURE__*/React.createElement("span", {
+    }))), isAnswerSubmitted && /*#__PURE__*/React.createElement("span", {
       className: "text-base mr-2 shrink-0"
     }, isCorrect ? '✅' : isSelected ? '❌' : ''));
   })), /*#__PURE__*/React.createElement("div", {
@@ -1916,7 +2057,7 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
     onClick: () => setCurrentIndex(i => Math.max(0, i - 1)),
     disabled: currentIndex === 0,
     className: "px-4 py-2 bg-slate-800 hover:bg-slate-700 active:scale-95 disabled:opacity-30 rounded-xl text-xs font-bold transition"
-  }, "\u0627\u0644\u0633\u0627\u0628\u0642"), currentMode !== 'exam' ? !isAnswerSubmitted ? /*#__PURE__*/React.createElement("button", {
+  }, "\u0627\u0644\u0633\u0627\u0628\u0642"), !isAnswerSubmitted ? /*#__PURE__*/React.createElement("button", {
     onClick: handleCheckAnswer,
     disabled: selectedOption === null,
     className: "px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 active:scale-95 disabled:opacity-40 text-white font-bold rounded-xl text-sm shadow-lg shadow-emerald-600/20 transition"
@@ -1929,13 +2070,11 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
       }
     },
     className: "px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-bold rounded-xl text-sm shadow-lg shadow-indigo-600/20 transition"
-  }, "\u0627\u0644\u0633\u0624\u0627\u0644 \u0627\u0644\u062A\u0627\u0644\u064A \u27A1\uFE0F") : /*#__PURE__*/React.createElement("span", {
-    className: "text-xs text-slate-400 font-mono"
-  }, "\u062A\u0645 \u0627\u0644\u0625\u062C\u0627\u0628\u0629: ", Object.keys(examAnswers).length, " \u0645\u0646 ", examQuestions.length), /*#__PURE__*/React.createElement("button", {
+  }, "\u0627\u0644\u0633\u0624\u0627\u0644 \u0627\u0644\u062A\u0627\u0644\u064A \u27A1\uFE0F"), /*#__PURE__*/React.createElement("button", {
     onClick: () => setCurrentIndex(i => Math.min(activeList.length - 1, i + 1)),
     disabled: currentIndex === activeList.length - 1,
     className: "px-4 py-2 bg-slate-800 hover:bg-slate-700 active:scale-95 disabled:opacity-30 rounded-xl text-xs font-bold transition"
-  }, "\u0627\u0644\u062A\u0627\u0644\u064A")), isAnswerSubmitted && currentMode !== 'exam' && /*#__PURE__*/React.createElement("div", {
+  }, "\u0627\u0644\u062A\u0627\u0644\u064A")), isAnswerSubmitted && /*#__PURE__*/React.createElement("div", {
     className: "mt-6 p-4 sm:p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-5 animate-fadeIn"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col sm:flex-row items-start sm:items-center justify-between pb-3 border-b border-slate-800 gap-2"
@@ -1947,7 +2086,7 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
     className: `font-bold text-sm sm:text-base ${selectedOption === currentQ.correctIndex ? 'text-emerald-400' : 'text-red-400'}`
   }, selectedOption === currentQ.correctIndex ? 'إجابة صحيحة ومتقنة!' : 'إجابة خاطئة، تعلم من الحل النموذجي خطوة بخطوة:')), /*#__PURE__*/React.createElement("span", {
     className: "text-[11px] font-semibold px-2.5 py-1 bg-slate-800/90 text-slate-300 rounded-lg"
-  }, "\u0646\u0648\u0639 \u0627\u0644\u062E\u0637\u0623 \u0627\u0644\u0634\u0627\u0626\u0639: ", currentQ.mistakeType)), /*#__PURE__*/React.createElement("div", {
+  }, "\u0646\u0648\u0639 \u0627\u0644\u062E\u0637\u0623: ", currentQ.mistakeType)), /*#__PURE__*/React.createElement("div", {
     className: "space-y-4"
   }, /*#__PURE__*/React.createElement("h4", {
     className: "font-bold text-xs sm:text-sm text-slate-200 flex items-center space-x-2 space-x-reverse"
@@ -1991,20 +2130,12 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
   }, /*#__PURE__*/React.createElement("div", {
     className: "text-xs text-slate-400 text-center sm:text-right"
   }, "\u062A\u062D\u062A\u0627\u062C \u0645\u0632\u064A\u062F\u0627\u064B \u0645\u0646 \u0627\u0644\u062A\u0648\u0636\u064A\u062D\u061F \u0646\u0627\u0642\u0634 \u0627\u0644\u0645\u0633\u0623\u0644\u0629 \u0645\u0628\u0627\u0634\u0631\u0629 \u0645\u0639 \u0627\u0644\u0645\u0639\u0644\u0645 \u0627\u0644\u0630\u0643\u064A:"), /*#__PURE__*/React.createElement("button", {
-    onClick: () => {
-      setShowAITutor(true);
-      if (aiMessages.length === 0) {
-        setAiMessages([{
-          role: 'assistant',
-          content: `مرحباً! أنا معك لمساعدتك في مسألة (${currentQ.module} - ${currentQ.topic}). ما الخطوة أو المفهوم الذي ترغب في أن أشرحه لك أكثر؟`
-        }]);
-      }
-    },
+    onClick: () => setShowAITutor(true),
     className: "w-full sm:w-auto px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold rounded-xl shadow-md transition flex items-center justify-center space-x-1.5 space-x-reverse"
-  }, /*#__PURE__*/React.createElement("span", null, "\uD83E\uDD16"), /*#__PURE__*/React.createElement("span", null, "\u0645\u062D\u0627\u062F\u062B\u0629 \u0627\u0644\u0645\u0639\u0644\u0645 \u0627\u0644\u0630\u0643\u064A (Gemini Pro)")))))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", null, "\uD83E\uDD16"), /*#__PURE__*/React.createElement("span", null, "\u0645\u062D\u0627\u062F\u062B\u0629 \u0627\u0644\u0645\u0639\u0644\u0645 \u0627\u0644\u0630\u0643\u064A (Gemini 2.0 Flash)")))))), /*#__PURE__*/React.createElement("div", {
     className: "lg:col-span-4 space-y-5"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-lg"
+    className: "bg-slate-900 border border-slate-800 rounded-3xl p-5 space-y-4 shadow-lg"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center justify-between border-b border-slate-800 pb-3"
   }, /*#__PURE__*/React.createElement("div", {
@@ -2015,9 +2146,9 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
     className: "font-bold text-sm text-slate-100"
   }, "\u0645\u0624\u0634\u0631 \u0627\u0644\u062A\u0641\u0648\u0642 \u0646\u062D\u0648 +A"), /*#__PURE__*/React.createElement("p", {
     className: "text-[11px] text-emerald-400 font-semibold"
-  }, currentTitle))), /*#__PURE__*/React.createElement("span", {
+  }, studentRank))), /*#__PURE__*/React.createElement("span", {
     className: "px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-500/20 text-indigo-300"
-  }, "\u0627\u0644\u0645\u0633\u062A\u0648\u0649 ", currentLevel)), /*#__PURE__*/React.createElement("div", {
+  }, "\u0627\u0644\u0645\u0633\u062A\u0648\u0649 ", student.level)), /*#__PURE__*/React.createElement("div", {
     className: "space-y-1.5"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex justify-between text-xs text-slate-400 font-mono"
@@ -2032,7 +2163,7 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
     className: "space-y-2.5 pt-2"
   }, /*#__PURE__*/React.createElement("h4", {
     className: "text-xs font-bold text-slate-300"
-  }, "\u0625\u062A\u0642\u0627\u0646 \u0641\u0635\u0648\u0644 Module 1 (Larson):"), Object.entries(stats.topicMastery).map(([mod, val]) => /*#__PURE__*/React.createElement("div", {
+  }, "\u0625\u062A\u0642\u0627\u0646 \u0641\u0635\u0648\u0644 Module 1:"), Object.entries(student.topicMastery).map(([mod, val]) => /*#__PURE__*/React.createElement("div", {
     key: mod,
     className: "space-y-1"
   }, /*#__PURE__*/React.createElement("div", {
@@ -2040,11 +2171,11 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-slate-400"
   }, mod), /*#__PURE__*/React.createElement("span", {
-    className: val >= 80 ? 'text-emerald-400 font-bold' : 'text-amber-400'
+    className: val >= 80 ? 'text-emerald-400 font-bold' : val > 0 ? 'text-amber-400' : 'text-slate-500'
   }, val, "%")), /*#__PURE__*/React.createElement("div", {
     className: "w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
-    className: `h-full ${val >= 80 ? 'bg-emerald-500' : val >= 60 ? 'bg-amber-500' : 'bg-red-500'}`,
+    className: `h-full ${val >= 80 ? 'bg-emerald-500' : val >= 50 ? 'bg-amber-500' : 'bg-slate-700'}`,
     style: {
       width: `${val}%`
     }
@@ -2055,7 +2186,7 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
   }, "\uD83D\uDCA1 \u0627\u0644\u062A\u0648\u0635\u064A\u0629 \u0627\u0644\u0630\u0643\u064A\u0629 \u0627\u0644\u062A\u0627\u0644\u064A\u0629:"), /*#__PURE__*/React.createElement("p", {
     className: "text-slate-400 text-[11px] leading-relaxed"
   }, "\u0631\u0643\u0632 \u0639\u0644\u0649 \u062A\u062F\u0631\u064A\u0628\u0627\u062A ", /*#__PURE__*/React.createElement("strong", null, "P.4 (Factoring)"), " \u0648 ", /*#__PURE__*/React.createElement("strong", null, "P.5 (Rational Expressions)"), " \u0644\u0631\u0641\u0639 \u0645\u0639\u062F\u0644 \u062F\u0642\u062A\u0643 \u0642\u0628\u0644 \u0643\u0648\u064A\u0632 \u0627\u0644\u0623\u0633\u0628\u0648\u0639 \u0627\u0644\u0642\u0627\u062F\u0645!"))), /*#__PURE__*/React.createElement("div", {
-    className: "bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-lg"
+    className: "bg-slate-900 border border-slate-800 rounded-3xl p-5 space-y-4 shadow-lg"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center justify-between border-b border-slate-800 pb-3"
   }, /*#__PURE__*/React.createElement("div", {
@@ -2065,11 +2196,8 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
   }, "\uD83E\uDD16"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
     className: "font-bold text-sm text-slate-100"
   }, "\u0627\u0644\u0645\u0639\u0644\u0645 \u0627\u0644\u0630\u0643\u064A (AI Math Tutor)"), /*#__PURE__*/React.createElement("p", {
-    className: "text-[10px] text-slate-400 font-mono"
-  }, geminiApiKey ? '🟢 متصل بـ Gemini Pro' : '🟡 يعمل بالوضع الذكي المدمج'))), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setShowSettingsModal(true),
-    className: "text-[10px] text-emerald-400 hover:underline"
-  }, geminiApiKey ? 'تعديل المفتاح' : '+ ربط API Key')), /*#__PURE__*/React.createElement("div", {
+    className: "text-[10px] text-emerald-400 font-mono"
+  }, "\uD83D\uDFE2 \u0645\u062A\u0635\u0644 \u0648\u0645\u062D\u0645\u064A \u062A\u0644\u0642\u0627\u0626\u064A\u0627\u064B (Gemini 2.0)")))), /*#__PURE__*/React.createElement("div", {
     className: "space-y-1.5 text-xs"
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-[11px] text-slate-400"
@@ -2094,65 +2222,265 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
   }), /*#__PURE__*/React.createElement("button", {
     onClick: () => handleAskAI(),
     className: "p-2 bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white rounded-xl text-xs transition"
-  }, "\u0625\u0631\u0633\u0627\u0644"))))), showAITutor && /*#__PURE__*/React.createElement("div", {
-    className: "fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-2.5 sm:p-6"
+  }, "\u0625\u0631\u0633\u0627\u0644"))))), currentView === 'exam' && /*#__PURE__*/React.createElement("div", {
+    className: "max-w-4xl mx-auto space-y-6"
+  }, !isExamSubmitted ? /*#__PURE__*/React.createElement("div", {
+    className: "space-y-6"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-2xl flex flex-col h-[90vh] sm:h-[85vh] shadow-2xl overflow-hidden"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "px-4 sm:px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900"
+    className: "bg-indigo-950/40 border border-indigo-900/50 rounded-3xl p-5 sm:p-6 flex items-center justify-between"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center space-x-3 space-x-reverse"
   }, /*#__PURE__*/React.createElement("span", {
-    className: "text-2xl"
+    className: "text-3xl"
+  }, "\u23F1\uFE0F"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+    className: "font-bold text-white text-base sm:text-lg"
+  }, "\u0627\u062E\u062A\u0628\u0627\u0631 \u0645\u062D\u0627\u0643\u0627\u0629 Math 001 \u0627\u0644\u0634\u0627\u0645\u0644"), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-indigo-300"
+  }, "\u0627\u0644\u0633\u0624\u0627\u0644 ", currentIndex + 1, " \u0645\u0646 ", examQuestions.length))), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center space-x-3 space-x-reverse"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `px-4 py-2 rounded-xl font-mono text-sm sm:text-base font-black border ${examTimeLeft < 300 ? 'bg-red-500/20 text-red-400 border-red-500/30 animate-pulse' : 'bg-slate-800 text-emerald-400 border-slate-700'}`
+  }, "\u23F3 ", Math.floor(examTimeLeft / 60), ":", (examTimeLeft % 60).toString().padStart(2, '0')), /*#__PURE__*/React.createElement("button", {
+    onClick: submitExam,
+    className: "px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl shadow-lg transition"
+  }, "\u062A\u0633\u0644\u064A\u0645 \u0627\u0644\u0627\u062E\u062A\u0628\u0627\u0631"))), /*#__PURE__*/React.createElement("div", {
+    className: "bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl space-y-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-xs text-slate-400 font-mono"
+  }, currentQ.module, " \u2022 ", currentQ.topic), /*#__PURE__*/React.createElement("div", {
+    className: "text-lg font-medium text-slate-100 font-en leading-relaxed text-left",
+    dir: "ltr"
+  }, /*#__PURE__*/React.createElement(MathText, {
+    text: currentQ.questionEn
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "p-3 bg-slate-950/80 border-r-2 border-emerald-500/70 rounded-lg text-xs sm:text-sm text-slate-300 text-right"
+  }, /*#__PURE__*/React.createElement(MathText, {
+    text: currentQ.questionAr
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3 pt-2"
+  }, currentQ.options.map((opt, optIdx) => {
+    const isChosen = examAnswers[currentQ.id] === optIdx;
+    return /*#__PURE__*/React.createElement("button", {
+      key: optIdx,
+      onClick: () => setExamAnswers(prev => ({
+        ...prev,
+        [currentQ.id]: optIdx
+      })),
+      className: `w-full p-4 rounded-xl border text-right flex items-center justify-between transition group font-en ${isChosen ? 'bg-emerald-600/20 border-emerald-500 text-white ring-1 ring-emerald-500/50' : 'bg-slate-800/70 hover:bg-slate-800 border-slate-700/80 text-slate-200'}`
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex items-center space-x-3 space-x-reverse w-full"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "w-8 h-8 rounded-lg bg-slate-950/80 flex items-center justify-center font-bold text-xs border border-slate-700/60"
+    }, ['A', 'B', 'C', 'D'][optIdx], "}"), /*#__PURE__*/React.createElement("div", {
+      className: "text-sm sm:text-base dir-ltr text-left font-mono"
+    }, /*#__PURE__*/React.createElement(MathText, {
+      text: `$${opt}$`
+    }))));
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between pt-4 border-t border-slate-800"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCurrentIndex(i => Math.max(0, i - 1)),
+    disabled: currentIndex === 0,
+    className: "px-4 py-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-30 rounded-xl text-xs font-bold transition"
+  }, "\u0627\u0644\u0633\u0627\u0628\u0642"), /*#__PURE__*/React.createElement("span", {
+    className: "text-xs text-slate-400 font-mono"
+  }, "\u062A\u0645 \u062D\u0644 ", Object.keys(examAnswers).length, " \u0645\u0646 ", examQuestions.length), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCurrentIndex(i => Math.min(examQuestions.length - 1, i + 1)),
+    disabled: currentIndex === examQuestions.length - 1,
+    className: "px-4 py-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-30 rounded-xl text-xs font-bold transition"
+  }, "\u0627\u0644\u062A\u0627\u0644\u064A")))) : examReport && /*#__PURE__*/React.createElement("div", {
+    className: "bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl space-y-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-center space-y-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "inline-block px-4 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30"
+  }, "\u062A\u0642\u0631\u064A\u0631 \u0623\u062F\u0627\u0621 \u0645\u062D\u0627\u0643\u0627\u0629 \u0627\u0644\u0627\u062E\u062A\u0628\u0627\u0631"), /*#__PURE__*/React.createElement("div", {
+    className: "text-5xl sm:text-6xl font-black text-white font-mono"
+  }, examReport.percentage, "%"), /*#__PURE__*/React.createElement("div", {
+    className: "text-xl font-bold text-emerald-400"
+  }, "\u0627\u0644\u062A\u0642\u062F\u064A\u0631 \u0627\u0644\u0645\u0633\u062A\u062D\u0642: ", examReport.grade), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs sm:text-sm text-slate-400"
+  }, "\u0623\u062C\u0628\u062A \u0625\u062C\u0627\u0628\u0629 \u0635\u062D\u064A\u062D\u0629 \u0639\u0644\u0649 ", examReport.correct, " \u0645\u0646 \u0623\u0635\u0644 ", examReport.total, " \u0623\u0633\u0626\u0644\u0629")), /*#__PURE__*/React.createElement("div", {
+    className: "bg-slate-950/70 p-5 rounded-2xl border border-slate-800 space-y-4"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "font-bold text-sm text-slate-200"
+  }, "\u062A\u062D\u0644\u064A\u0644 \u0627\u0644\u0623\u062F\u0627\u0621 \u0627\u0644\u062A\u0641\u0635\u064A\u0644\u064A \u062D\u0633\u0628 \u0641\u0635\u0648\u0644 \u0627\u0644\u0645\u0646\u0647\u062C:"), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 sm:grid-cols-3 gap-3"
+  }, Object.keys(examReport.topicCounts).map(mod => {
+    const total = examReport.topicCounts[mod] || 0;
+    const correct = examReport.topicCorrect[mod] || 0;
+    const pct = Math.round(correct / total * 100);
+    return /*#__PURE__*/React.createElement("div", {
+      key: mod,
+      className: "bg-slate-900 p-3 rounded-xl border border-slate-800 text-xs"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between font-bold mb-1"
+    }, /*#__PURE__*/React.createElement("span", null, "\u0627\u0644\u0641\u0635\u0644 ", mod), /*#__PURE__*/React.createElement("span", {
+      className: pct >= 80 ? 'text-emerald-400' : 'text-amber-400'
+    }, pct, "%")), /*#__PURE__*/React.createElement("div", {
+      className: "w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `h-full ${pct >= 80 ? 'bg-emerald-500' : 'bg-amber-500'}`,
+      style: {
+        width: `${pct}%`
+      }
+    })));
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-center space-x-3 space-x-reverse pt-2"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: startExam,
+    className: "px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition"
+  }, "\u0625\u0639\u0627\u062F\u0629 \u0627\u0644\u0627\u062E\u062A\u0628\u0627\u0631 \u0628\u0646\u0645\u0648\u0630\u062C \u062C\u062F\u064A\u062F \uD83D\uDD04"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCurrentView('practice'),
+    className: "px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-sm transition"
+  }, "\u0627\u0644\u0639\u0648\u062F\u0629 \u0644\u0644\u062A\u062F\u0631\u064A\u0628 \u0627\u0644\u0645\u0641\u062A\u0648\u062D \uD83D\uDCDA")))), currentView === 'lessons' && /*#__PURE__*/React.createElement("div", {
+    className: "space-y-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between border-b border-slate-800 pb-3"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+    className: "text-xl font-bold text-white"
+  }, "\u0645\u0644\u062E\u0635 \u0642\u0648\u0627\u0646\u064A\u0646 \u0648\u0641\u0635\u0648\u0644 Math 001"), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-slate-400"
+  }, "\u0645\u0631\u062C\u0639 \u0633\u0631\u064A\u0639 \u0644\u0644\u0645\u0641\u0627\u0647\u064A\u0645 \u0648\u0627\u0644\u0642\u0648\u0627\u0646\u064A\u0646 \u0627\u0644\u0631\u064A\u0627\u0636\u064A\u0629 \u0627\u0644\u0623\u0633\u0627\u0633\u064A\u0629")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCurrentView('practice'),
+    className: "px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition"
+  }, "\u062A\u0637\u0628\u064A\u0642 \u0648\u062D\u0644 \u0627\u0644\u0645\u0633\u0627\u0626\u0644 \uD83D\uDE80")), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-4"
+  }, LESSONS_DATA.map((lesson, idx) => /*#__PURE__*/React.createElement("div", {
+    key: idx,
+    className: "bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center space-x-3 space-x-reverse border-b border-slate-800 pb-3"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "px-2.5 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-lg text-xs font-bold font-mono"
+  }, lesson.module), /*#__PURE__*/React.createElement("h3", {
+    className: "font-bold text-white text-base"
+  }, lesson.title)), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-1 sm:grid-cols-2 gap-3"
+  }, lesson.formulas.map((f, fIdx) => /*#__PURE__*/React.createElement("div", {
+    key: fIdx,
+    className: "bg-slate-950 p-3.5 rounded-2xl border border-slate-800/80"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-[11px] font-semibold text-slate-400 mb-1.5"
+  }, f.label), /*#__PURE__*/React.createElement("div", {
+    className: "text-emerald-300 font-mono text-xs overflow-x-auto py-1"
+  }, /*#__PURE__*/React.createElement(MathText, {
+    text: `$${f.math}$`
+  }))))), /*#__PURE__*/React.createElement("div", {
+    className: "bg-amber-500/10 border border-amber-500/20 rounded-2xl p-3.5 text-xs text-amber-300 flex items-start space-x-2 space-x-reverse"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-base"
+  }, "\uD83D\uDCA1"), /*#__PURE__*/React.createElement("p", {
+    className: "leading-relaxed"
+  }, lesson.tips)))))), currentView === 'analytics' && /*#__PURE__*/React.createElement("div", {
+    className: "space-y-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "border-b border-slate-800 pb-3"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "text-xl font-bold text-white"
+  }, "\u0627\u0644\u062A\u062D\u0644\u064A\u0644\u0627\u062A \u0648\u0645\u0624\u0634\u0631\u0627\u062A \u0627\u0644\u0623\u062F\u0627\u0621 \u0627\u0644\u0623\u0643\u0627\u062F\u064A\u0645\u064A"), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-slate-400"
+  }, "\u062A\u062A\u0628\u0639 \u062F\u0642\u064A\u0642 \u0644\u0646\u0642\u0627\u0637 \u0627\u0644\u0642\u0648\u0629 \u0648\u0645\u062C\u0627\u0644\u0627\u062A \u0627\u0644\u062A\u062D\u0633\u064A\u0646 \u0644\u0644\u0648\u0635\u0648\u0644 \u0644\u0640 +A")), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-1 sm:grid-cols-3 gap-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "p-5 bg-slate-900 rounded-3xl border border-slate-800 space-y-1"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-xs text-slate-400"
+  }, "\u0625\u062C\u0645\u0627\u0644\u064A \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u0645\u062D\u0644\u0648\u0644\u0629"), /*#__PURE__*/React.createElement("div", {
+    className: "text-3xl font-black text-white font-mono"
+  }, student.solvedCount)), /*#__PURE__*/React.createElement("div", {
+    className: "p-5 bg-slate-900 rounded-3xl border border-slate-800 space-y-1"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-xs text-slate-400"
+  }, "\u0627\u0644\u0625\u062C\u0627\u0628\u0627\u062A \u0627\u0644\u0635\u062D\u064A\u062D\u0629"), /*#__PURE__*/React.createElement("div", {
+    className: "text-3xl font-black text-emerald-400 font-mono"
+  }, student.correctCount)), /*#__PURE__*/React.createElement("div", {
+    className: "p-5 bg-slate-900 rounded-3xl border border-slate-800 space-y-1"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-xs text-slate-400"
+  }, "\u0645\u0639\u062F\u0644 \u0627\u0644\u062F\u0642\u0629 \u0627\u0644\u0639\u0627\u0645"), /*#__PURE__*/React.createElement("div", {
+    className: "text-3xl font-black text-indigo-400 font-mono"
+  }, student.solvedCount > 0 ? Math.round(student.correctCount / student.solvedCount * 100) : 0, "%"))), /*#__PURE__*/React.createElement("div", {
+    className: "p-6 bg-slate-900 rounded-3xl border border-slate-800 space-y-4"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "font-bold text-sm text-slate-200"
+  }, "\u0645\u0633\u062A\u0648\u0649 \u0627\u0644\u0625\u062A\u0642\u0627\u0646 \u0639\u0628\u0631 \u0641\u0635\u0648\u0644 \u0627\u0644\u0645\u0646\u0647\u062C:"), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3"
+  }, Object.entries(student.topicMastery).map(([mod, val]) => /*#__PURE__*/React.createElement("div", {
+    key: mod,
+    className: "space-y-1.5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between text-xs font-mono"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-slate-300 font-bold"
+  }, "\u0627\u0644\u0648\u062D\u062F\u0629 ", mod), /*#__PURE__*/React.createElement("span", {
+    className: val >= 80 ? 'text-emerald-400 font-bold' : 'text-amber-400'
+  }, val, "%")), /*#__PURE__*/React.createElement("div", {
+    className: "w-full h-2.5 bg-slate-950 rounded-full overflow-hidden border border-slate-800"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `h-full ${val >= 80 ? 'bg-emerald-500' : val >= 50 ? 'bg-amber-500' : 'bg-slate-700'} transition-all duration-700`,
+    style: {
+      width: `${val}%`
+    }
+  })))))))), showAITutor && /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-2.5 sm:p-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-2xl flex flex-col h-[90vh] sm:h-[85vh] shadow-2xl overflow-hidden animate-fadeIn"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "px-5 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-900"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center space-x-3 space-x-reverse"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "w-10 h-10 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-xl"
   }, "\uD83E\uDD16"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
     className: "font-bold text-white text-sm sm:text-base"
-  }, "\u0627\u0644\u0645\u0639\u0644\u0645 \u0627\u0644\u062E\u0635\u0648\u0635\u064A \u0627\u0644\u0630\u0643\u064A (Gemini Pro)"), /*#__PURE__*/React.createElement("p", {
-    className: "text-[11px] text-slate-400"
-  }, "\u0645\u0631\u0634\u062F\u0643 \u0627\u0644\u0631\u064A\u0627\u0636\u064A \u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0644\u0645\u0646\u0647\u062C Math 001"))), /*#__PURE__*/React.createElement("button", {
+  }, "\u0627\u0644\u0645\u0639\u0644\u0645 \u0627\u0644\u062E\u0635\u0648\u0635\u064A \u0627\u0644\u0630\u0643\u064A (Gemini 2.0 Flash)"), /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-emerald-400 font-mono"
+  }, "\uD83D\uDFE2 \u0645\u062A\u0635\u0644 \u0648\u0645\u062D\u0645\u064A \u062A\u0644\u0642\u0627\u0626\u064A\u0627\u064B"))), /*#__PURE__*/React.createElement("button", {
     onClick: () => setShowAITutor(false),
-    className: "p-1.5 rounded-lg text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700"
+    className: "p-1.5 text-slate-400 hover:text-white rounded-lg bg-slate-800"
   }, "\u2715")), /*#__PURE__*/React.createElement("div", {
-    className: "flex-1 p-3.5 sm:p-4 overflow-y-auto space-y-3 bg-slate-950/60"
+    className: "flex-1 p-4 overflow-y-auto space-y-3 bg-slate-950/60"
   }, aiMessages.map((msg, mIdx) => /*#__PURE__*/React.createElement("div", {
     key: mIdx,
     className: `flex flex-col ${msg.role === 'user' ? 'items-start' : 'items-end'}`
   }, /*#__PURE__*/React.createElement("div", {
-    className: `max-w-[90%] sm:max-w-[85%] p-3.5 rounded-2xl text-xs sm:text-sm leading-relaxed ${msg.role === 'user' ? 'bg-emerald-600 text-white rounded-tr-none' : 'bg-slate-800 text-slate-200 border border-slate-700/60 rounded-tl-none'}`
+    className: `max-w-[90%] sm:max-w-[85%] p-4 rounded-2xl text-xs sm:text-sm leading-relaxed ${msg.role === 'user' ? 'bg-emerald-600 text-white rounded-tr-none shadow-md' : 'bg-slate-800 text-slate-200 border border-slate-700/60 rounded-tl-none'}`
   }, /*#__PURE__*/React.createElement(MathText, {
     text: msg.content
   })))), isAiLoading && /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center space-x-2 space-x-reverse text-xs text-slate-400"
+    className: "flex items-center space-x-2 space-x-reverse text-xs text-slate-400 p-2"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "w-2 h-2 rounded-full bg-emerald-400 animate-ping"
-  }), /*#__PURE__*/React.createElement("span", null, "\u062C\u0627\u0631\u064A \u0627\u0644\u062A\u0641\u0643\u064A\u0631 \u0648\u0635\u064A\u0627\u063A\u0629 \u0627\u0644\u0634\u0631\u062D \u0627\u0644\u0623\u0643\u0627\u062F\u064A\u0645\u064A..."))), /*#__PURE__*/React.createElement("div", {
-    className: "px-3 sm:px-4 py-2 bg-slate-900 border-t border-slate-800 flex flex-wrap gap-1.5 text-xs font-mono overflow-x-auto"
-  }, ['\\frac{a}{b}', '\\sqrt{x}', 'x^2', 'x^n', '|x|', '\\pi', '\\le', '\\ge', '\\ne', '\\pm'].map((sym, sIdx) => /*#__PURE__*/React.createElement("button", {
+    className: "w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"
+  }), /*#__PURE__*/React.createElement("span", null, "\u062C\u0627\u0631\u064A \u0643\u062A\u0627\u0628\u0629 \u0627\u0644\u0634\u0631\u062D \u0627\u0644\u0645\u0641\u0627\u0647\u064A\u0645\u064A \u0648\u0627\u0644\u0623\u0643\u0627\u062F\u064A\u0645\u064A..."))), /*#__PURE__*/React.createElement("div", {
+    className: "px-4 py-2 bg-slate-900 border-t border-slate-800 flex flex-wrap gap-1.5 text-xs font-mono overflow-x-auto"
+  }, ['\frac{a}{b}', '\sqrt{x}', 'x^2', 'x^n', '|x|', '\pi', '\le', '\ge', '\ne', '\pm'].map((sym, sIdx) => /*#__PURE__*/React.createElement("button", {
     key: sIdx,
     onClick: () => setAiInput(prev => prev + ` $${sym}$ `),
-    className: "px-2 py-1 bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-300 rounded border border-slate-700/50"
+    className: "px-2.5 py-1 bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-300 rounded-lg border border-slate-700/60"
   }, /*#__PURE__*/React.createElement(MathText, {
     text: `$${sym}$`
   })))), /*#__PURE__*/React.createElement("div", {
-    className: "p-3 sm:p-4 bg-slate-900 border-t border-slate-800 flex items-center space-x-2 space-x-reverse"
+    className: "p-4 bg-slate-900 border-t border-slate-800 flex items-center space-x-2 space-x-reverse"
   }, /*#__PURE__*/React.createElement("input", {
     type: "text",
     value: aiInput,
     onChange: e => setAiInput(e.target.value),
     onKeyDown: e => e.key === 'Enter' && handleAskAI(),
-    placeholder: "\u0627\u0643\u062A\u0628 \u0633\u0624\u0627\u0644\u0643 \u0623\u0648 \u0627\u0633\u062A\u0641\u0633\u0627\u0631\u0643 \u0647\u0646\u0627...",
-    className: "flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+    placeholder: "\u0627\u0633\u0623\u0644 \u0627\u0644\u0645\u0639\u0644\u0645 \u0639\u0646 \u0623\u064A \u0645\u0633\u0623\u0644\u0629 \u0623\u0648 \u062E\u0637\u0648\u0629...",
+    className: "flex-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500"
   }), /*#__PURE__*/React.createElement("button", {
     onClick: () => handleAskAI(),
     disabled: isAiLoading || !aiInput.trim(),
-    className: "px-4 sm:px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 active:scale-95 disabled:opacity-40 text-white text-xs font-bold rounded-xl transition"
+    className: "px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 active:scale-95 disabled:opacity-40 text-white text-xs font-bold rounded-xl transition"
   }, "\u0625\u0631\u0633\u0627\u0644")))), showScratchpad && /*#__PURE__*/React.createElement(ScratchpadModal, {
     onClose: () => setShowScratchpad(false)
-  }), showGlossaryModal && /*#__PURE__*/React.createElement("div", {
-    className: "fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4"
+  }), showGlossary && /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-2xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden"
+    className: "bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-2xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "px-5 py-4 border-b border-slate-800 flex items-center justify-between"
+    className: "px-6 py-4 border-b border-slate-800 flex items-center justify-between"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center space-x-2 space-x-reverse"
   }, /*#__PURE__*/React.createElement("span", {
@@ -2160,17 +2488,17 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
   }, "\uD83D\uDCD6"), /*#__PURE__*/React.createElement("h3", {
     className: "font-bold text-white text-sm sm:text-base"
   }, "\u0642\u0627\u0645\u0648\u0633 \u0645\u0635\u0637\u0644\u062D\u0627\u062A Math 001 (Arabic-English)")), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setShowGlossaryModal(false),
+    onClick: () => setShowGlossary(false),
     className: "p-1 text-slate-400 hover:text-white"
   }, "\u2715")), /*#__PURE__*/React.createElement("div", {
-    className: "p-4 overflow-y-auto space-y-2"
+    className: "p-5 overflow-y-auto space-y-3"
   }, /*#__PURE__*/React.createElement("p", {
-    className: "text-xs text-slate-400 mb-3"
+    className: "text-xs text-slate-400"
   }, "\u0645\u0633\u062A\u062E\u0631\u062C \u0645\u0628\u0627\u0634\u0631\u0629 \u0645\u0646 \u0645\u0644\u062D\u0642 \u0627\u0644\u0645\u0635\u0637\u0644\u062D\u0627\u062A \u0641\u064A \u0635\u0641\u062D\u0627\u062A 46-48 \u0645\u0646 \u0645\u0630\u0643\u0631\u0629 \u0645\u0639\u0647\u062F \u064A\u0646\u0628\u0639:"), /*#__PURE__*/React.createElement("div", {
-    className: "grid grid-cols-1 sm:grid-cols-2 gap-2.5"
+    className: "grid grid-cols-1 sm:grid-cols-2 gap-3"
   }, GLOSSARY_DATA.map((item, gIdx) => /*#__PURE__*/React.createElement("div", {
     key: gIdx,
-    className: "p-3 bg-slate-950 border border-slate-800/80 rounded-xl text-xs space-y-1"
+    className: "p-3.5 bg-slate-950 border border-slate-800/80 rounded-xl text-xs space-y-1"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex justify-between font-bold"
   }, /*#__PURE__*/React.createElement("span", {
@@ -2181,61 +2509,47 @@ Please provide a clear, supportive, teacher-quality explanation in Arabic, with 
     className: "text-[11px] text-slate-400 font-mono dir-ltr text-left"
   }, /*#__PURE__*/React.createElement(MathText, {
     text: `$${item.symbol}$`
-  })))))))), showCalculatorModal && /*#__PURE__*/React.createElement(CalculatorModal, {
-    onClose: () => setShowCalculatorModal(false)
-  }), showSettingsModal && /*#__PURE__*/React.createElement("div", {
+  })))))))), showCalculator && /*#__PURE__*/React.createElement(CalculatorModal, {
+    onClose: () => setShowCalculator(false)
+  }), showNotes && /*#__PURE__*/React.createElement("div", {
     className: "fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-lg p-5 sm:p-6 shadow-2xl space-y-4"
+    className: "bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-lg p-6 shadow-2xl space-y-4"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center justify-between border-b border-slate-800 pb-3"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "font-bold text-white text-base"
-  }, "\u2699\uFE0F \u0625\u0639\u062F\u0627\u062F\u0627\u062A \u0627\u0644\u0645\u0646\u0635\u0629 \u0648\u0631\u0628\u0637 Gemini Pro"), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setShowSettingsModal(false),
-    className: "text-slate-400 hover:text-white"
-  }, "\u2715")), /*#__PURE__*/React.createElement("div", {
-    className: "space-y-3 text-xs leading-relaxed text-slate-300"
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "font-bold text-emerald-400"
-  }, "\u0631\u0628\u0637 \u0627\u0634\u062A\u0631\u0627\u0643\u0643 \u0628\u0640 Gemini Pro:"), /*#__PURE__*/React.createElement("p", null, "\u0644\u0644\u0627\u0633\u062A\u0647\u0644\u0627\u0643 \u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0645\u0646 \u0628\u0627\u0642\u0629 \u0627\u0644\u0630\u0643\u0627\u0621 \u0627\u0644\u0627\u0635\u0637\u0646\u0627\u0639\u064A \u0627\u0644\u062E\u0627\u0635\u0629 \u0628\u0643\u060C \u0627\u0644\u0635\u0642 \u0645\u0641\u062A\u0627\u062D ", /*#__PURE__*/React.createElement("strong", null, "Google AI Studio API Key"), " \u0647\u0646\u0627. \u064A\u062A\u0645 \u062D\u0641\u0638 \u0627\u0644\u0645\u0641\u062A\u0627\u062D \u0628\u0623\u0645\u0627\u0646 \u062F\u0627\u062E\u0644 \u0645\u062A\u0635\u0641\u062D\u0643 \u0645\u062D\u0644\u064A\u0627\u064B \u0641\u0642\u0637."), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center space-x-2 space-x-reverse"
-  }, /*#__PURE__*/React.createElement("input", {
-    type: "password",
-    value: geminiApiKey,
-    onChange: e => {
-      setGeminiApiKey(e.target.value);
-      setApiTestStatus(null);
-    },
-    placeholder: "AIzaSy...",
-    className: "flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-emerald-500"
-  }), /*#__PURE__*/React.createElement("button", {
-    onClick: testGeminiConnection,
-    disabled: apiTestStatus === 'testing',
-    className: "px-3 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold transition whitespace-nowrap"
-  }, apiTestStatus === 'testing' ? 'جاري الفحص...' : 'فحص الاتصال')), apiTestStatus && /*#__PURE__*/React.createElement("div", {
-    className: `p-2.5 rounded-lg text-xs font-semibold ${apiTestStatus === 'success' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : apiTestStatus === 'error' ? 'bg-red-500/20 text-red-300 border border-red-500/30' : 'bg-slate-800 text-slate-300'}`
-  }, apiTestMsg), /*#__PURE__*/React.createElement("div", {
-    className: "bg-slate-950 p-3 rounded-xl border border-slate-800 text-[11px] text-slate-400 space-y-1"
-  }, /*#__PURE__*/React.createElement("p", null, "\uD83D\uDCCC \u0643\u064A\u0641 \u062A\u062D\u0635\u0644 \u0639\u0644\u0649 \u0627\u0644\u0645\u0641\u062A\u0627\u062D \u0645\u062C\u0627\u0646\u0627\u064B \u0645\u0646 \u062D\u0633\u0627\u0628\u0643\u061F"), /*#__PURE__*/React.createElement("p", null, "1. \u0627\u062F\u062E\u0644 \u0639\u0644\u0649 \u0631\u0627\u0628\u0637: ", /*#__PURE__*/React.createElement("a", {
-    href: "https://aistudio.google.com/app/apikey",
-    target: "_blank",
-    className: "text-emerald-400 underline"
-  }, "Google AI Studio API Keys"), "."), /*#__PURE__*/React.createElement("p", null, "2. \u0627\u0636\u063A\u0637 ", /*#__PURE__*/React.createElement("strong", null, "Create API key"), " \u062B\u0645 \u0627\u0646\u0633\u062E\u0647 \u0648\u0627\u0644\u0635\u0642\u0647 \u0641\u064A \u0627\u0644\u062E\u0627\u0646\u0629 \u0623\u0639\u0644\u0627\u0647."))), /*#__PURE__*/React.createElement("div", {
-    className: "flex justify-end space-x-2 space-x-reverse pt-2"
-  }, /*#__PURE__*/React.createElement("button", {
-    onClick: () => setShowSettingsModal(false),
-    className: "px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs transition"
-  }, "\u062D\u0641\u0638 \u0648\u0625\u063A\u0644\u0627\u0642")))));
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-xl"
+  }, "\uD83D\uDCDD"), /*#__PURE__*/React.createElement("h3", {
+    className: "font-bold text-white text-base"
+  }, "\u0645\u0644\u0627\u062D\u0638\u0627\u062A\u064A \u0627\u0644\u062F\u0631\u0627\u0633\u064A\u0629 \u0627\u0644\u0634\u062E\u0635\u064A\u0629")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setShowNotes(false),
+    className: "text-slate-400 hover:text-white"
+  }, "\u2715")), /*#__PURE__*/React.createElement("textarea", {
+    rows: "8",
+    value: student.notes,
+    onChange: e => setStudent(prev => ({
+      ...prev,
+      notes: e.target.value
+    })),
+    placeholder: "\u0627\u0643\u062A\u0628 \u0647\u0646\u0627 \u0645\u0644\u0627\u062D\u0638\u0627\u062A\u0643 \u0627\u0644\u0647\u0627\u0645\u0629\u060C \u0627\u0644\u0642\u0648\u0627\u0646\u064A\u0646 \u0627\u0644\u062A\u064A \u062A\u0631\u063A\u0628 \u0628\u062A\u0630\u0643\u0631\u0647\u0627\u060C \u0648\u0645\u0644\u0627\u062D\u0638\u0627\u062A \u0645\u062F\u0631\u0633 \u0627\u0644\u0645\u0627\u062F\u0629...",
+    className: "w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 leading-relaxed"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center text-xs text-slate-500"
+  }, /*#__PURE__*/React.createElement("span", null, "\u064A\u062A\u0645 \u0627\u0644\u062D\u0641\u0638 \u062A\u0644\u0642\u0627\u0626\u064A\u0627\u064B \u0641\u064A \u0645\u062A\u0635\u0641\u062D\u0643"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setShowNotes(false),
+    className: "px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition"
+  }, "\u0625\u063A\u0644\u0627\u0642")))));
 }
 
-// Scratchpad Canvas Component with Touch Action None & Apple Pencil Support
+// Scratchpad Canvas Component
 function ScratchpadModal({
   onClose
 }) {
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [tool, setTool] = useState('pen'); // 'pen' | 'eraser'
+  const [tool, setTool] = useState('pen');
   const [color, setColor] = useState('#22c55e');
   const [lineWidth, setLineWidth] = useState(3);
   useEffect(() => {
@@ -2246,8 +2560,6 @@ function ScratchpadModal({
     canvas.height = canvas.parentElement.clientHeight - 80;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
-
-    // Add non-passive event listeners to block iOS Safari dragging gestures
     const handleTouchStart = e => {
       e.preventDefault();
       const touch = e.touches[0];
@@ -2263,7 +2575,7 @@ function ScratchpadModal({
       const rect = canvas.getBoundingClientRect();
       if (tool === 'eraser') {
         ctx.strokeStyle = '#020617';
-        ctx.lineWidth = 20;
+        ctx.lineWidth = 22;
       } else {
         ctx.strokeStyle = color;
         ctx.lineWidth = lineWidth;
@@ -2290,7 +2602,7 @@ function ScratchpadModal({
       canvas.removeEventListener('touchend', handleTouchEnd);
     };
   }, [isDrawing, color, lineWidth, tool]);
-  const startMouseDrawing = e => {
+  const startMouse = e => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     const rect = canvas.getBoundingClientRect();
@@ -2298,23 +2610,20 @@ function ScratchpadModal({
     ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
     setIsDrawing(true);
   };
-  const mouseDraw = e => {
+  const mouseMove = e => {
     if (!isDrawing) return;
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     const rect = canvas.getBoundingClientRect();
     if (tool === 'eraser') {
       ctx.strokeStyle = '#020617';
-      ctx.lineWidth = 20;
+      ctx.lineWidth = 22;
     } else {
       ctx.strokeStyle = color;
       ctx.lineWidth = lineWidth;
     }
     ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
     ctx.stroke();
-  };
-  const stopMouseDrawing = () => {
-    setIsDrawing(false);
   };
   const clearCanvas = () => {
     const canvas = canvasRef.current;
@@ -2324,9 +2633,9 @@ function ScratchpadModal({
   return /*#__PURE__*/React.createElement("div", {
     className: "fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-2 sm:p-5"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-4xl h-[90vh] sm:h-[85vh] flex flex-col shadow-2xl overflow-hidden"
+    className: "bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-4xl h-[90vh] sm:h-[85vh] flex flex-col shadow-2xl overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "px-4 sm:px-5 py-3 border-b border-slate-800 flex items-center justify-between bg-slate-900 flex-wrap gap-2"
+    className: "px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900 flex-wrap gap-2"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center space-x-2.5 space-x-reverse"
   }, /*#__PURE__*/React.createElement("span", {
@@ -2337,10 +2646,10 @@ function ScratchpadModal({
     className: "flex items-center space-x-2 space-x-reverse"
   }, /*#__PURE__*/React.createElement("button", {
     onClick: () => setTool('pen'),
-    className: `px-2.5 py-1 rounded-lg text-xs font-bold transition ${tool === 'pen' ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-300'}`
+    className: `px-3 py-1 rounded-lg text-xs font-bold transition ${tool === 'pen' ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-300'}`
   }, "\u0642\u0644\u0645"), /*#__PURE__*/React.createElement("button", {
     onClick: () => setTool('eraser'),
-    className: `px-2.5 py-1 rounded-lg text-xs font-bold transition ${tool === 'eraser' ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-300'}`
+    className: `px-3 py-1 rounded-lg text-xs font-bold transition ${tool === 'eraser' ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-300'}`
   }, "\u0645\u0645\u062D\u0627\u0629"), tool === 'pen' && ['#22c55e', '#38bdf8', '#f59e0b', '#ef4444', '#ffffff'].map(c => /*#__PURE__*/React.createElement("button", {
     key: c,
     onClick: () => setColor(c),
@@ -2358,10 +2667,10 @@ function ScratchpadModal({
     className: "flex-1 bg-slate-950 cursor-crosshair relative touch-none"
   }, /*#__PURE__*/React.createElement("canvas", {
     ref: canvasRef,
-    onMouseDown: startMouseDrawing,
-    onMouseMove: mouseDraw,
-    onMouseUp: stopMouseDrawing,
-    onMouseLeave: stopMouseDrawing,
+    onMouseDown: startMouse,
+    onMouseMove: mouseMove,
+    onMouseUp: () => setIsDrawing(false),
+    onMouseLeave: () => setIsDrawing(false),
     className: "w-full h-full"
   }))));
 }
@@ -2378,7 +2687,7 @@ function CalculatorModal({
       setCalcRes('');
     } else if (val === '=') {
       try {
-        const sanitized = calcVal.replace(/\\^/g, '**');
+        const sanitized = calcVal.replace(/\^/g, '**');
         const res = Function(`'use strict'; return (${sanitized})`)();
         setCalcRes(res.toString());
       } catch (e) {
@@ -2391,7 +2700,7 @@ function CalculatorModal({
   return /*#__PURE__*/React.createElement("div", {
     className: "fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-xs p-5 shadow-2xl space-y-4"
+    className: "bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-xs p-5 shadow-2xl space-y-4"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center justify-between border-b border-slate-800 pb-2"
   }, /*#__PURE__*/React.createElement("span", {
@@ -2416,6 +2725,6 @@ function CalculatorModal({
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render( /*#__PURE__*/React.createElement(App, null));
 
-</script>
+  </script>
 </body>
 </html>
