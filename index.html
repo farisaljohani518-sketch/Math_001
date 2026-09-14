@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MATH 001 Mastery & Drill Platform | منصة إتقان الرياضيات التحضيرية</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              slate: '#020617',
+              card: '#0f172a',
+              cardHover: '#1e293b',
+              border: '#334155',
+              accent: '#10b981', // emerald
+              cyan: '#06b6d4',
+              amber: '#f59e0b',
+              rose: '#f43f5e',
+            }
+          },
+          fontFamily: {
+            sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Cairo', 'sans-serif'],
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- External Stylesheet (style.css) -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- KaTeX CDN for High-Performance Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 flex flex-col min-h-screen selection:bg-cyan-500 selection:text-white">
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 transition-colors">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-2 sm:gap-4">
+      
+      <!-- Brand & Title -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-emerald-500/20 text-white font-black text-xl">
+          $\sum$
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-black tracking-tight text-base sm:text-lg text-white flex items-center gap-1.5">
+              <span>MATH 001</span>
+              <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">Mastery</span>
+            </h1>
+            <span class="hidden md:inline-block text-xs text-slate-400 border-r border-slate-700 pr-2 mr-1">منصة الرياضيات التحضيرية</span>
+          </div>
+          <p class="text-[11px] text-slate-400 hidden sm:block">KFUPM & Preparatory Year Standards | الفصول P.1 إلى P.6</p>
+        </div>
+      </div>
+
+      <!-- User Stats Bar (Streak, Solved, Accuracy) -->
+      <div class="flex items-center gap-2 sm:gap-3 text-xs bg-slate-950/80 px-3 py-1.5 rounded-xl border border-slate-800">
+        <div class="flex items-center gap-1.5 text-amber-400 font-bold" title="التتابع اليومي (Current Streak)">
+          <span>🔥</span>
+          <span id="stat-streak">0</span>
+        </div>
+        <div class="h-3 w-[1px] bg-slate-800"></div>
+        <div class="flex items-center gap-1.5 text-emerald-400 font-bold" title="الأسئلة المنجزة (Solved Questions)">
+          <span>✅</span>
+          <span id="stat-solved">0/240</span>
+        </div>
+        <div class="h-3 w-[1px] bg-slate-800"></div>
+        <div class="flex items-center gap-1.5 text-cyan-400 font-bold" title="نسبة الدقة (Accuracy)">
+          <span>🎯</span>
+          <span id="stat-accuracy">0%</span>
+        </div>
+      </div>
+
+      <!-- Header Tools & Utilities -->
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        
+        <!-- Scratchpad Toggle Button -->
+        <button id="btn-toggle-scratchpad" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-1.5 text-xs font-semibold transition active:scale-95 shadow-sm" title="فتح المسودة الحسابية">
+          <span>📝</span>
+          <span class="hidden md:inline">المسودة</span>
+        </button>
+
+        <!-- Calculator Toggle Button -->
+        <button id="btn-toggle-calculator" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-1.5 text-xs font-semibold transition active:scale-95 shadow-sm" title="الآلة الحاسبة العلمية">
+          <span>🧮</span>
+          <span class="hidden md:inline">الحاسبة</span>
+        </button>
+
+        <!-- Cheat Sheet Toggle Button -->
+        <button id="btn-toggle-cheatsheet" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-1.5 text-xs font-semibold transition active:scale-95 shadow-sm" title="ملخص القوانين والمتطابقات">
+          <span>📖</span>
+          <span class="hidden md:inline">القوانين</span>
+        </button>
+
+        <!-- Language Switcher -->
+        <div class="relative">
+          <button id="btn-lang-toggle" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 text-xs font-bold transition flex items-center gap-1">
+            <span id="lang-display-label">🌐 ثنائي</span>
+          </button>
+        </div>
+
+        <!-- Export Progress Button -->
+        <button id="btn-export-data" class="p-1.5 rounded-lg text-slate-400 hover:text-emerald-400 hover:bg-slate-800 transition" title="تصدير نسخة احتياطية من تقدمك (JSON)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+        </button>
+
+        <!-- Import Progress Button -->
+        <button id="btn-import-data" class="p-1.5 rounded-lg text-slate-400 hover:text-cyan-400 hover:bg-slate-800 transition" title="استيراد تقدم محفوظ (JSON)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+        </button>
+        <input type="file" id="file-import-input" accept=".json" class="hidden">
+
+        <!-- Reset Button -->
+        <button id="btn-reset-data" class="p-1.5 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-slate-800 transition" title="إعادة تعيين التقدم">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- MAIN NAVIGATION TABS -->
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 flex items-center gap-2 overflow-x-auto py-1.5 border-t border-slate-800/80 text-xs sm:text-sm font-medium">
+      <button id="tab-btn-chapter" class="nav-tab px-3.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold flex items-center gap-1.5 shrink-0 transition">
+        <span>📚</span>
+        <span>تمرين الفصول (Chapter Drill)</span>
+      </button>
+      <button id="tab-btn-exam" class="nav-tab px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 flex items-center gap-1.5 shrink-0 transition">
+        <span>⏱️</span>
+        <span>اختبار تجريبي (Exam Simulation)</span>
+      </button>
+      <button id="tab-btn-mistakes" class="nav-tab px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 flex items-center gap-1.5 shrink-0 transition relative">
+        <span>⚠️</span>
+        <span>بنك الأخطاء (Mistakes)</span>
+        <span id="mistakes-badge" class="ml-1 px-1.5 py-0.2 rounded-full bg-rose-500 text-white font-bold text-[10px] hidden">0</span>
+      </button>
+      <button id="tab-btn-bookmarks" class="nav-tab px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 flex items-center gap-1.5 shrink-0 transition">
+        <span>⭐</span>
+        <span>المفضلة (Bookmarks)</span>
+        <span id="bookmarks-badge" class="ml-1 px-1.5 py-0.2 rounded-full bg-amber-500 text-slate-950 font-bold text-[10px] hidden">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-6 flex flex-col gap-5">
+
+    <!-- ======================================================== -->
+    <!-- VIEW 1: CHAPTER DRILL MODE                               -->
+    <!-- ======================================================== -->
+    <section id="view-chapter" class="flex flex-col gap-4">
+      
+      <!-- Filter Controls Bar -->
+      <div class="bg-slate-900/90 rounded-2xl p-4 border border-slate-800 shadow-xl flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
+        
+        <!-- Module Selectors -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 text-xs">
+          <button data-module="ALL" class="mod-pill px-3 py-1.5 rounded-xl font-bold bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20 transition">الكل (240)</button>
+          <button data-module="P.1" class="mod-pill px-3 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">P.1 (40)</button>
+          <button data-module="P.2" class="mod-pill px-3 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">P.2 (40)</button>
+          <button data-module="P.3" class="mod-pill px-3 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">P.3 (40)</button>
+          <button data-module="P.4" class="mod-pill px-3 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">P.4 (40)</button>
+          <button data-module="P.5" class="mod-pill px-3 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">P.5 (40)</button>
+          <button data-module="P.6" class="mod-pill px-3 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">P.6 (40)</button>
+        </div>
+
+        <!-- Secondary Filters (Difficulty & Question Jumper) -->
+        <div class="flex items-center justify-between md:justify-end gap-2 text-xs">
+          
+          <!-- Difficulty Filter -->
+          <div class="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800">
+            <button data-diff="ALL" class="diff-btn px-2.5 py-1 rounded-lg font-semibold bg-slate-800 text-white">الكل</button>
+            <button data-diff="Easy" class="diff-btn px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-emerald-400">سهل</button>
+            <button data-diff="Medium" class="diff-btn px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-amber-400">متوسط</button>
+            <button data-diff="Hard" class="diff-btn px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-rose-400">صعب</button>
+          </div>
+
+          <!-- Question Grid Jumper Button -->
+          <button id="btn-open-grid" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold flex items-center gap-1.5 transition">
+            <span>📑</span>
+            <span>الفهرس</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Question Card Container -->
+      <div id="question-card-container" class="bg-slate-900/90 rounded-3xl p-4 sm:p-7 border border-slate-800 shadow-2xl flex flex-col gap-6 relative">
+        
+        <!-- Question Header Meta -->
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span id="q-meta-module" class="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-xs font-black">P.1</span>
+            <span id="q-meta-topic" class="px-3 py-1 rounded-full bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 text-xs font-semibold">Sets of Numbers</span>
+            <span id="q-meta-difficulty" class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-400 border border-amber-500/30">Medium</span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <!-- Bookmark Star Button -->
+            <button id="q-btn-bookmark" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-amber-400 border border-slate-700 transition" title="إضافة للمفضلة">
+              <svg id="star-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>
+            </button>
+
+            <!-- Question Counter -->
+            <div class="text-xs font-mono text-slate-400 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
+              <span id="q-current-num">1</span> / <span id="q-total-num">240</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question Body (Bilingual) -->
+        <div class="flex flex-col gap-3.5">
+          <!-- English Question Text -->
+          <div id="q-text-en" class="text-base sm:text-lg font-medium text-slate-100 leading-relaxed dir-ltr text-left">
+            Loading question...
+          </div>
+          <!-- Arabic Question Text -->
+          <div id="q-text-ar" class="text-base sm:text-lg font-medium text-slate-300 leading-relaxed dir-rtl text-right border-t border-slate-800/60 pt-3">
+            جاري تحميل السؤال...
+          </div>
+        </div>
+
+        <!-- Options Grid -->
+        <div id="q-options-container" class="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-2">
+          <!-- Dynamic 4 Options (A, B, C, D) -->
+        </div>
+
+        <!-- Feedback & Deep-Dive Solution Section (Expands on answer) -->
+        <div id="q-feedback-container" class="hidden flex flex-col gap-4 border-t border-slate-800 pt-5 transition-all">
+          
+          <!-- Banner Result Status -->
+          <div id="q-status-banner" class="p-3.5 rounded-2xl flex items-center justify-between font-bold text-sm">
+            <!-- Dynamic Correct / Incorrect status -->
+          </div>
+
+          <!-- Hint Card -->
+          <div class="p-4 rounded-2xl bg-cyan-950/20 border border-cyan-500/20 flex items-start gap-3">
+            <span class="text-xl">💡</span>
+            <div>
+              <h4 class="font-bold text-xs uppercase tracking-wider text-cyan-400 mb-1">المفتاح المفاهيمي (Concept Hint)</h4>
+              <p id="q-hint-text" class="text-sm text-slate-300 leading-relaxed"></p>
+            </div>
+          </div>
+
+          <!-- Step-by-Step Explanation Card -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col gap-2">
+            <div class="flex items-center gap-2 text-emerald-400 font-bold text-xs uppercase tracking-wider">
+              <span>📝</span>
+              <span>خطوات الحل المفصلة (Academic Step-by-Step Solution)</span>
+            </div>
+            <div id="q-explanation-text" class="text-sm text-slate-200 leading-relaxed font-sans pt-1"></div>
+          </div>
+
+          <!-- Trap Alert Card -->
+          <div class="p-4 rounded-2xl bg-amber-950/20 border border-amber-500/20 flex items-start gap-3">
+            <span class="text-xl">⚠️</span>
+            <div>
+              <h4 class="font-bold text-xs uppercase tracking-wider text-amber-400 mb-1">فخ الاختبار والتنبيه الأكاديمي (Common Exam Trap & Tip)</h4>
+              <p id="q-traptip-text" class="text-sm text-amber-200/90 leading-relaxed"></p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Navigation Buttons Bar -->
+        <div class="flex items-center justify-between gap-2 border-t border-slate-800 pt-4 mt-2">
+          <button id="btn-prev-q" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs sm:text-sm flex items-center gap-2 transition active:scale-95 disabled:opacity-40 disabled:pointer-events-none">
+            <span>&rarr;</span>
+            <span>السابق (Previous)</span>
+          </button>
+
+          <button id="btn-random-q" class="px-3.5 py-2 rounded-xl bg-slate-950 hover:bg-slate-800 text-cyan-400 border border-slate-800 font-semibold text-xs flex items-center gap-1.5 transition">
+            <span>🎲</span>
+            <span class="hidden sm:inline">سؤال عشوائي</span>
+          </button>
+
+          <button id="btn-next-q" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm flex items-center gap-2 transition active:scale-95 shadow-lg shadow-emerald-600/20 disabled:opacity-40 disabled:pointer-events-none">
+            <span>التالي (Next)</span>
+            <span>&larr;</span>
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW 2: EXAM SIMULATION MODE                             -->
+    <!-- ======================================================== -->
+    <section id="view-exam" class="hidden flex flex-col gap-5">
+      
+      <!-- Exam Intro / Pre-start Card -->
+      <div id="exam-prestart-card" class="bg-slate-900/90 rounded-3xl p-6 sm:p-10 border border-slate-800 text-center max-w-2xl mx-auto flex flex-col items-center gap-5 shadow-2xl">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyan-500 to-emerald-500 flex items-center justify-center text-3xl shadow-xl shadow-cyan-500/20">
+          ⏱️
+        </div>
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-white">محاكاة الاختبار الفصلي لمقرر MATH 001</h2>
+          <p class="text-slate-400 text-sm mt-1.5">اختبار معياري يحاكي تماماً اختبارات الميدتيرم والفاينل التحضيرية</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 w-full my-2 text-xs">
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+            <div class="text-slate-400">الأسئلة</div>
+            <div class="text-lg font-bold text-cyan-400 mt-1">20 سؤال</div>
+          </div>
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+            <div class="text-slate-400">الزمن المحدد</div>
+            <div class="text-lg font-bold text-emerald-400 mt-1">40 دقيقة</div>
+          </div>
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+            <div class="text-slate-400">التغطية</div>
+            <div class="text-lg font-bold text-amber-400 mt-1">P.1 - P.6</div>
+          </div>
+        </div>
+
+        <ul class="text-right text-xs text-slate-300 space-y-2 bg-slate-950/60 p-4 rounded-xl border border-slate-800/80 w-full list-disc list-inside">
+          <li>يتم سحب 20 سؤالاً عشوائياً موزعاً على جميع الفصول من P.1 إلى P.6.</li>
+          <li>لا تظهر الإجابات أو الحلول إلا بعد تسليم الاختبار النهائي.</li>
+          <li>يمكنك تعليم الأسئلة للرجوع إليها عبر زر (تعليم للمراجعة).</li>
+          <li>ستحصل في النهاية على تقرير تشخيصي يحلل نقاط قوتك وضعفك حسب كل فصل.</li>
+        </ul>
+
+        <button id="btn-start-exam" class="w-full sm:w-auto px-8 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 font-black text-base shadow-lg shadow-emerald-500/30 hover:opacity-95 transition active:scale-95">
+          🚀 ابدأ الاختبار الآن (Start Exam)
+        </button>
+      </div>
+
+      <!-- Live Exam Interface (Shown during exam) -->
+      <div id="exam-live-container" class="hidden flex flex-col gap-4">
+        
+        <!-- Sticky Exam Top Bar -->
+        <div class="sticky top-16 z-30 bg-slate-900/95 backdrop-blur-md rounded-2xl p-3.5 border border-slate-800 shadow-xl flex items-center justify-between gap-3">
+          
+          <!-- Timer -->
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-sm">⏱️</div>
+            <div>
+              <div class="text-[10px] text-slate-400">الوقت المتبقي</div>
+              <div id="exam-timer-display" class="text-base sm:text-lg font-mono font-bold text-emerald-400">40:00</div>
+            </div>
+          </div>
+
+          <!-- Progress Counters -->
+          <div class="text-center">
+            <div class="text-[10px] text-slate-400">الإجابات المكتملة</div>
+            <div class="text-xs sm:text-sm font-bold text-cyan-400">
+              <span id="exam-answered-count">0</span> / 20
+            </div>
+          </div>
+
+          <!-- Flag & Submit Controls -->
+          <div class="flex items-center gap-2">
+            <button id="btn-exam-flag" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs border border-slate-700 flex items-center gap-1 transition">
+              <span>🚩</span>
+              <span class="hidden sm:inline">تعليم</span>
+            </button>
+            <button id="btn-exam-submit" class="px-4 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow-md shadow-rose-600/20 transition active:scale-95">
+              🏁 تسليم الاختبار
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Question Navigation Palette (1 to 20) -->
+        <div class="bg-slate-900/90 rounded-2xl p-3 border border-slate-800 flex items-center gap-2 overflow-x-auto">
+          <div id="exam-palette-container" class="flex items-center gap-2 min-w-full justify-start sm:justify-center">
+            <!-- 20 number buttons injected dynamically -->
+          </div>
+        </div>
+
+        <!-- Live Question Card -->
+        <div class="bg-slate-900/90 rounded-3xl p-5 sm:p-7 border border-slate-800 shadow-2xl flex flex-col gap-6">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3 text-xs">
+            <div class="flex items-center gap-2">
+              <span id="exam-q-module" class="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-400 font-bold">P.1</span>
+              <span id="exam-q-topic" class="text-slate-400">Topic</span>
+            </div>
+            <div class="font-mono text-slate-400">
+              سؤال <span id="exam-q-num">1</span> من 20
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-3">
+            <div id="exam-q-en" class="text-base sm:text-lg font-medium text-slate-100 dir-ltr text-left"></div>
+            <div id="exam-q-ar" class="text-base sm:text-lg font-medium text-slate-300 dir-rtl text-right border-t border-slate-800/60 pt-3"></div>
+          </div>
+
+          <div id="exam-options-container" class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+            <!-- 4 Options -->
+          </div>
+
+          <div class="flex items-center justify-between border-t border-slate-800 pt-4">
+            <button id="btn-exam-prev" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs transition">
+              &rarr; السابق
+            </button>
+            <button id="btn-exam-next" class="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition shadow-md shadow-cyan-600/20">
+              التالي &larr;
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Post-Exam Results Diagnostic Report -->
+      <div id="exam-results-container" class="hidden flex flex-col gap-6">
+        
+        <!-- Score Hero Header -->
+        <div class="bg-slate-900/90 rounded-3xl p-6 sm:p-8 border border-slate-800 text-center flex flex-col items-center gap-4 shadow-2xl">
+          <div id="results-badge-ring" class="w-24 h-24 rounded-full border-4 border-emerald-500 flex flex-col items-center justify-center bg-slate-950 text-emerald-400 font-black text-2xl shadow-xl shadow-emerald-500/20">
+            <span id="results-score-text">18/20</span>
+            <span id="results-percentage-text" class="text-xs text-slate-400 font-normal">90%</span>
+          </div>
+
+          <div>
+            <h3 id="results-evaluation-title" class="text-xl sm:text-2xl font-black text-white">ممتاز مرتفع (A+ Distinction)</h3>
+            <p id="results-evaluation-desc" class="text-slate-400 text-xs sm:text-sm mt-1">أداؤك استثنائي ويعكس جاهزية تامة للاختبار الفصلي للمادة.</p>
+          </div>
+
+          <div class="flex items-center gap-4 text-xs">
+            <div class="px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-300">
+              الوقت المستغرق: <span id="results-time-spent" class="font-bold text-cyan-400">23:14</span>
+            </div>
+            <button id="btn-retake-exam" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition shadow-lg shadow-emerald-600/20">
+              🔄 إعادة المحاولة باختبار جديد
+            </button>
+          </div>
+        </div>
+
+        <!-- Diagnostic Breakdown by Module -->
+        <div class="bg-slate-900/90 rounded-3xl p-6 border border-slate-800 shadow-xl flex flex-col gap-4">
+          <h4 class="font-bold text-sm text-slate-200 flex items-center gap-2">
+            <span>📊</span>
+            <span>التحليل التشخيصي للأداء حسب الفصول (Diagnostic Breakdown)</span>
+          </h4>
+          <div id="results-module-bars" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <!-- Bars injected dynamically -->
+          </div>
+        </div>
+
+        <!-- Review Section (Questions & Explanations) -->
+        <div class="bg-slate-900/90 rounded-3xl p-6 border border-slate-800 shadow-xl flex flex-col gap-4">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <h4 class="font-bold text-sm text-slate-200 flex items-center gap-2">
+              <span>🔍</span>
+              <span>مراجعة الأسئلة بالتفصيل (Detailed Review)</span>
+            </h4>
+            <div class="flex items-center gap-1.5 text-xs">
+              <button id="filter-review-all" class="px-2.5 py-1 rounded-lg bg-slate-800 text-white font-semibold">الكل (20)</button>
+              <button id="filter-review-wrong" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-rose-400 font-semibold">الأخطاء فقط</button>
+              <button id="filter-review-correct" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-emerald-400 font-semibold">الصحيحة فقط</button>
+            </div>
+          </div>
+
+          <div id="results-questions-list" class="flex flex-col gap-4 mt-2">
+            <!-- Injected question reviews -->
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW 3: MISTAKES BANK (بنك الأخطاء)                        -->
+    <!-- ======================================================== -->
+    <section id="view-mistakes" class="hidden flex flex-col gap-4">
+      
+      <div class="bg-slate-900/90 rounded-2xl p-4 border border-slate-800 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div>
+          <h2 class="text-base sm:text-lg font-black text-white flex items-center gap-2">
+            <span>⚠️</span>
+            <span>بنك الأخطاء وتثبيت المفاهيم (Mistakes Bank)</span>
+          </h2>
+          <p class="text-slate-400 text-xs mt-0.5">يجمع تلقائياً أي سؤال أخطأت فيه أثناء التدريب أو الاختبار لتكرار حله حتى الإتقان الكامل.</p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button id="btn-clear-mistakes" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-rose-900/30 text-slate-400 hover:text-rose-400 border border-slate-700 text-xs font-semibold transition">
+            مسح السجل
+          </button>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div id="mistakes-empty-state" class="hidden bg-slate-900/60 rounded-3xl p-10 border border-slate-800 text-center flex flex-col items-center gap-3">
+        <div class="text-4xl">🎉</div>
+        <h3 class="text-base font-bold text-emerald-400">رائع جداً! لا توجد أخطاء مسجلة حالياً</h3>
+        <p class="text-xs text-slate-400 max-w-sm">واصل التدريب وحل الاختبارات، وسيتم تسجيل أي مسألة تواجه فيها صعوبة هنا لمراجعتها وتثبيتها.</p>
+      </div>
+
+      <!-- Mistakes Questions List -->
+      <div id="mistakes-list-container" class="flex flex-col gap-4">
+        <!-- Injected dynamically -->
+      </div>
+
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW 4: BOOKMARKS VIEW (المفضلة)                          -->
+    <!-- ======================================================== -->
+    <section id="view-bookmarks" class="hidden flex flex-col gap-4">
+      
+      <div class="bg-slate-900/90 rounded-2xl p-4 border border-slate-800 shadow-xl flex items-center justify-between">
+        <div>
+          <h2 class="text-base sm:text-lg font-black text-white flex items-center gap-2">
+            <span>⭐</span>
+            <span>الأسئلة المميزة والمفضلة (Bookmarked Questions)</span>
+          </h2>
+          <p class="text-slate-400 text-xs mt-0.5">المسائل عالية الأهمية التي قمت بحفظها للمراجعة السريعة قبل الاختبار.</p>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div id="bookmarks-empty-state" class="hidden bg-slate-900/60 rounded-3xl p-10 border border-slate-800 text-center flex flex-col items-center gap-3">
+        <div class="text-4xl">⭐</div>
+        <h3 class="text-base font-bold text-amber-400">قائمة المفضلة فارغة حالياً</h3>
+        <p class="text-xs text-slate-400 max-w-sm">انقر على أيقونة النجمة بجانب أي سؤال لحفظه في هذه القائمة الخاصة للرجوع إليه وقتما تشاء.</p>
+      </div>
+
+      <!-- Bookmarks List -->
+      <div id="bookmarks-list-container" class="flex flex-col gap-4">
+        <!-- Injected dynamically -->
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- MODAL 1: QUESTION JUMPER / GRID PALETTE                  -->
+  <!-- ======================================================== -->
+  <div id="modal-grid" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-6">
+    <div class="bg-slate-900 border border-slate-800 w-full max-w-3xl rounded-3xl p-5 sm:p-7 shadow-2xl flex flex-col gap-4 max-h-[90vh]">
+      
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div>
+          <h3 class="font-bold text-base text-white flex items-center gap-2">
+            <span>📑</span>
+            <span>فهرس الانتقال السريع لجميع الأسئلة</span>
+          </h3>
+          <p class="text-xs text-slate-400">اختر أي سؤال للانتقال إليه مباشرة</p>
+        </div>
+        <button id="btn-close-grid" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition">
+          ✕
+        </button>
+      </div>
+
+      <!-- Grid Filter indicators legend -->
+      <div class="flex items-center gap-4 text-xs text-slate-400 border-b border-slate-800/60 pb-3">
+        <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-emerald-500"></span> مجاب بشكل صحيح</div>
+        <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-rose-500"></span> خطأ سابق</div>
+        <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-slate-800 border border-slate-700"></span> غير محلول</div>
+      </div>
+
+      <!-- Grid Buttons Container -->
+      <div id="grid-items-container" class="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 gap-2 overflow-y-auto p-1 flex-1">
+        <!-- Injected dynamically -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL 2: SCIENTIFIC CALCULATOR                           -->
+  <!-- ======================================================== -->
+  <div id="modal-calculator" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4">
+    <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-3xl p-4 sm:p-5 shadow-2xl flex flex-col gap-3">
+      
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <div class="flex items-center gap-2 text-sm font-bold text-slate-200">
+          <span>🧮</span>
+          <span>الآلة الحاسبة السريعة (Scientific Calculator)</span>
+        </div>
+        <button id="btn-close-calc" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">✕</button>
+      </div>
+
+      <!-- Display -->
+      <div class="bg-slate-950 rounded-2xl p-3 border border-slate-800 text-left flex flex-col justify-end min-h-[70px]">
+        <div id="calc-expr" class="text-xs text-slate-400 font-mono overflow-x-auto whitespace-nowrap"></div>
+        <div id="calc-result" class="text-xl font-bold font-mono text-emerald-400 overflow-x-auto whitespace-nowrap">0</div>
+      </div>
+
+      <!-- Keypad -->
+      <div class="grid grid-cols-5 gap-1.5 text-xs font-mono font-bold">
+        <button class="calc-key p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-rose-400" data-val="C">C</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300" data-val="DEL">⌫</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400" data-val="(">(</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400" data-val=")">)</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400" data-val="^">^</button>
+
+        <button class="calc-key p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400" data-val="sqrt">√</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400" data-val="cbrt">∛</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400" data-val="abs">|x|</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400" data-val="inv">1/x</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400" data-val="/">÷</button>
+
+        <button class="calc-key p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-white" data-val="7">7</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-white" data-val="8">8</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-white" data-val="9">9</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400" data-val="*">×</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300" data-val="pi">π</button>
+
+        <button class="calc-key p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-white" data-val="4">4</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-white" data-val="5">5</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-white" data-val="6">6</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400" data-val="-">-</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300" data-val="e">e</button>
+
+        <button class="calc-key p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-white" data-val="1">1</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-white" data-val="2">2</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-white" data-val="3">3</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400" data-val="+">+</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300" data-val="sq">x²</button>
+
+        <button class="calc-key p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300" data-val="neg">±</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-white" data-val="0">0</button>
+        <button class="calc-key p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-white" data-val=".">.</button>
+        <button class="calc-key p-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 col-span-2 font-black text-base shadow-lg shadow-emerald-500/20" data-val="=">=</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- DRAWER: FORMULA CHEAT SHEET (ملخص القوانين والمتطابقات)     -->
+  <!-- ======================================================== -->
+  <div id="drawer-cheatsheet" class="fixed inset-y-0 left-0 z-50 w-full max-w-xl bg-slate-900/98 backdrop-blur-xl border-r border-slate-800 shadow-2xl transform -translate-x-full drawer-transition flex flex-col">
+    
+    <!-- Drawer Header -->
+    <div class="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between">
+      <div>
+        <h3 class="font-bold text-base sm:text-lg text-white flex items-center gap-2">
+          <span>📖</span>
+          <span>ملخص القوانين والمتطابقات الأساسية</span>
+        </h3>
+        <p class="text-xs text-slate-400 mt-0.5">MATH 001 Formula Master Sheet (P.1 to P.6)</p>
+      </div>
+      <button id="btn-close-cheatsheet" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition">✕</button>
+    </div>
+
+    <!-- Chapter Tabs -->
+    <div class="flex items-center gap-1.5 p-3 border-b border-slate-800 overflow-x-auto text-xs font-bold">
+      <button data-sheet="P.1" class="sheet-tab px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">P.1</button>
+      <button data-sheet="P.2" class="sheet-tab px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300">P.2</button>
+      <button data-sheet="P.3" class="sheet-tab px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300">P.3</button>
+      <button data-sheet="P.4" class="sheet-tab px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300">P.4</button>
+      <button data-sheet="P.5" class="sheet-tab px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300">P.5</button>
+      <button data-sheet="P.6" class="sheet-tab px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300">P.6</button>
+    </div>
+
+    <!-- Sheet Content Container -->
+    <div id="sheet-content-container" class="flex-1 overflow-y-auto p-4 sm:p-6 flex flex-col gap-4 text-xs sm:text-sm">
+      <!-- Injected via JavaScript -->
+    </div>
+
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- PERSISTENT SCRATCHPAD / DRAWING CANVAS MODAL / OVERLAY   -->
+  <!-- ======================================================== -->
+  <div id="scratchpad-wrapper" class="fixed inset-x-3 bottom-3 sm:bottom-6 sm:right-6 sm:left-auto sm:w-[500px] z-50 hidden transition-all duration-300">
+    <div class="bg-slate-900/98 backdrop-blur-xl border border-slate-700 rounded-3xl shadow-2xl flex flex-col overflow-hidden">
+      
+      <!-- Scratchpad Top Toolbar -->
+      <div class="p-3 bg-slate-950/90 border-b border-slate-800 flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <span class="text-sm">📝</span>
+          <span class="text-xs font-bold text-white">المسودة الحسابية (Scratchpad)</span>
+        </div>
+
+        <div class="flex items-center gap-1">
+          <!-- Save Image Button -->
+          <button id="sp-btn-save-img" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition" title="حفظ المسودة كصورة PNG">
+            💾
+          </button>
+          <!-- Grid Toggle -->
+          <button id="sp-btn-grid" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition" title="شبكة بيانية (Graph Grid)">
+            📐
+          </button>
+          <!-- Minimize -->
+          <button id="sp-btn-minimize" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition" title="تصغير">
+            ➖
+          </button>
+          <!-- Close -->
+          <button id="sp-btn-close" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 text-xs transition" title="إغلاق">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Canvas Area -->
+      <div id="sp-canvas-container" class="relative w-full h-[280px] sm:h-[340px] bg-slate-950 overflow-hidden">
+        <canvas id="scratchpad-canvas" class="w-full h-full block"></canvas>
+      </div>
+
+      <!-- Scratchpad Drawing Controls Bottom Bar -->
+      <div class="p-2.5 bg-slate-950/90 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs">
+        
+        <!-- Pen Color Swatches -->
+        <div class="flex items-center gap-1.5">
+          <button class="sp-color w-6 h-6 rounded-full bg-cyan-400 border-2 border-white transition active:scale-90" data-color="#22d3ee" title="سماوي"></button>
+          <button class="sp-color w-6 h-6 rounded-full bg-emerald-400 border-2 border-transparent transition active:scale-90" data-color="#34d399" title="أخضر"></button>
+          <button class="sp-color w-6 h-6 rounded-full bg-amber-400 border-2 border-transparent transition active:scale-90" data-color="#fbbf24" title="أصفر"></button>
+          <button class="sp-color w-6 h-6 rounded-full bg-slate-100 border-2 border-transparent transition active:scale-90" data-color="#f8fafc" title="أبيض"></button>
+        </div>
+
+        <!-- Stroke Width -->
+        <div class="flex items-center gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800">
+          <button class="sp-size px-2 py-0.5 rounded-lg font-bold bg-slate-800 text-white" data-size="2">رفيع</button>
+          <button class="sp-size px-2 py-0.5 rounded-lg text-slate-400 hover:text-white" data-size="4">متوسط</button>
+          <button class="sp-size px-2 py-0.5 rounded-lg text-slate-400 hover:text-white" data-size="8">عريض</button>
+        </div>
+
+        <!-- Tools (Eraser & Clear All) -->
+        <div class="flex items-center gap-1.5">
+          <button id="sp-btn-eraser" class="px-2.5 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold flex items-center gap-1 transition" title="ممحاة">
+            <span>🧹</span>
+            <span>ممحاة</span>
+          </button>
+          <button id="sp-btn-clear" class="px-2.5 py-1 rounded-xl bg-rose-950/60 hover:bg-rose-900 text-rose-300 border border-rose-500/30 font-semibold flex items-center gap-1 transition active:scale-95" title="مسح كل اللوحة">
+            <span>🗑️</span>
+            <span>مسح الكل</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FLOATING SCRATCHPAD QUICK LAUNCHER -->
+  <button id="btn-floating-scratchpad" class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 w-12 h-12 rounded-full bg-gradient-to-tr from-emerald-500 to-cyan-500 text-slate-950 font-black text-xl shadow-2xl flex items-center justify-center hover:scale-105 active:scale-95 transition" title="فتح المسودة الحسابية">
+    ✏️
+  </button>
+
+  <!-- External JavaScript Application (app.js) -->
+  <script src="app.js"></script>
+</body>
+</html>
